@@ -5,7 +5,7 @@
             '0': {
                 'id': '0',
                 'title': 'Notebook of Stuff',
-                'noteIds': ['0']
+                'note_ids': ['0']
             }
         },
         'ids': ['0']

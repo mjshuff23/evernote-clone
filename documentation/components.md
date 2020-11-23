@@ -1,67 +1,69 @@
-Bart Components
-
-react-app/src/App.js
-
-react-app/src/components/
-    /auth
-        LoginForm.js
-        LogoutButton.js
-        ProtectedRoute.js
-        SignUpForm.js
-
-    /User.js
-    /UsersList.js
-
-react-app/src/services/auth.js
-    aka utils
-    could use as thunk middlewear
-        authenticate
-        login
-        logout
-        signUp
-
-
-Not Logged In
-    - Route (/sign-up)
-        SignUpForm - Material UI
-    - Route (/login)
-        LoginForm - Material UI
 
 App
-    - BrowserRouter
-        - NavBar
-            - Route (/login)
-                LoginForm - Material UI
-            - Route (/main-page)
-                MainPage
-
-NavBar - Material UI
-    - NavLink
-
-MainPage
-    - SideBar
-
-
-Mike Components
-
-End Goal
-
-App
-Not Logged In
-    - Route (/sign-up)
-        SignUpForm - Material UI
-    - Route (/login)
-        LoginForm - Material UI
-
-    Logged In:
-    - BrowserRouter
-            - Route (/login)
-                LoginForm - Material UI
-            - Route (/main-page)
-                MainPage
-                    - SideBar
-                        - BrowserRouter
-                            - AllNotes (MP and E)
-                            - Notebooks (MP and E)
-                    - MiddlePanel
-                    - Editor
+- Browser Router
+    - Public Route
+        - Route (/login)
+            LoginForm - Material UI
+            - Route (/sign-up)
+                SignUpForm - Material UI
+    - Private Route
+        - Route (/main-page)
+            - MainPage
+                - SideBar
+                    - User Info Display
+                        - username
+                        - avatar (optional)
+                        - popover button
+                            - sign out
+                    - New Note Button
+                    - NavLinks - Material UI drawer
+                        - All Notes
+                        - All Notebooks
+                            - Individual Notebook
+                        - Tags
+                            - Individual Tag
+                - TagPanel
+                    - TFC Container
+                        - Title
+                        - Filter
+                            - Filter Popover
+                        - CreateNewTag
+                    - Search Bar
+                    - TagList
+                - BrowserRouter
+                    - Route: All Notes, Specific Notebook, Specific Tag
+                        - NoteInfoPanel
+                            - Title
+                            - Container
+                                - Number of Notes
+                                - Filter
+                                    - Filter Popover
+                            - Note List
+                                - Note Excerpt (title, content slice, created_at)
+                        - EditorPanel
+                            - NavLinks
+                                - Go to Notebook
+                                - Move Note
+                            - Title Input
+                            - Editor (Quill)
+                            - Tag Container
+                                - Add Tag Input (Material UI Search Bar)
+                                    - Popover
+                                        - Match Tags
+                                        - CreateTagButton
+                                - AddTagButton
+                                - TagList
+                                    - TagNameButton
+                                        - FilterByTag
+                                        - RemoveTag
+                    - Route: All Notebooks
+                        - Notebook Panel
+                            - Title Container
+                                - Title
+                                - Search Bar
+                            - Container
+                                - Add New Notebook Button
+                                    - New Notebook Modal
+                                - Filter
+                                    - Filter Popover
+                                - Notebook Table

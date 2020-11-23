@@ -46,7 +46,7 @@ App
                                 - Move Note
                             - Title Input
                             - Editor (Quill)
-                            - Tag Container
+                            - TagContainer
                                 - Add Tag Input (Material UI Search Bar)
                                     - Popover
                                         - Match Tags
@@ -60,7 +60,6 @@ App
                         - Notebook Panel
                             - Title Container
                                 - Title
-                                - Search Bar
                             - Container
                                 - Add New Notebook Button
                                     - New Notebook Modal

@@ -43,3 +43,4 @@
     - Auto save
     - Search
     - Reminders
+    - Templates

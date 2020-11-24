@@ -2,3 +2,6 @@
 __pycache__/
 *.py[cod]
 .venv
+/.vscode
+.DS_Store
+/.DS_Store

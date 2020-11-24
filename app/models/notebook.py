@@ -10,3 +10,5 @@ class Notebook(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now())
     notes = db.relationship('Note', backref='notebooks', lazy=True)
+
+    __table_args__ = (db.Index("only_one_unique_notebook_per_user", "user_id", "title", unique=True),)

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { Button, Popover } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './sidebarStyles';
+import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+// import { withStyles } from '@material-ui/core/styles';
+import styles from './styles/sidebarStyles';
 // import SidebarItem from './SidebarItem';
 
 function Sidebar({ notes, classes, noteIndex }) {
-    const [addingNote, setAddingNote] = useState(false);
+    const [ addingNote, setAddingNote ] = useState(false);
+    const [ openNotebooks, setOpenNotebooks ] = useState(false);
+    const [ openTags, setOpenTags ] = useState(false);
     // const [title, setTitle] = useState(null);
 
     function newNoteClick(e) {
@@ -13,32 +17,59 @@ function Sidebar({ notes, classes, noteIndex }) {
         console.log('NEW NOTE CLICKED');
     }
 
+    function clickOpenNotebooks() {
+        setOpenNotebooks(!openNotebooks);
+    }
+
+    function clickOpenTags() {
+        setOpenTags(!openTags);
+    }
 
 
     return (
-        <div className={ `${classes.sidebarContainer} sidebar` }>
-            <Button onClick={ newNoteClick } className={ classes.newNoteBtn }>
+        <Container> {/* className={`${classes.sidebarContainer} sidebar`} */}
+            {/* <UserInfoDisplay /> => has button & popover*/}
+            <Button onClick={newNoteClick}> {/* className={ classes.newNoteBtn } */}
                 New Note
             </Button>
-            <Popover
-                anchorReference="anchorPosition"
-                anchorPosition={ { top: 350, left: 800 } }
-                anchorOrigin={ {
-                    vertical: 'center',
-                    horizontal: 'center',
-                } }
-                transformOrigin={ {
-                    vertical: 'center',
-                    horizontal: 'center',
-                } }
-                open={ addingNote }
-                onClose={ () => setAddingNote(!addingNote) }
-            >
-                <div>Add Note Title Here OR Automatically create a blank Note in current Notebook!</div>
-            </Popover>
-        </div>
+            <List>
+                <ListItem button>
+                    <ListItemText primary="All Notes" />
+                </ListItem>
+                <ListItem button onClick={clickOpenNotebooks}>
+                    <ListItemText primary="Notebooks" />
+                    {openNotebooks ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={openNotebooks}>
+                    <List component="div" disablePadding>
+                        {/* actuall map through all notebooks creating ListItems*/}
+                        <ListItem button>
+                            <ListItemText primary="First Notebook" />
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemText primary="Second Notebook" />
+                        </ListItem>
+                    </List>
+                </Collapse>
+                <ListItem button onClick={clickOpenTags}>
+                    <ListItemText primary="Tags" />
+                    {openTags ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={openTags}>
+                    <List component="div" disablePadding>
+                        {/* actuall map through all Tags creating ListItems*/}
+                        <ListItem button>
+                            <ListItemText primary="First Tag" />
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemText primary="Second Tag" />
+                        </ListItem>
+                    </List>
+                </Collapse>
+            </List>
+        </Container>
     );
 }
 
-
-export default withStyles(styles)(Sidebar);
+export default Sidebar;
+// export default withStyles(styles)(Sidebar);

@@ -1,0 +1,46 @@
+html, body {
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.appContainer {
+    display: flex;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.quill {
+    box-sizing: border-box;
+    width: 80vw;
+    overflow: scroll;
+}
+
+.quill::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.ql-container {
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.ql-container::-webkit-scrollbar {
+    /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.ql-editor {
+    cursor: text;
+    height: 100vh;
+}
+
+.MuiListItem-root.Mui-selected {
+    background-color: #d4d8e8 !important;
+}

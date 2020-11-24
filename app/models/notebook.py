@@ -1,5 +1,4 @@
 from .db import db
-from datetime import datetime
 from sqlalchemy.sql import func
 
 class Notebook(db.Model):

@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const user = await authenticate();
+      console.log(user);
       if (!user.errors) {
         // setAuthenticated(true);
       }

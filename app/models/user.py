@@ -9,7 +9,8 @@ class User(db.Model, UserMixin):
   username = db.Column(db.String(40), nullable = False, unique = True)
   email = db.Column(db.String(255), nullable = False, unique = True)
   hashed_password = db.Column(db.String(255), nullable = False)
-
+  notebooks = db.relationship('Notebook', backref='users', lazy=True)
+  notes = db.relationship('Note', backref='users', lazy=True)
 
   @property
   def password(self):

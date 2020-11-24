@@ -1,0 +1,17 @@
+// removed from Sidebar.js:
+<Popover
+    anchorReference="anchorPosition"
+    anchorPosition={ { top: 350, left: 800 } }
+    anchorOrigin={ {
+        vertical: 'center',
+        horizontal: 'center',
+    } }
+    transformOrigin={ {
+        vertical: 'center',
+        horizontal: 'center',
+    } }
+    open={ addingNote }
+    onClose={ () => setAddingNote(!addingNote) }
+>
+    <div>Add Note Title Here OR Automatically create a blank Note in current Notebook!</div>
+</Popover>

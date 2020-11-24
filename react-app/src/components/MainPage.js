@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 // import firebase from 'firebase';
 // import 'firebase/firestore';
 import Sidebar from './Sidebar';
-import Editor from './Editor';
+// import Editor from './Editor';
+// import ProtectedRoute from './auth/ProtectedRoute';
+import { Route } from 'react-router-dom';
+import { Container, Grid } from '@material-ui/core';
+import TagPanel from './TagPanel';
 
 function MainPage() {
     const userId = window.localStorage.getItem('userId');
@@ -22,13 +26,28 @@ function MainPage() {
     //         setNotes(notes);
     //     });
     // }, []);
-
+    let id; // TODO: Set default note ID
 
     return (
-        <div className="appContainer">
+        <Container> {/* className="appContainer" */}
             <Sidebar />
-            <Editor />
-        </div>
+            <main>
+                <div id="drawer-container" style="position: relative">
+                    <span>Some elements</span>
+                </div>
+                <TagPanel />
+                <Route path="/notes">
+                    {/* Eventually Protected */}
+                    <Grid>
+                        {/* <NoteInfoPanel /> */}
+                        {/* <EditorPanel /> */}
+                    </Grid>
+                </Route>
+                <Route path="/notebooks">  {/* Eventually Protected */}
+                    {/* <NotebookPanel /> */}
+                </Route>
+            </main>
+        </Container>
     );
 
 }

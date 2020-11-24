@@ -7,4 +7,6 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(30), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
     users = db.relationship('User', backref='tags', lazy=True)
+    __table_args__ = (db.Index("only_one_tag_per_user", "user_id", "title", unique=True),)

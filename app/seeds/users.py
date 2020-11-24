@@ -7,8 +7,8 @@ def seed_users():
 
     demo = User(username='Demo', email='demo@aa.io',
                 password='password')
-
     demo_notebook = Notebook(title='Default', user_id=1)
+
     db.session.add(demo)
     db.session.commit()
     db.session.add(demo_notebook)

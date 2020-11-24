@@ -1,13 +1,13 @@
-from app.models import db, Tag
+from app.models import db, Note_Tag
 
 # Adds a demo user, you can add other users here if you want
 
 
-def seed_tags():
+def seed_note_tags():
 
-    demo_tag = Tag(title='Test', user_id=1)
+    demo_note_tag = Note_Tag(note_id='1', tag_id='1')
 
-    db.session.add(demo_tag)
+    db.session.add(demo_note_tag)
     db.session.commit()
 
 
@@ -17,6 +17,6 @@ def seed_tags():
 # the auto incrementing primary key
 
 
-def undo_tags():
-    db.session.execute('TRUNCATE tags RESTART IDENTITY CASCADE;')
+def undo_note_tags():
+    db.session.execute('TRUNCATE note_tags RESTART IDENTITY CASCADE;')
     db.session.commit()

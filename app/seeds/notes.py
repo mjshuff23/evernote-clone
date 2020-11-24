@@ -6,6 +6,7 @@ from app.models import db, Note
 def seed_notes():
 
     demo_note = Note(title='Test', content='jehbwhefwehbdajlksdbkjsdbjlsdbljhsbdjhf', user_id=1, notebook_id=1)
+
     db.session.add(demo_note)
     db.session.commit()
 

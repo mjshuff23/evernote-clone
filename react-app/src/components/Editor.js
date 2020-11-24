@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
-import { withStyles } from '@material-ui/core/styles';
-import styles from './editorStyles';
+import useStyles from './styles/EditorStyles';
 import debounce from 'lodash/debounce';
 
 
 
-function Editor({ classes }) {
+export default function Editor() {
+  const classes = useStyles();
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [id, setId] = useState('');
@@ -27,6 +26,3 @@ function Editor({ classes }) {
         </div>
     );
 }
-
-
-export default withStyles(styles)(Editor);

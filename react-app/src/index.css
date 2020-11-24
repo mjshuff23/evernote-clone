@@ -1,1 +1,14 @@
 /* TODO Add site wide styles */
+* {
+  /* border: 1px solid black; */
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}

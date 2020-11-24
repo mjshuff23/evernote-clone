@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-// import { withStyles } from '@material-ui/core/styles';
-import styles from './styles/sidebarStyles';
-// import SidebarItem from './SidebarItem';
+import useStyles from './styles/SidebarStyles';
 
-function Sidebar({ notes, classes, noteIndex }) {
+export default function Sidebar() {
+  const classes = useStyles();
     const [ addingNote, setAddingNote ] = useState(false);
     const [ openNotebooks, setOpenNotebooks ] = useState(false);
     const [ openTags, setOpenTags ] = useState(false);
@@ -27,7 +26,7 @@ function Sidebar({ notes, classes, noteIndex }) {
 
 
     return (
-        <Container> {/* className={`${classes.sidebarContainer} sidebar`} */}
+      <Container className={classes.sidebarContainer}> 
             {/* <UserInfoDisplay /> => has button & popover*/}
             <Button onClick={newNoteClick}> {/* className={ classes.newNoteBtn } */}
                 New Note
@@ -70,6 +69,3 @@ function Sidebar({ notes, classes, noteIndex }) {
         </Container>
     );
 }
-
-export default Sidebar;
-// export default withStyles(styles)(Sidebar);

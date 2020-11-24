@@ -13,7 +13,6 @@ import './App.css';
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
     (async () => {
       const user = await authenticate();
@@ -29,21 +28,20 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      {/* <NavBar setAuthenticated={setAuthenticated} /> */ }
-      {/* <Route path="/login" exact={ true }>
-        <LoginForm
-          authenticated={ authenticated }
-          setAuthenticated={ setAuthenticated }
-        />
-      </Route> */}
-      {/* <Route path="/sign-up" exact={true}>
-        <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
-      </Route> */}
-      {/* <ProtectedRoute path="/" exact={ true } authenticated={ authenticated }> */}
-        <MainPage />
-      {/* </ProtectedRoute> */}
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        {/* <NavBar setAuthenticated={setAuthenticated} /> */ }
+        <Route path="/login" exact={ true }>
+          <LoginForm
+            authenticated={ authenticated }
+            setAuthenticated={ setAuthenticated }
+          />
+        </Route>
+        <ProtectedRoute path="/" exact={ true } authenticated={ authenticated }>
+          <MainPage />
+        </ProtectedRoute>
+      </BrowserRouter>
+    </>
   );
 }
 

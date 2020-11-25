@@ -1,5 +1,6 @@
 COMPONENTS NEEDED
     - TagPanel
+    - TagEditor
 
 MODELS NEEDED
     - tags

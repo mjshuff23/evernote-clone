@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 
 export default function Sidebar() {
-  const classes = useStyles();
-    const [ addingNote, setAddingNote ] = useState(false);
-    const [ openNotebooks, setOpenNotebooks ] = useState(false);
-    const [ openTags, setOpenTags ] = useState(false);
+    const classes = useStyles();
+    // const [addingNote, setAddingNote] = useState(false);
+    const [openNotebooks, setOpenNotebooks] = useState(false);
+    const [openTags, setOpenTags] = useState(false);
     // const [title, setTitle] = useState(null);
 
     function newNoteClick(e) {
-        setAddingNote(true);
+        // setAddingNote(true);
         console.log('NEW NOTE CLICKED');
     }
 
@@ -26,8 +27,8 @@ export default function Sidebar() {
 
 
     return (
-      <Container className={classes.sidebarContainer}> 
-            {/* <UserInfoDisplay /> => has button & popover*/}
+        <Container className={classes.sidebarContainer}>
+            <UserInfoDisplay />
             <Button onClick={newNoteClick}> {/* className={ classes.newNoteBtn } */}
                 New Note
             </Button>

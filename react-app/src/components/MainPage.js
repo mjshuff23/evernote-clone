@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 // import ProtectedRoute from './auth/ProtectedRoute';
 import { Box, Grid, FormControlLabel, Switch } from '@material-ui/core';
@@ -11,7 +11,6 @@ import useStyles from './styles/MainPageStyles';
 
 
 export default function MainPage() {
-  const userId = window.localStorage.getItem('userId');
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
 

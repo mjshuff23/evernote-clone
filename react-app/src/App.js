@@ -15,7 +15,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(authenticateThunk())
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

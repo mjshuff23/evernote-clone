@@ -26,4 +26,7 @@ def createTag(userid):
 @tag_routes.route('/<int:tagid>', methods=['DELETE'])
 # @login_required
 def deleteTag(userid, tagid):
-    Tag.delete().where(Tag.id == tagid)
+    tag = Tag.query.filter(Tag.id == tagid).first()
+    db.session.delete(tag)
+    db.session.commit()
+    return {'message': 'success'}

@@ -10,3 +10,10 @@ class Tag(db.Model):
 
     users = db.relationship('User', backref='tags', lazy=True)
     __table_args__ = (db.Index("only_one_tag_per_user", "user_id", "title", unique=True),)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "user_id": self.user_id,
+        }

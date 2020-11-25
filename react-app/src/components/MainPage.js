@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from 'react';
-// import firebase from 'firebase';
-// import 'firebase/firestore';
+import { Route } from 'react-router-dom';
+// import ProtectedRoute from './auth/ProtectedRoute';
+import { Box, Grid, FormControlLabel, Switch } from '@material-ui/core';
 import Sidebar from './Sidebar';
-import Editor from './Editor';
-
-function MainPage() {
-    const userId = window.localStorage.getItem('userId');
-    // const [noteIndex, setNoteIndex] = useState(null);
-    // const [currentNote, setCurrentNote] = useState(null);
-    // const [notes, setNotes] = useState(null);
+import TagPanel from './TagPanel';
+import NoteInfoPanel from './NoteInfoPanel';
+import EditorPanel from './EditorPanel';
+import NotebookPanel from './NotebookPanel'
+import useStyles from './styles/MainPageStyles';
 
 
-    // useEffect(() => {
-    //     firebase.firestore().collection('notes').onSnapshot((serverUpdate) => {
-    //         const notes = serverUpdate.docs.map(doc => {
-    //             const data = doc.data();
-    //             data.id = doc.id;
-    //             return data;
-    //         });
-    //         console.log(notes);
-    //         setNotes(notes);
-    //     });
-    // }, []);
+export default function MainPage() {
+  const userId = window.localStorage.getItem('userId');
+  const classes = useStyles();
+  const [checked, setChecked] = useState(false);
 
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
-    return (
-        <div className="appContainer">
-            <Sidebar />
-            <Editor />
-        </div>
-    );
-
+  return (
+    <Box className={classes.mainpageContainer}>
+      <Sidebar />
+      <main className={classes.main}>
+        <FormControlLabel
+          control={<Switch checked={checked} onChange={handleChange} />}
+          label="Show"
+        /> {/* TODO: replace this with Tag button in Sidebar */}
+        <TagPanel checked={checked} />
+        <Route path="/notes">
+          {/* Eventually Protected */}
+          <Box className={classes.noteviewcontainer}>
+            <NoteInfoPanel />
+            <EditorPanel />
+          </Box>
+        </Route>
+        <Route path="/notebooks">  {/* Eventually Protected */}
+          <NotebookPanel />
+        </Route>
+      </main>
+    </Box>
+  );
 }
-
-
-export default MainPage;

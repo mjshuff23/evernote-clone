@@ -31,18 +31,18 @@ function App() {
   return (
     <BrowserRouter>
       {/* <NavBar setAuthenticated={setAuthenticated} /> */ }
-      <Route path="/login" exact={ true }>
+      {/* <Route path="/login" exact={ true }>
         <LoginForm
           authenticated={ authenticated }
           setAuthenticated={ setAuthenticated }
         />
-      </Route>
+      </Route> */}
       {/* <Route path="/sign-up" exact={true}>
         <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
       </Route> */}
-      <ProtectedRoute path="/" exact={ true } authenticated={ authenticated }>
+      {/* <ProtectedRoute path="/" exact={ true } authenticated={ authenticated }> */}
         <MainPage />
-      </ProtectedRoute>
+      {/* </ProtectedRoute> */}
     </BrowserRouter>
   );
 }

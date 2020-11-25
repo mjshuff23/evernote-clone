@@ -46,5 +46,8 @@ def edit_notebook(userid, notebookid):
 # delete an existing notebook
 @notebook_routes.route('/<int:notebookid>', methods=['DELETE'])
 # @login_required
-def delete_notebook(user_id, notebook_id):
-    pass
+def delete_notebook(userid, notebookid):
+    notebook = Notebook.query.filter(Notebook.id == notebookid).first()
+    db.session.delete(notebook)
+    db.session.commit()
+    return 'Notebook deleted'

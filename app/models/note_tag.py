@@ -9,3 +9,10 @@ class Note_Tag(db.Model):
     note_id = db.Column(db.Integer, db.ForeignKey('notes.id'), nullable=False)
 
     __table_args__ = (db.Index("only_one_unique_tag_per_note", "tag_id", "note_id", unique=True),)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "note_id": self.note_id,
+            "tag_id": self.tag_id
+        }

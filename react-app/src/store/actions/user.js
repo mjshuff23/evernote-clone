@@ -1,4 +1,4 @@
-import { authenticate, login } from "../../services/auth";
+import { authenticate, login, logout } from "../../services/auth";
 
 export const USER_KEY = "authentication/USER";
 export const SET_USER = 'authentication/SET_USER';
@@ -21,4 +21,10 @@ export const loginThunk = (email, password) => async (dispatch) => {
   if (!user.errors) {
     dispatch(setUser(user));
   }
+};
+
+export const logoutThunk = () => async (dispatch) => {
+  const user = await logout();
+  console.log(user, '\nLOGOUTTHUNK');
+  dispatch(removeUser());
 };

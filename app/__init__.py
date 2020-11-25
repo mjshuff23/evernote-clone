@@ -32,7 +32,7 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-app.register_blueprint(notebook_routes, url_prefix='/api/users/<int:user_id>/notebooks')
+app.register_blueprint(notebook_routes, url_prefix='/api/users/<int:userid>/notebooks')
 db.init_app(app)
 Migrate(app, db)
 

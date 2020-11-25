@@ -16,7 +16,7 @@ export const authenticateThunk = () => async (dispatch) => {
 };
 
 export const loginThunk = (email, password) => async (dispatch) => {
-  const user = await login();
+  const user = await login(email, password);
   console.log(user, '\nLOGINTHUNK');
   if (!user.errors) {
     dispatch(setUser(user));

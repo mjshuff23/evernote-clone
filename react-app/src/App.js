@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route } from "react-router-dom";
+import MainPage from './components/MainPage';
 import LoginForm from "./components/auth/LoginForm";
-// import SignUpForm from "./components/auth/SignUpForm";
-// import NavBar from "./components/NavBar";
+import PrivateRoute from "./components/auth/PrivateRoute";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
-import MainPage from './components/MainPage';
-import './App.css';
 import { authenticateThunk } from "./store/actions/user";
-import PrivateRoute from "./components/auth/PrivateRoute";
+import './App.css';
 
 function App() {
   const isNotLoggedIn = useSelector((state) => !state.user);
@@ -27,7 +25,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        {/* <NavBar setAuthenticated={setAuthenticated} /> */ }
         <ProtectedRoute path="/login" exact={true} authenticated={!isNotLoggedIn}>
           <LoginForm />
         </ProtectedRoute>

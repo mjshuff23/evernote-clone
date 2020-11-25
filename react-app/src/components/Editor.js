@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce';
 
 
 export default function Editor() {
-  const classes = useStyles();
+    const classes = useStyles();
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [id, setId] = useState('');

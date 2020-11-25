@@ -13,7 +13,7 @@ class Note(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now())
 
-    note_tags = db.relationship('Note_Tag', backref='notes', lazy=True)
+    tags = db.relationship('Note_Tag', backref='notes', lazy=True)
 
 
     def to_dict(self):
@@ -25,4 +25,5 @@ class Note(db.Model):
             "notebook_id": self.notebook_id,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
+            "tag_ids": [tag.id for tag in self.tags]
         }

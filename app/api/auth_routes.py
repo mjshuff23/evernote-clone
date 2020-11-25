@@ -6,6 +6,34 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 auth_routes = Blueprint('auth', __name__)
 
+def get_user_data(user):
+    tags = Tag.query.filter(Tag.user_id == user.id).options(joinedload(Tag.notes)).all()
+    tags_data = {
+        "dict": {tag.id:tag.to_dict() for tag in tags},
+        "ids": [tag.id for tag in tags]
+    }
+
+    notebooks = Notebook.query.filter(Notebook.user_id == user.id).options(joinedload(Notebook.notes).joinedload(Note.tags)).all()
+    notebooks_data = [notebook.to_dict() for notebook in notebooks]
+    notebooks_data = {
+        "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
+        "ids": [notebook.id for notebook in notebooks]
+    }
+
+    notes = []
+    for notebook in notebooks:
+        notes.extend(notebook.notes)
+    notes_data = {
+        "dict": {note.id: note.to_dict() for note in notes},
+        "ids": [note.id for note in notes],
+    }
+
+    return {
+        "user": user,
+        "tags": tags_data,
+        "notebooks": notebooks_data,
+        "notes": notes_data
+    }
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -24,7 +52,8 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        return current_user.to_dict()
+        data = get_user_data(current_user.to_dict())
+        return data
     return {'errors': ['Unauthorized']}, 401
 
 
@@ -48,7 +77,8 @@ def login():
           # }
           print('\n\n\nor here\n\n\n')
           login_user(user)
-          return user.to_dict()
+          data = get_user_data(user.to_dict())
+          return data
       print('\n\n\nhere\n\n\n')
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
     except Error as e:

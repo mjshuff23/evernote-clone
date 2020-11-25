@@ -14,27 +14,27 @@ def users():
 
 
 @user_routes.route('/<int:id>')
-@login_required
+# @login_required
 def user(id):
-    user = User.query.filter(User.id == id).options(joinedload(User.tags)).first()
-    user_object = user.to_dict()
-    user_object["tags"] = [user_tag.to_dict() for user_tag in user.tags]
+    tags = Tag.query.filter(Tag.user_id == id).options(joinedload(Tag.notes)).all()
+    tags_data = {
+        "dict": {tag.id:tag.to_dict() for tag in tags},
+        "ids": [tag.id for tag in tags]
+    }
 
-    notebooks = Notebook.query.filter(Notebook.user_id == id).options(joinedload(Notebook.notes).joinedload(Note.note_tags)).all()
-
-    notebooks_object = [notebook.to_dict() for notebook in notebooks]
-    user_object["notebooks"] = notebooks_object
+    notebooks = Notebook.query.filter(Notebook.user_id == id).options(joinedload(Notebook.notes).joinedload(Note.tags)).all()
+    notebooks_data = [notebook.to_dict() for notebook in notebooks]
+    notebooks_data = {
+        "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
+        "ids": [notebook.id for notebook in notebooks]
+    }
 
     notes = []
     for notebook in notebooks:
         notes.extend(notebook.notes)
-    notes_object = [note.to_dict() for note in notes]
-    user_object["notes"] = notes_object
+    notes_data = {
+        "dict": {note.id: note.to_dict() for note in notes},
+        "ids": [note.id for note in notes],
+    }
 
-    note_tags = []
-    for note in notes:
-        note_tags.extend(note.note_tags)
-    user_object["note_tags"] = [note_tag.to_dict() for note_tag in note_tags]
-
-
-    return user_object
+    return {"tags": tags_data, "notebooks": notebooks_data, "notes": notes_data}

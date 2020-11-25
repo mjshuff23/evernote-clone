@@ -1,19 +1,21 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Note, Notebook, Tag, Note_Tag
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy.orm import joinedload
 
 auth_routes = Blueprint('auth', __name__)
 
 def get_user_data(user):
-    tags = Tag.query.filter(Tag.user_id == user.id).options(joinedload(Tag.notes)).all()
+    print(user)
+    tags = Tag.query.filter(Tag.user_id == user["id"]).options(joinedload(Tag.notes)).all()
     tags_data = {
         "dict": {tag.id:tag.to_dict() for tag in tags},
         "ids": [tag.id for tag in tags]
     }
 
-    notebooks = Notebook.query.filter(Notebook.user_id == user.id).options(joinedload(Notebook.notes).joinedload(Note.tags)).all()
+    notebooks = Notebook.query.filter(Notebook.user_id == user["id"]).options(joinedload(Notebook.notes).joinedload(Note.tags)).all()
     notebooks_data = [notebook.to_dict() for notebook in notebooks]
     notebooks_data = {
         "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
@@ -52,6 +54,7 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
+        print(f'user id: {current_user}')
         data = get_user_data(current_user.to_dict())
         return data
     return {'errors': ['Unauthorized']}, 401
@@ -81,7 +84,7 @@ def login():
           return data
       print('\n\n\nhere\n\n\n')
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    except Error as e:
+    except NameError as e:
       print(e)
       return e
 

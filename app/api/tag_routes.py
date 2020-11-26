@@ -16,15 +16,11 @@ def createTag(userid):
     new_tag = Tag(title=tag_name, user_id=userid)
     db.session.add(new_tag)
     db.session.commit()
-    return {
-        "id": new_tag.id,
-        "title": new_tag.title,
-        "user_id": new_tag.user_id
-    }
+    return new_tag.to_dict()
 
 
 @tag_routes.route('/<int:tagid>', methods=['DELETE'])
-# @login_required
+@login_required
 def deleteTag(userid, tagid):
     tag = Tag.query.filter(Tag.id == tagid).first()
     db.session.delete(tag)

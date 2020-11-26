@@ -12,7 +12,6 @@ export const setUser = (user) => ({ type: SET_USER, user });
 
 export const authenticateThunk = () => async (dispatch) => {
     const data = await authenticate();
-    console.log(data, '\nAUTHENTICATETHUNK');
     if (!data.errors) {
         const { user, tags, notebooks, notes } = data;
         dispatch(setUser(user));
@@ -24,7 +23,6 @@ export const authenticateThunk = () => async (dispatch) => {
 
 export const loginThunk = (email, password) => async (dispatch) => {
     const data = await login(email, password);
-    console.log(data, '\nLOGINTHUNK');
     if (!data.errors) {
         const { user, tags, notebooks, notes } = data;
         dispatch(setUser(user));
@@ -36,6 +34,5 @@ export const loginThunk = (email, password) => async (dispatch) => {
 
 export const logoutThunk = () => async (dispatch) => {
     const user = await logout();
-    console.log(user, '\nLOGOUTTHUNK');
     dispatch(removeUser());
 };

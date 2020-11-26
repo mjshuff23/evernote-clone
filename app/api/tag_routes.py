@@ -25,4 +25,4 @@ def deleteTag(userid, tagid):
     tag = Tag.query.filter(Tag.id == tagid).first()
     db.session.delete(tag)
     db.session.commit()
-    return {'message': 'success'}
+    return {'id': tagid}

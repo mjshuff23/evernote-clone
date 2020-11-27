@@ -5,10 +5,11 @@ from sqlalchemy.sql import func
 
 note_routes = Blueprint('notes', __name__)
 
-
+## For Testing Only
 @note_routes.route('/')
 def test(userid, notebookid):
     return f'{userid} {notebookid}'
+## For Testing Only
 
 @note_routes.route('/', methods=['POST'])
 @login_required
@@ -16,15 +17,7 @@ def create_note(userid, notebookid):
     new_note = Note(title="Untitled", user_id=userid, notebook_id=notebookid, content="")
     db.session.add(new_note)
     db.session.commit()
-    return {
-        'id': new_note.id,
-        'title': new_note.title,
-        'user_id': new_note.user_id,
-        'notebook_id': new_note.notebook_id,
-        'content': new_note.content,
-        'created_at': new_note.created_at,
-        'updated_at': new_note.updated_at
-    }
+    return new_note.to_dict()
 
 
 @note_routes.route('/<int:id>', methods=['PUT'])
@@ -39,15 +32,7 @@ def edit_note(userid, notebookid, id):
     note.content = content
     note.updated_at = func.now()
     db.session.commit()
-    return {
-        'id': note.id,
-        'title': note.title,
-        'content': note.content,
-        'notebook_id': note.notebook_id,
-        'user_id': note.user_id,
-        'created_at': note.created_at,
-        'updated_at': note.updated_at
-    }
+    return note.to_dict()
 
 
 
@@ -57,4 +42,6 @@ def delete_note(userid, notebookid, id):
     note = Note.query.filter(Note.id == id).first()
     db.session.delete(note)
     db.session.commit()
-    return 'Note deleted'
+    return {
+        "id": id,
+    }

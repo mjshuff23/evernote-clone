@@ -9,6 +9,10 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.note_routes import note_routes
+from .api.notebook_routes import notebook_routes
+from .api.tag_routes import tag_routes
+
+
 from .seeds import seed_commands
 
 from .config import Config
@@ -32,6 +36,10 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(note_routes, url_prefix='/api/users/<int:userid>/notebooks/<int:notebookid>/notes')
+app.register_blueprint(notebook_routes, url_prefix='/api/users/<int:userid>/notebooks')
+app.register_blueprint(tag_routes, url_prefix='/api/users/<int:userid>/tags')
+
+
 db.init_app(app)
 Migrate(app, db)
 

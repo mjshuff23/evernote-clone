@@ -1,9 +1,18 @@
-import { SET_NOTEBOOKS } from '../actions/notebooks';
+import { CREATE_NOTEBOOK, RENAME_NOTEBOOK, DELETE_NOTEBOOK } from '../actions/notebook';
 
-export default function reducer(state = {}, action) {
+const initialState = {
+    dict: {},
+    ids: []
+}
+
+export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case SET_NOTEBOOKS:
-            return action.notebooks;
+        case CREATE_NOTEBOOK:
+            return action.user;
+        case RENAME_NOTEBOOK:
+            return null;
+        case DELETE_NOTEBOOK:
+            return null;
         default:
             return state;
     }

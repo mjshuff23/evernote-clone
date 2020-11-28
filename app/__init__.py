@@ -11,6 +11,7 @@ from .api.auth_routes import auth_routes
 from .api.note_routes import note_routes
 from .api.notebook_routes import notebook_routes
 from .api.tag_routes import tag_routes
+from .api.note_tag_routes import note_tag_routes
 
 
 from .seeds import seed_commands
@@ -35,9 +36,17 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+<<<<<<< HEAD
 app.register_blueprint(note_routes, url_prefix='/api/users/<int:userid>/notebooks/<int:notebookid>/notes')
 app.register_blueprint(notebook_routes, url_prefix='/api/users/<int:userid>/notebooks')
+=======
+
+app.register_blueprint(
+    notebook_routes, url_prefix='/api/users/<int:userid>/notebooks')
+>>>>>>> created the basic shell for the reducer and actions for tags and note tags, and I created the routes for note tags
 app.register_blueprint(tag_routes, url_prefix='/api/users/<int:userid>/tags')
+app.register_blueprint(
+    note_tag_routes, url_prefix='/api/notes/<int:noteid>/tags')
 
 
 db.init_app(app)

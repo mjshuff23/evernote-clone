@@ -1,15 +1,12 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
-from app.models import Tag, Note, db
+from app.models import Tag, db
 
 tag_routes = Blueprint('tags', __name__)
 
-# userid is in the params,
-# tag_name is in the request body
-
 
 @tag_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def createTag(userid):
     tag_name = str(request.data)
     tag_name = tag_name[2:-1]

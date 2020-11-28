@@ -9,3 +9,9 @@ export const toggleLogoutPanel = () => ({ type: TOGGLE_LOGOUT_PANEL });
 export const setCurrentNotebook = notebookid => ({ type: SET_CURRENT_NOTEBOOK });
 export const setCurrentNote = noteid => ({ type: SET_CURRENT_NOTE });
 export const setCurrentTag = tagid => ({ type: SET_CURRENT_TAG });
+
+export const toggleTagPanelThunk = () => dispatch => dispatch(toggleTagPanel());
+export const toggleLogoutPanelThunk = () => dispatch => dispatch(toggleLogoutPanel());
+export const setCurrentNotebookThunk = notebookid => dispatch => dispatch(setCurrentNotebook(notebookid));
+export const setCurrentNoteThunk = noteid => dispatch => dispatch(setCurrentNote(noteid));
+export const setCurrentTagThunk = tagid => dispatch => dispatch(setCurrentTag(tagid));

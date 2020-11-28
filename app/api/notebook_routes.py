@@ -8,8 +8,8 @@ notebook_routes = Blueprint('notebook', __name__)
 
 
 # create a new notebook
-@notebook_routes.route('/', methods=['POST'])
-# @login_required
+@notebook_routes.route('/', methods=['POST'], strict_slashes=False)
+@login_required
 def create_notebook(userid):
     title = str(request.data)[2:-1]
     user_id = userid
@@ -21,8 +21,8 @@ def create_notebook(userid):
 
 
 # edit an existing notebook
-@notebook_routes.route('/<int:notebookid>', methods=['PUT'])
-# @login_required
+@notebook_routes.route('/<int:notebookid>', methods=['PUT'], strict_slashes=False)
+@login_required
 def edit_notebook(userid, notebookid):
     title = str(request.data)[2:-1]
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
@@ -34,8 +34,8 @@ def edit_notebook(userid, notebookid):
 
 
 # delete an existing notebook
-@notebook_routes.route('/<int:notebookid>', methods=['DELETE'])
-# @login_required
+@notebook_routes.route('/<int:notebookid>', methods=['DELETE'], strict_slashes=False)
+@login_required
 def delete_notebook(userid, notebookid):
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
     db.session.delete(notebook)

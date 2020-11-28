@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, session
 from flask_login import login_required
 from app.models import Notebook, db
 from sqlalchemy.sql import func
+from json
 
 
 notebook_routes = Blueprint('notebook', __name__)
@@ -11,7 +12,7 @@ notebook_routes = Blueprint('notebook', __name__)
 @notebook_routes.route('/', methods=['POST'], strict_slashes=False)
 @login_required
 def create_notebook(userid):
-    title = str(request.data)[2:-1]
+    title = json.loads(request.data)
     user_id = userid
     new_notebook = Notebook(title=title, user_id=user_id)
     db.session.add(new_notebook)
@@ -24,7 +25,7 @@ def create_notebook(userid):
 @notebook_routes.route('/<int:notebookid>', methods=['PUT'], strict_slashes=False)
 @login_required
 def edit_notebook(userid, notebookid):
-    title = str(request.data)[2:-1]
+    title = json.loads(request.data)
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
     notebook.title = title
     notebook.updated_at = func.now()

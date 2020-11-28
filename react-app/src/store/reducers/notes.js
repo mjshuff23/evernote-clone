@@ -1,6 +1,6 @@
 import { CREATE_NOTE, DELETE_NOTE, SET_NOTES, UPDATE_NOTE, TAG_NOTE, UNTAG_NOTE } from '../actions/notes';
 
-const initialState = {
+let initialState = {
     dict: {},
     ids: [],
 };
@@ -13,11 +13,9 @@ export default function reducer(state = {}, action) {
         case SET_NOTES:
             return action.notes;
         case TAG_NOTE:
-            newState = { ...state };
             newState.dict[ action.noteid ].tag_ids.push(action.notetag.id);
             return newState;
         case UNTAG_NOTE:
-            newState = { ...state };
             newState.dict[ action.noteid ].tag_ids.filter(tagid => tagid !== action.noteid);
             return newState;
         case UPDATE_NOTE:

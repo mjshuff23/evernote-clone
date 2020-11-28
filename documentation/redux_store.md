@@ -24,9 +24,11 @@
     },
     'tags': {
         dict: {
-           'id': '',
-           'title': '',
-           'note_ids': []
+            '0': {
+                'id': '',
+                'title': '',
+                'note_ids': []
+            }
         },
         'ids': []
     },

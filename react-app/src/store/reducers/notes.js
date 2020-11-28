@@ -1,4 +1,4 @@
-import { CREATE_NOTE, DELETE_NOTE, SET_NOTES, UPDATE_NOTE } from '../actions/notes';
+import { CREATE_NOTE, DELETE_NOTE, SET_NOTES, UPDATE_NOTE, TAG_NOTE, UNTAG_NOTE } from '../actions/notes';
 
 const initialState = {
     dict: {},
@@ -12,6 +12,14 @@ export default function reducer(state = {}, action) {
     switch (action.type) {
         case SET_NOTES:
             return action.notes;
+        case TAG_NOTE:
+            newState = { ...state };
+            newState.dict[ action.noteid ].tag_ids.push(action.notetag.id);
+            return newState;
+        case UNTAG_NOTE:
+            newState = { ...state };
+            newState.dict[ action.noteid ].tag_ids.filter(tagid => tagid !== action.noteid);
+            return newState;
         case UPDATE_NOTE:
         case CREATE_NOTE:
             newState.dict[action.note.id] = action.note;
@@ -20,8 +28,5 @@ export default function reducer(state = {}, action) {
         case DELETE_NOTE:
             delete newState.dict[action.note.id];
             newState = newState.ids.filter(id => id != action.note.id);
-            return newState;
-        default:
-            return state;
     }
 }

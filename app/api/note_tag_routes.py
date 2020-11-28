@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import Note_Tag, db
+import json
 
 note_tag_routes = Blueprint('note_tags', __name__)
 
@@ -8,7 +9,8 @@ note_tag_routes = Blueprint('note_tags', __name__)
 @note_tag_routes.route('/', methods=['POST'])
 @login_required
 def addTagToNote(noteid):
-    tag_id = int(request.data)
+    data = json.loads(request.data)
+    tag_id = data['tagid']
     new_note_tag = Note_Tag(tag_id=tag_id, note_id=noteid)
     db.session.add(new_note_tag)
     db.session.commit()

@@ -18,7 +18,8 @@ export const createNote = (userId, notebookId) => async (dispatch) => {
 
     if (response.ok) {
         const note = await response.json();
-        dispatch(createNoteAction(note.id));
+        dispatch(createNoteAction(note));
+        return note;
     }
 };
 

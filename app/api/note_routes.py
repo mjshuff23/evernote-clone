@@ -12,7 +12,7 @@ def test(userid, notebookid):
 ## For Testing Only
 
 @note_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_note(userid, notebookid):
     new_note = Note(title="Untitled", user_id=userid, notebook_id=notebookid, content="")
     db.session.add(new_note)

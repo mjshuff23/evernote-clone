@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from sqlalchemy.orm import joinedload
+from app.models import User, db, Note, Notebook, Tag, Note_Tag
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -7,13 +8,14 @@ from flask_login import current_user, login_user, logout_user, login_required
 auth_routes = Blueprint('auth', __name__)
 
 def get_user_data(user):
-    tags = Tag.query.filter(Tag.user_id == user.id).options(joinedload(Tag.notes)).all()
+    tags = Tag.query.filter(Tag.user_id == user['id']).options(joinedload(Tag.notes)).all()
     tags_data = {
         "dict": {tag.id:tag.to_dict() for tag in tags},
         "ids": [tag.id for tag in tags]
     }
 
-    notebooks = Notebook.query.filter(Notebook.user_id == user.id).options(joinedload(Notebook.notes).joinedload(Note.tags)).all()
+    notebooks = Notebook.query.filter(Notebook.user_id == user['id']).options(
+        joinedload(Notebook.notes).joinedload(Note.tags)).all()
     notebooks_data = [notebook.to_dict() for notebook in notebooks]
     notebooks_data = {
         "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
@@ -63,27 +65,16 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    print(request.get_json())
-    print('*' * 20);
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    try:
-      if form.validate_on_submit():
-          # Add the user to the session, we are logged in!
-          user = User.query.filter(User.email == form.data['email']).first()
-          # if (!user) {
-          #     return {'errors': 'No user found'}, 401
-          # }
-          print('\n\n\nor here\n\n\n')
-          login_user(user)
-          data = get_user_data(user.to_dict())
-          return data
-      print('\n\n\nhere\n\n\n')
-      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    except Error as e:
-      print(e)
-      return e
+    if form.validate_on_submit():
+        # Add the user to the session, we are logged in!
+        user = User.query.filter(User.email == form.data['email']).first()
+        login_user(user)
+        data = get_user_data(user.to_dict())
+        return data
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @auth_routes.route('/logout')

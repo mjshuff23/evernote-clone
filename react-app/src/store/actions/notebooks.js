@@ -1,7 +1,13 @@
+export const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
 export const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
 export const RENAME_NOTEBOOK = 'notebooks/RENAME_NOTEBOOK';
 export const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOK';
 
+
+export const setNotebooks = (notebooks) => ({
+    type: SET_NOTEBOOKS,
+    notebooks
+});
 export const createNotebook = (notebook) => ({
     type: CREATE_NOTEBOOK,
     notebook
@@ -48,3 +54,16 @@ export const deleteNotebookThunk = () => async (dispatch) => {
         dispatch(deleteNotebook(deleted.id))
     }
 };
+
+import {
+    SET_NOTEBOOKS
+} from '../actions/notebooks';
+
+export default function reducer(state = {}, action) {
+    switch (action.type) {
+        case SET_NOTEBOOKS:
+            return action.notebooks;
+        default:
+            return state;
+    }
+}

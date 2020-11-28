@@ -17,20 +17,21 @@ export const createNote = (userId, notebookId) => async (dispatch) => {
     });
 
     if (response.ok) {
-        note = await response.json();
+        const note = await response.json();
         dispatch(createNoteAction(note.id));
     }
 };
 
 export const updateNote = (userId, notebookId, note) => async (dispatch) => {
-    const { title, content, noteId };
+    // Destructure these from passed note object
+    const { title, content, noteId } = note;
     const response = await fetch(`${baseUrl}/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}`, {
         method: 'PUT',
         body: JSON.stringify({ title, content })
     });
 
     if (response.ok) {
-        note = await response.json();
+        const note = await response.json();
         dispatch(updateNoteAction(note));
     }
 };
@@ -41,7 +42,7 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
     });
 
     if (response.ok) {
-        deletedNote = await response.json();
+        const deletedNote = await response.json();
         dispatch(deleteNoteAction(deletedNote.id));
     }
 };

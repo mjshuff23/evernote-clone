@@ -1,7 +1,7 @@
 export const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
-export const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
-export const RENAME_NOTEBOOK = 'notebooks/RENAME_NOTEBOOK';
-export const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOK';
+export const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOKS';
+export const RENAME_NOTEBOOK = 'notebooks/RENAME_NOTEBOOKS';
+export const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOKS';
 
 
 export const setNotebooks = (notebooks) => ({
@@ -54,16 +54,3 @@ export const deleteNotebookThunk = () => async (dispatch) => {
         dispatch(deleteNotebook(deleted.id))
     }
 };
-
-import {
-    SET_NOTEBOOKS
-} from '../actions/notebooks';
-
-export default function reducer(state = {}, action) {
-    switch (action.type) {
-        case SET_NOTEBOOKS:
-            return action.notebooks;
-        default:
-            return state;
-    }
-}

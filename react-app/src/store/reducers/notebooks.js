@@ -6,17 +6,17 @@ const initialState = {
 }
 
 export default function reducer(state = initialState, action) {
+    let newState = { ...state };
+    
     switch (action.type) {
         case SET_NOTEBOOKS:
             return action.notebooks;
         case RENAME_NOTEBOOK:
         case CREATE_NOTEBOOK:
-            let newState = { ...state };
             newState.dict[action.notebook.id] = action.notebook;
             newState.ids.push(action.notebook.id);
             return newState;
         case DELETE_NOTEBOOK:
-            let newState = { ...state };
             delete newState.dict[action.notebookid];
             newState = newState.ids.filter(id => id != action.notebookid);
             return newState;

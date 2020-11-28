@@ -1,17 +1,18 @@
+export const SET_TAGS = 'SET_TAGS';
 export const CREATE_TAG = 'CREATE_TAG';
 export const DELETE_TAG = 'DELETE_TAG';
-export const TAG_NOTE = 'TAG_NOTE';
-export const UNTAG_NOTE = 'UNTAG_NOTE';
 
+export const setTags = tags => ({ type: SET_TAGS, tags });
 export const createTag = tag => ({ type: CREATE_TAG, tag });
 export const deleteTag = tagid => ({ type: DELETE_TAG, tagid });
-export const tagNote = () => ({ type: TAG_NOTE }); // might go into the notes slice of state
-export const untagNote = notetagid => ({ type: UNTAG_NOTE, notetagid }); // might go into the notes slice of state
 
-export const createTagThunk = name => async dispatch => {
+export const createTagThunk = (userid, name) => async dispatch => {
     const newTag = await fetch(`/api/users/${userid}/tags/`, {
         method: 'POST',
-        body: name
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name })
     });
     if (newTag.ok) {
         newTag = await newTag.json();
@@ -19,7 +20,7 @@ export const createTagThunk = name => async dispatch => {
     }
 }
 
-export const deleteTagThunk = tagid => async dispatch => {
+export const deleteTagThunk = (userid, tagid) => async dispatch => {
     const deleted = await fetch(`/api/users/${userid}/tags/${tagid}`, {
         method: 'DELETE'
     });
@@ -27,12 +28,4 @@ export const deleteTagThunk = tagid => async dispatch => {
         deleted = await deleted.json();
         dispatch(deleteTag(deleted.id));
     }
-}
-
-export const tagNoteThunk = () => async dispatch => {
-    // add the tag to the note
-}
-
-export const untagNoteThunk = notetagid => async dispatch => {
-    // remove the tag from the note
 }

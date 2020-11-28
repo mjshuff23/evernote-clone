@@ -24,8 +24,8 @@ export const untagNoteThunk = (noteid, notetagid) => async dispatch => {
     let removedTagId = await fetch(`/api/notes/${noteid}/tags/${notetagid}`, {
         method: 'DELETE'
     });
-    if (removedTag.ok) {
-        removedTagId = removedTag.json();
+    if (removedTagId.ok) {
+        removedTagId = removedTagId.json();
         dispatch(untagNote(removedTagId.id, noteid));
     }
 }

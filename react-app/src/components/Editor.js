@@ -14,8 +14,6 @@ export default function Editor() {
     //     console.log('UPDATING DB');
     // }, 2000);
 
-    useEffect;
-
     function updateBody(text) {
         setText(text);
         // update();

@@ -12,8 +12,11 @@ export const updateNoteAction = (note) => ({ type: UPDATE_NOTE, note });
 export const deleteNoteAction = (noteId) => ({ type: DELETE_NOTE, noteId });
 
 export const createNote = (userId, notebookId) => async (dispatch) => {
-    const response = await fetch(`${baseUrl}/api/users/${userId}/notebooks/${notebookId}/notes/`, {
-        method: 'POST'
+    const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
     });
 
     if (response.ok) {
@@ -26,7 +29,7 @@ export const createNote = (userId, notebookId) => async (dispatch) => {
 export const updateNote = (userId, notebookId, note) => async (dispatch) => {
     // Destructure these from passed note object
     const { title, content, noteId } = note;
-    const response = await fetch(`${baseUrl}/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}`, {
+    const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}/`, {
         method: 'PUT',
         body: JSON.stringify({ title, content })
     });
@@ -38,7 +41,7 @@ export const updateNote = (userId, notebookId, note) => async (dispatch) => {
 };
 
 export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
-    const response = await fetch(`${baseUrl}/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}`, {
+    const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}/`, {
         method: 'DELETE'
     });
 

@@ -22,7 +22,6 @@ export default function Sidebar() {
         if (!userState.id) return;
         // We have a user id and notebook id, time to dispatch
         dispatch(createNote(userState.id, currentNotebookId));
-        console.log(note);
         console.log('NEW NOTE CLICKED');
     }
 

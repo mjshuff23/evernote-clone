@@ -7,12 +7,17 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case CREATE_NOTEBOOK:
-            return action.user;
         case RENAME_NOTEBOOK:
-            return null;
+        case CREATE_NOTEBOOK:
+            const newState = { ...state }
+            newState[action.notebook.id] = action.notebook
+            newState.ids.push(action.notebook.id);
+            return newState;
         case DELETE_NOTEBOOK:
-            return null;
+            const newState = { ...state };
+            delete newState[action.notebookid];
+            newState = newState.ids.filter(id => id != action.notebookid);
+            return newState;
         default:
             return state;
     }

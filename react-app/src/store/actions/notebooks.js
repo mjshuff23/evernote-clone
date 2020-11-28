@@ -19,7 +19,7 @@ export const deleteNotebook = (notebookid) => ({
 export const createNotebookThunk = (title) => async (dispatch) => {
     const newNotebook = await fetch(`/api/users/${userid}/notebooks/`, {
         method: 'POST',
-        body: title
+        body: JSON.stringify(title)
     });
     if (newNotebook.ok) {
         newNotebook = await newNotebook.json();
@@ -30,7 +30,7 @@ export const createNotebookThunk = (title) => async (dispatch) => {
 export const renameNotebookThunk = (title) => async (dispatch) => {
     const renamed = await fetch(`api/users/${userid}/notebooks/${notebookid}`, {
         method: 'PUT',
-        body: title
+        body: JSON.stringify(title)
     });
     if (renamed.ok) {
         renamed = await renamed.json();

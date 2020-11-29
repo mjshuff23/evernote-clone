@@ -46,6 +46,7 @@ app.register_blueprint(
     note_tag_routes, url_prefix='/api/notes/<int:noteid>/tags')
 
 
+db.init_app(app)
 Migrate(app, db)
 
 # Application Security

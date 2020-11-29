@@ -10,7 +10,6 @@ export default function Editor() {
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [id, setId] = useState('');
-
     // const update = debounce(() => {
     //     console.log('UPDATING DB');
     // }, 2000);

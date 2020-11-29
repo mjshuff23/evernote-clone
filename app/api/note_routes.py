@@ -11,7 +11,7 @@ def test(userid, notebookid):
     return f'{userid} {notebookid}'
 ## For Testing Only
 
-@note_routes.route('/', methods=['POST'])
+@note_routes.route('/', methods=['POST'], strict_slashes=False)
 @login_required
 def create_note(userid, notebookid):
     new_note = Note(title="Untitled", user_id=userid, notebook_id=notebookid, content="")
@@ -20,7 +20,7 @@ def create_note(userid, notebookid):
     return new_note.to_dict()
 
 
-@note_routes.route('/<int:id>', methods=['PUT'])
+@note_routes.route('/<int:id>', methods=['PUT'], strict_slashes=False)
 @login_required
 def edit_note(userid, notebookid, id):
     req_data = request.get_json()
@@ -36,7 +36,7 @@ def edit_note(userid, notebookid, id):
 
 
 
-@note_routes.route('/<int:id>', methods=['DELETE'])
+@note_routes.route('/<int:id>', methods=['DELETE'], strict_slashes=False)
 @login_required
 def delete_note(userid, notebookid, id):
     note = Note.query.filter(Note.id == id).first()

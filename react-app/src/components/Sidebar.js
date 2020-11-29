@@ -6,6 +6,7 @@ import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
 import { useSelector, useDispatch } from 'react-redux';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function Sidebar() {
     const classes = useStyles();
@@ -38,7 +39,7 @@ export default function Sidebar() {
         <Container className={ classes.sidebarContainer }>
             <UserInfoDisplay />
             <Button onClick={ newNoteClick } className={ classes.newNoteBtn }>
-                New Note
+                <AddIcon className="muiAddIcon" />New Note
             </Button>
             <List>
                 <ListItem button>

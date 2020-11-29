@@ -5,6 +5,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    margin-right: 5%;
 }
 
 .appContainer {
@@ -45,4 +46,20 @@ html, body {
 
 .MuiButton-containedPrimary {
     margin: 10px !important;
+}
+
+.MuiAvatar-colorDefault {
+    margin: 5px;
+    background-color: #1A1A1A !important;
+    color: #008F26 !important;
+}
+
+.muiAddIcon {
+    margin-right: 5px !important;
+    size: 1.25em !important;
+}
+
+.MuiPopover-paper {
+    background-color: #1A1A1A !important;
+    color: whitesmoke !important;
 }

@@ -13,13 +13,15 @@ export default function reducer(state = {}, action) {
         case SET_NOTES:
             return action.notes;
         case UPDATE_NOTE:
+            newState.dict[action.note.id] = action.note;
+            return newState;
         case CREATE_NOTE:
             newState.dict[action.note.id] = action.note;
             newState.ids.push(action.note.id);
             return newState;
         case DELETE_NOTE:
             delete newState.dict[action.note.id];
-            newState = newState.ids.filter(id => id != action.note.id);
+            newState.ids = newState.ids.filter(id => id != action.note.id);
             return newState;
         default:
             return state;

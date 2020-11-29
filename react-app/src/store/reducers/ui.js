@@ -6,7 +6,7 @@ import {
     SET_CURRENT_TAG
 } from '../actions/ui';
 
-initialState = {
+let initialState = {
     display_tag_panel: false,
     display_logout_panel: false
 }

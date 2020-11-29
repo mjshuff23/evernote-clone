@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
             return newState;
         case DELETE_TAG:
             delete newState.dict[ action.tagid ];
-            newState = newState.ids.filter(id => id !== action.tagid);
+            newState.ids = newState.ids.filter(id => id !== action.tagid);
             return newState;
         default:
             return state;

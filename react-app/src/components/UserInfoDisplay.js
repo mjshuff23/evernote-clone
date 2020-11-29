@@ -42,7 +42,7 @@ export default function UserInfoDisplay() {
                 open={ open }
                 onClose={ handleClose }
                 anchorReference="anchorPosition"
-                anchorPosition={ { top: 0, left: 179 } }
+                anchorPosition={ { top: 0, left: 200 } }
                 anchorOrigin={ {
                     vertical: 'top',
                     horizontal: 'left',

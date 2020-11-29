@@ -60,6 +60,6 @@ html, body {
 }
 
 .MuiPopover-paper {
-    background-color: #1A1A1A !important;
-    color: whitesmoke !important;
+    background-color: #dfdfdf !important;
+    color: #1A1A1A !important;
 }

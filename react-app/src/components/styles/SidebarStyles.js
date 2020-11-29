@@ -1,19 +1,20 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-    // newNoteBtn: {
-    //     width: '100%',
-    //     height: '35px',
-    //     borderBottom: '1px solid black',
-    //     borderRadius: '20px',
-    //     backgroundColor: '#5ba525',
-    //     color: 'white',
-    //     '&:hover': {
-    //         backgroundColor: '#88a2ce'
-    //     }
-    // },
+    newNoteBtn: {
+        width: '100%',
+        height: '35px',
+        borderBottom: '1px solid black',
+        borderRadius: '20px',
+        backgroundColor: '#5ba525',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#88a2ce'
+        }
+    },
     sidebarContainer: {
         display: 'flex',
+        color: 'darkgray',
         flexDirection: 'column',
         // marginTop: '0px',
         width: '200px',
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         // float: 'left',
         // overflowY: 'scroll',
         // overflowX: 'hidden',
-        backgroundColor: 'green',
+        backgroundColor: '#1A1A1A',
         zIndex: 2,
     },
 }));

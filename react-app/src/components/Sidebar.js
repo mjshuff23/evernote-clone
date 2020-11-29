@@ -37,7 +37,7 @@ export default function Sidebar() {
     return (
         <Container className={ classes.sidebarContainer }>
             <UserInfoDisplay />
-            <Button onClick={ newNoteClick }> {/* className={ classes.newNoteBtn } */ }
+            <Button onClick={ newNoteClick } className={ classes.newNoteBtn }>
                 New Note
             </Button>
             <List>

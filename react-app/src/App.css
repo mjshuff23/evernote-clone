@@ -1,4 +1,4 @@
-/* html, body {
+html, body {
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
@@ -41,4 +41,8 @@
 
 .MuiListItem-root.Mui-selected {
     background-color: #d4d8e8 !important;
-} */
+}
+
+.MuiButton-containedPrimary {
+    margin: 10px !important;
+}

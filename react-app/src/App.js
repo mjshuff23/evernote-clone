@@ -5,7 +5,8 @@ import MainPage from './components/MainPage';
 import LoginForm from "./components/auth/LoginForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-
+import { CssBaseline } from '@material-ui/core';
+import Theme from './Theme';
 import { authenticateThunk } from "./store/actions/user";
 import './App.css';
 
@@ -14,19 +15,22 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authenticateThunk())
+    dispatch(authenticateThunk());
   }, [dispatch]);
 
   return (
     <>
-      <BrowserRouter>
-        <ProtectedRoute path="/login" exact={true} authenticated={!isNotLoggedIn}>
-          <LoginForm />
-        </ProtectedRoute>
-        <PrivateRoute path="/" authenticated={!isNotLoggedIn }>
-          <MainPage />
-        </PrivateRoute>
-      </BrowserRouter>
+      <CssBaseline />
+      <Theme>
+        <BrowserRouter>
+          <ProtectedRoute path="/login" exact={ true } authenticated={ !isNotLoggedIn }>
+            <LoginForm />
+          </ProtectedRoute>
+          <PrivateRoute path="/" authenticated={ !isNotLoggedIn }>
+            <MainPage />
+          </PrivateRoute>
+        </BrowserRouter>
+      </Theme>
     </>
   );
 }

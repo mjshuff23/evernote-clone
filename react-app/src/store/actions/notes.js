@@ -10,7 +10,6 @@ export const UNTAG_NOTE = 'notes/UNTAG_NOTE';
 export const setNotes = (notes) => ({ type: SET_NOTES, notes });
 export const tagNote = (notetag, noteid) => ({ type: TAG_NOTE, notetag, noteid });
 export const untagNote = (notetagid, noteid) => ({ type: UNTAG_NOTE, notetagid, noteid });
-export const setNotes = (notes) => ({ type: SET_NOTES, notes });
 export const createNoteAction = (note) => ({ type: CREATE_NOTE, note });
 export const updateNoteAction = (note) => ({ type: UPDATE_NOTE, note });
 export const deleteNoteAction = (noteId) => ({ type: DELETE_NOTE, noteId });
@@ -67,7 +66,7 @@ export const tagNoteThunk = (noteid, tagid) => async dispatch => {
         newNoteTag = await newNoteTag.json();
         dispatch(tagNote(newNoteTag, noteid));
     }
-}
+};
 
 export const untagNoteThunk = (noteid, notetagid) => async dispatch => {
     let removedTagId = await fetch(`/api/notes/${noteid}/tags/${notetagid}`, {
@@ -77,4 +76,4 @@ export const untagNoteThunk = (noteid, notetagid) => async dispatch => {
         removedTagId = removedTagId.json();
         dispatch(untagNote(removedTagId.id, noteid));
     }
-}
+};

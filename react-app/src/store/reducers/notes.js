@@ -1,4 +1,4 @@
-import { CREATE_NOTE, DELETE_NOTE, SET_NOTES, UPDATE_NOTE, TAG_NOTE, UNTAG_NOTE } from '../actions/notes';
+import { CREATE_NOTE, DELETE_NOTE, SET_NOTES, UPDATE_NOTE, TAG_NOTE, UNTAG_NOTE, TAG_DELETED } from '../actions/notes';
 
 let initialState = {
     dict: {},
@@ -17,6 +17,12 @@ export default function reducer(state = initialState, action) {
             return newState;
         case UNTAG_NOTE:
             newState.dict[ action.noteid ].tag_ids = newState.dict[ action.noteid ].tag_ids.filter(tagid => tagid !== action.noteid);
+            return newState;
+        case TAG_DELETED:
+            newState.dict = Object.keys(newState.dict).map(note => {
+                note.tag_ids = note.tag_ids.filter(tag => tag !== action.tagid);
+                return note;
+            });
             return newState;
         case UPDATE_NOTE:
         case CREATE_NOTE:

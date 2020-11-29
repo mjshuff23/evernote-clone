@@ -34,12 +34,19 @@ def load_user(id):
 app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(
     note_routes, url_prefix='/api/users/<int:userid>/notebooks/<int:notebookid>/notes')
 app.register_blueprint(
     notebook_routes, url_prefix='/api/users/<int:userid>/notebooks')
+<<<<<<< HEAD
+=======
+app.register_blueprint(tag_routes, url_prefix='/api/users/<int:userid>/tags')
+app.register_blueprint(
+    note_tag_routes, url_prefix='/api/notes/<int:noteid>/tags')
+>>>>>>> 8099a9aace217d663fbd57a3087c35b66f7267dd
 
 
 Migrate(app, db)

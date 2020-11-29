@@ -71,6 +71,19 @@ const TagPanel = (props) => {
   };
   //=================================================
 
+  const sections = () => {
+    return tagsections = [ '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ].map(section => {
+      let sectionMap = new Map();
+      sectionMap[section] = tags.ids.filter(tagid => {
+        if (section === '#') {
+          return tags.dict[tagid].title.match(/^[^a-z]/i);
+        }
+        return tags.dict[tagid].title.match(new RegExp(`^[${section}]`, 'i'));
+      });
+      return sectionMap;
+    });
+  }
+
   const hideTagPanel = e => {
     dispatch(toggleTagPanel);
   }

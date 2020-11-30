@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '26px',
         border: 'none',
         width: '100%',
+        margin: '10px 0',
     }
 }));
 

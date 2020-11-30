@@ -98,22 +98,19 @@ export default function Sidebar() {
                         <ListItemText primary="Tags" />
                     </Button>
                 </ListItem>
-                {tags.ids ? <Collapse in={openTags}>
+                <Collapse in={openTags}>
                     <List component="div" disablePadding>
-                        {tags.ids.map(id => {
-                            console.log(tags.dict[id]);
-                            return (
-                                <ListItem
-                                    button
-                                    component={NavLink}
-                                    key={`tag-${id}`}
-                                    to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}>
-                                    <ListItemText primary={tags.dict[id].title} />
-                                </ListItem>
-                            )})
-                        }}
+                        {tags.ids.map(id => (
+                            <ListItem
+                                button
+                                component={NavLink}
+                                key={`tag-${id}`}
+                                to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}>
+                                <ListItemText primary={tags.dict[id].title} />
+                            </ListItem>
+                        ))}
                     </List>
-                </Collapse> : null}
+                </Collapse>
             </List>
         </Container>
     );

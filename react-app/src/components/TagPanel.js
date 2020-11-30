@@ -21,7 +21,6 @@ const TagPanel = () => {
     let sectionMapping = {};
     ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'].forEach(section => {
       let filteredIds = tags.ids.filter(tagid => {
-        console.log(tags.dict[tagid].title);
         if (section === '#') {
           return tags.dict[tagid].title.match(/^[^a-z]/i);
         }

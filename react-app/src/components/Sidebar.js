@@ -6,14 +6,16 @@ import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
 import { useSelector, useDispatch } from 'react-redux';
+import { toggleTagPanelThunk } from '../store/actions/ui';
 
 export default function Sidebar() {
     const classes = useStyles();
-    const [openNotebooks, setOpenNotebooks] = useState(false);
+    const [ openNotebooks, setOpenNotebooks ] = useState(false);
     // This is just a test, but since we will be using this across multiple
     //  components, I believe we should put this in our Redux Store.
-    const [currentNotebookId, setCurrentNotebookId] = useState(1);
-    const [openTags, setOpenTags] = useState(false);
+    const [ currentNotebookId, setCurrentNotebookId ] = useState(1);
+    const openTags = useSelector(state => state.ui.display_tag_panel);
+    // const [openTags, setOpenTags] = useState(false);
     const userState = useSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -30,27 +32,27 @@ export default function Sidebar() {
     }
 
     function clickOpenTags() {
-        setOpenTags(!openTags);
+        dispatch(toggleTagPanelThunk());
     }
 
 
     return (
-        <Container className={ classes.sidebarContainer }>
+        <Container className={classes.sidebarContainer}>
             <UserInfoDisplay />
-            <Button onClick={ newNoteClick }> {/* className={ classes.newNoteBtn } */ }
+            <Button onClick={newNoteClick}> {/* className={ classes.newNoteBtn } */}
                 New Note
             </Button>
             <List>
                 <ListItem button>
                     <ListItemText primary="All Notes" />
                 </ListItem>
-                <ListItem button onClick={ clickOpenNotebooks }>
+                <ListItem button onClick={clickOpenNotebooks}>
                     <ListItemText primary="Notebooks" />
-                    { openNotebooks ? <ExpandLess /> : <ExpandMore /> }
+                    {openNotebooks ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
-                <Collapse in={ openNotebooks }>
+                <Collapse in={openNotebooks}>
                     <List component="div" disablePadding>
-                        {/* actuall map through all notebooks creating ListItems*/ }
+                        {/* actuall map through all notebooks creating ListItems*/}
                         <ListItem button>
                             <ListItemText primary="First Notebook" />
                         </ListItem>
@@ -59,21 +61,10 @@ export default function Sidebar() {
                         </ListItem>
                     </List>
                 </Collapse>
-                <ListItem button onClick={ clickOpenTags }>
+                <ListItem button onClick={clickOpenTags}>
                     <ListItemText primary="Tags" />
-                    { openTags ? <ExpandLess /> : <ExpandMore /> }
                 </ListItem>
-                <Collapse in={ openTags }>
-                    <List component="div" disablePadding>
-                        {/* actuall map through all Tags creating ListItems*/ }
-                        <ListItem button>
-                            <ListItemText primary="First Tag" />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText primary="Second Tag" />
-                        </ListItem>
-                    </List>
-                </Collapse>
+
             </List>
         </Container>
     );

@@ -42,7 +42,7 @@ export default function Editor() {
     return (
         <div className={ classes.editorContainer }>
             <div className={ classes.editorNoteTitle }>
-                <input type="text" value={ title } onChange={ updateTitle } />
+                <input style={ { textAlign: 'center', fontSize: 'larger', border: 'none' } } type="text" value={ title } onChange={ updateTitle } />
             </div>
             <ReactQuill value={ text } onChange={ (text) => updateBody(text) }></ReactQuill>
         </div>

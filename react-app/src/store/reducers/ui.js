@@ -3,7 +3,8 @@ import {
     TOGGLE_LOGOUT_PANEL,
     SET_CURRENT_NOTE,
     SET_CURRENT_NOTEBOOK,
-    SET_CURRENT_TAG
+    SET_CURRENT_TAG,
+    CREATE_TAG_DIALOG_OPEN
 } from '../actions/ui';
 
 let initialState = {

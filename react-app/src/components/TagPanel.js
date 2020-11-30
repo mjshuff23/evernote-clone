@@ -64,43 +64,43 @@ const TagPanel = (props) => {
         <Dialog open={createDialog} onClose={closeDialog}>
           <DialogTitle id='form-dialog-title'>Add a tag</DialogTitle>
           <DialogContent>
-          <TextField
-            autoFocus
-            variant="outlined"
-            margin="dense"
-            id="name"
-            label="Tag name"
-            type="text"
-            fullWidth
-            onChange={updateNewTagName}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDialog} color="primary">
-            Cancel
+            <TextField
+              autoFocus
+              variant="outlined"
+              margin="dense"
+              id="name"
+              label="Tag name"
+              type="text"
+              fullWidth
+              onChange={updateNewTagName}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeDialog} color="primary">
+              Cancel
           </Button>
-          <Button onClick={submitCreatedTag}  color="primary">
-            Create
+            <Button onClick={submitCreatedTag} color="primary">
+              Create
           </Button>
-        </DialogActions>
+          </DialogActions>
         </Dialog>
         <List className={classes.listroot} subheader={<li />}>
           {Object.keys(sections()).map((sectionId) => (
             <li key={`section-${sectionId}`} className={classes.listSection}>
               <ul className={classes.ul}>
                 <ListSubheader>{sectionId}</ListSubheader>
-                {sections()[ sectionId ].sort(function (tag1, tag2) {
-                  if (tags.dict[ tag1 ].title.toLowerCase() < tags.dict[ tag2 ].title.toLowerCase()) return -1;
-                  if (tags.dict[ tag1 ].title.toLowerCase() > tags.dict[ tag2 ].title.toLowerCase()) return 1;
+                {sections()[sectionId].sort(function (tag1, tag2) {
+                  if (tags.dict[tag1].title.toLowerCase() < tags.dict[tag2].title.toLowerCase()) return -1;
+                  if (tags.dict[tag1].title.toLowerCase() > tags.dict[tag2].title.toLowerCase()) return 1;
                   return 0;
                 }).map((item) => (
-                  <ListItem key={ `item-${sectionId}-${item}` }>
-                    <ListItemText primary={ `${tags.dict[item].title} (${tags.dict[item].note_ids.length})` } />
+                  <ListItem key={`item-${sectionId}-${item}`}>
+                    <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
                   </ListItem>
-                )) }
+                ))}
               </ul>
             </li>
-          )) }
+          ))}
         </List>
       </Box>
     </Slide>

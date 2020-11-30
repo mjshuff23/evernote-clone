@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     width: 300
   },
+  tagIcon: {
+    transform: 'rotate(45deg)'
+  },
   listroot: {
     width: '100%',
     maxWidth: 360,

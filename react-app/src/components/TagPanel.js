@@ -1,98 +1,57 @@
-import { Box, Divider, Slide, Typography } from '@material-ui/core';
-import React, { useState, useDispatch } from 'react';
-import { useSelector } from 'react-redux';
+import { Box, Divider, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from '@material-ui/core';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
 
 const TagPanel = (props) => {
   const classes = useStyles();
-  // const tags = useSelector(state => state.tags.dict);
+  const tags = useSelector(state => state.tags);
   const dispatch = useDispatch();
 
-  //========= FOR TESTING ===========================
-  const tags = {
-    "dict": {
-      "1": {
-        "id": 1,
-        "note_ids": [ 1 ],
-        "title": "test",
-        "user_id": 1
-      },
-      "2": {
-        "id": 2,
-        "note_ids": [ 2 ],
-        "title": "class",
-        "user_id": 1
-      },
-      "3": {
-        "id": 3,
-        "note_ids": [ 3 ],
-        "title": "fix",
-        "user_id": 1
-      },
-      "4": {
-        "id": 4,
-        "note_ids": [ 4, 5 ],
-        "title": "javascript",
-        "user_id": 1
-      },
-      "5": {
-        "id": 5,
-        "note_ids": [ 6, 7 ],
-        "title": "c++",
-        "user_id": 1
-      },
-      "6": {
-        "id": 6,
-        "note_ids": [ 8, 9 ],
-        "title": "java",
-        "user_id": 1
-      },
-      "7": {
-        "id": 7,
-        "note_ids": [ 10 ],
-        "title": "to do",
-        "user_id": 1
-      },
-      "8": {
-        "id": 8,
-        "note_ids": [ 11 ],
-        "title": "team",
-        "user_id": 1
-      },
-      "9": {
-        "id": 9,
-        "note_ids": [ 12 ],
-        "title": "project",
-        "user_id": 1
-      }
-    },
-    "ids": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
-  };
-  //=================================================
-
   const sections = () => {
-    return tagsections = [ '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ].map(section => {
-      let sectionMap = new Map();
-      sectionMap[section] = tags.ids.filter(tagid => {
+    let sectionMapping = new Map();
+    [ '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ].forEach(section => {
+      let filteredIds = tags.ids.filter(tagid => {
         if (section === '#') {
-          return tags.dict[tagid].title.match(/^[^a-z]/i);
+          return tags.dict[ tagid ].title.match(/^[^a-z]/i);
         }
-        return tags.dict[tagid].title.match(new RegExp(`^[${section}]`, 'i'));
+        return tags.dict[ tagid ].title.match(new RegExp(`^[${section}]`, 'i'));
       });
-      return sectionMap;
+      if (filteredIds.length > 0) {
+        sectionMapping[ section ] = filteredIds;
+      }
     });
+    return sectionMapping;
   }
 
   const hideTagPanel = e => {
-    dispatch(toggleTagPanel);
+    dispatch(toggleTagPanel());
   }
 
   return (
-    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit onBlur={hideTagPanel}>
+    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
       <Box className={classes.tagPanel}>
         <Typography>Tags</Typography>
         <Divider />
+        <List className={classes.listroot} subheader={<li />}>
+          {Object.keys(sections()).map((sectionId) => (
+            <li key={`section-${sectionId}`} className={classes.listSection}>
+              <ul className={classes.ul}>
+                <ListSubheader>{sectionId}</ListSubheader>
+                {sections()[ sectionId ].sort(function (tag1, tag2) {
+                  if (tags.dict[ tag1 ].title.toLowerCase() < tags.dict[ tag2 ].title.toLowerCase()) return -1;
+                  if (tags.dict[ tag1 ].title.toLowerCase() > tags.dict[ tag2 ].title.toLowerCase()) return 1;
+                  return 0;
+                }).map((item) => (
+                  <ListItem key={`item-${sectionId}-${item}`}>
+                    <ListItemText primary={`${tags.dict[ item ].title} (${tags.dict[ item ].note_ids.length})`} />
+                  </ListItem>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </List>
       </Box>
     </Slide>
   );

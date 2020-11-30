@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import ProtectedRoute from './auth/ProtectedRoute';
-import { Box, Grid, FormControlLabel, Switch } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import Sidebar from './Sidebar';
 import TagPanel from './TagPanel';
 import NoteInfoPanel from './NoteInfoPanel';
@@ -9,23 +10,14 @@ import EditorPanel from './EditorPanel';
 import NotebookPanel from './NotebookPanel'
 import useStyles from './styles/MainPageStyles';
 
-
 export default function MainPage() {
   const classes = useStyles();
-  const [checked, setChecked] = useState(false);
-
-  const handleChange = () => {
-    setChecked(!checked);
-  };
+  const checked = useSelector(state => state.ui.display_tag_panel);
 
   return (
     <Box className={classes.mainpageContainer}>
       <Sidebar />
       <main className={classes.main}>
-        <FormControlLabel
-          control={<Switch checked={checked} onChange={handleChange} />}
-          label="Show"
-        /> {/* TODO: replace this with Tag button in Sidebar */}
         <TagPanel checked={checked} />
         <Route path="/notes">
           {/* Eventually Protected */}

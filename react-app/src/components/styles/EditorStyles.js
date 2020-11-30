@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
         fontSize: "larger",
         fontWeight: "bolder",
         border: "1px solid darkgray",
+    },
+    editorNoteInput: {
+        textAlign: 'center',
+        fontSize: '26px',
+        border: 'none'
     }
 }));
 

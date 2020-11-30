@@ -4,12 +4,28 @@ const useStyles = makeStyles(theme => ({
   tagPanel: {
     left: 200,
     zIndex: 1,
-    position: "absolute",
+    position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
     width: 300,
     color: "#F8F8F8",
+    width: 300
+  },
+  listroot: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    position: 'relative',
+    overflow: 'auto',
+    maxHeight: '100vh'
+  },
+  listSection: {
+    backgroundColor: "inherit"
+  },
+  ul: {
+    backgroundColor: "inherit",
+    padding: 0
   }
 }));
 

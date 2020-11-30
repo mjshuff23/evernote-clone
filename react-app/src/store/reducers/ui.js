@@ -1,5 +1,5 @@
 import {
-    TOGGLE_TAGS_PANEL,
+    TOGGLE_TAG_PANEL,
     TOGGLE_LOGOUT_PANEL,
     SET_CURRENT_NOTE,
     SET_CURRENT_NOTEBOOK,
@@ -8,13 +8,16 @@ import {
 
 let initialState = {
     display_tag_panel: false,
-    display_logout_panel: false
+    display_logout_panel: false,
+    current_note: null,
+    current_notebook: null,
+    current_tag: null
 }
 
 export default function reducer(state = initialState, action) {
     let newState = { ...state };
     switch (action.type) {
-        case TOGGLE_TAGS_PANEL:
+        case TOGGLE_TAG_PANEL:
             newState.display_tag_panel = !newState.display_tag_panel;
             return newState;
         case TOGGLE_LOGOUT_PANEL:

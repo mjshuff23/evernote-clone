@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import MainPage from './components/MainPage';
 import LoginForm from "./components/auth/LoginForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
@@ -23,12 +23,14 @@ export default function App() {
       <CssBaseline />
       <Theme>
         <BrowserRouter>
-          <ProtectedRoute path="/login" exact={ true } authenticated={ !isNotLoggedIn }>
-            <LoginForm />
-          </ProtectedRoute>
-          <PrivateRoute path="/" authenticated={ !isNotLoggedIn }>
-            <MainPage />
-          </PrivateRoute>
+          <Switch>
+            <ProtectedRoute path="/login" exact={ true } authenticated={ !isNotLoggedIn }>
+              <LoginForm />
+            </ProtectedRoute>
+            <PrivateRoute path="/" authenticated={ !isNotLoggedIn }>
+              <MainPage />
+            </PrivateRoute>
+          </Switch>
         </BrowserRouter>
       </Theme>
     </>

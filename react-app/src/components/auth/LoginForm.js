@@ -10,7 +10,6 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Copyright from '../Copyright';
 import AuthStyles from '../styles/AuthStyles';
 
 const LoginForm = () => {
@@ -41,7 +40,10 @@ const LoginForm = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Evernote
+                </Typography>
+                <Typography component="span" variant="subtitle1">
+                    Remember everything important.
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -50,7 +52,7 @@ const LoginForm = () => {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Email"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -78,20 +80,22 @@ const LoginForm = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Continue
                     </Button>
                     <Grid container justify="center">
                         <Grid item>
+                            <Typography component="p" variant="caption">
+                                Don't have an account?
+                            </Typography>
+                        </Grid>
+                        <Grid item>
                             <Link href="/signup" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                Create account
                             </Link>
                         </Grid>
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
         </Container>
     );
 };

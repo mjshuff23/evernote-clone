@@ -9,8 +9,6 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
-import Copyright from '../Copyright';
 import AuthStyles from '../styles/AuthStyles';
 import { signupThunk } from "../../store/actions/user";
 
@@ -45,7 +43,10 @@ export default function SignupForm() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Evernote
+                </Typography>
+                <Typography component="span" variant="subtitle1">
+                    Remember everything important.
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -55,7 +56,7 @@ export default function SignupForm() {
                         required
                         fullWidth
                         id="username"
-                        label="Display Name"
+                        label="Username"
                         autoFocus
                         margin="normal"
                         value={username}
@@ -67,7 +68,7 @@ export default function SignupForm() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Email"
                         name="email"
                         autoComplete="email"
                         type="email"
@@ -94,20 +95,22 @@ export default function SignupForm() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign Up
+                        Continue
                     </Button>
                     <Grid container justify="center">
                         <Grid item>
+                            <Typography component="p" variant="caption">
+                                Already have an account?
+                            </Typography> 
+                        </Grid>
+                        <Grid item>
                             <Link href="/login" variant="body2">
-                                Already have an account? Sign in
+                                Sign in
                             </Link>
                         </Grid>
                     </Grid>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }

@@ -7,8 +7,8 @@ const useStyles = makeStyles(theme => ({
         borderBottom: '1px solid black',
         borderRadius: '20px',
         backgroundColor: '#008F26',
-        paddingTop: '7px',
-        paddingBottom: '7px',
+        marginTop: '10px',
+        marginBottom: '10px',
         color: 'white',
         '&:hover': {
             backgroundColor: '#007e22'
@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
         color: 'darkgray',
         flexDirection: 'column',
         // marginTop: '0px',
-        padding: '10px',
+        padding: '5px',
         height: '100vh',
-        alignItems: 'center',
+        width: '17%',
         // boxSizing: 'border-box',
         // float: 'left',
         // overflowY: 'scroll',

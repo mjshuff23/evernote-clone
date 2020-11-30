@@ -7,6 +7,9 @@ import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
 import { useSelector, useDispatch } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
+import NotesIcon from '@material-ui/icons/Notes';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 export default function Sidebar() {
     const classes = useStyles();
@@ -43,9 +46,11 @@ export default function Sidebar() {
             </Button>
             <List>
                 <ListItem button>
+                    <NotesIcon />
                     <ListItemText primary="All Notes" />
                 </ListItem>
                 <ListItem button onClick={ clickOpenNotebooks }>
+                    <MenuBookIcon />
                     <ListItemText primary="Notebooks" />
                     { openNotebooks ? <ExpandLess /> : <ExpandMore /> }
                 </ListItem>
@@ -61,6 +66,7 @@ export default function Sidebar() {
                     </List>
                 </Collapse>
                 <ListItem button onClick={ clickOpenTags }>
+                    <LocalOfferIcon />
                     <ListItemText primary="Tags" />
                     { openTags ? <ExpandLess /> : <ExpandMore /> }
                 </ListItem>

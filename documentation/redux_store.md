@@ -24,9 +24,11 @@
     },
     'tags': {
         dict: {
-           'id': '',
-           'title': '',
-           'note_ids': []
+            '0': {
+                'id': '',
+                'title': '',
+                'note_ids': []
+            }
         },
         'ids': []
     },
@@ -34,9 +36,9 @@
         'current_notebook': '',
         'current_note': '',
         'current_tag': '',
-        'display_tag_panel': True,
+        'display_tag_panel': False,
         'display_logout_panel': False,
-    }
+    },
     'user': {
         'username': '',
         'email': '',

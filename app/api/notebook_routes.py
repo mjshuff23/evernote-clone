@@ -40,4 +40,4 @@ def delete_notebook(userid, notebookid):
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
     db.session.delete(notebook)
     db.session.commit()
-    return { 'id': notebookid }
+    return {'id': notebookid}

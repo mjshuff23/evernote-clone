@@ -3,14 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = props => {
 
-  if (props.authenticated) {
-    {/* TODO: /notes/allnotes/:firstnote_id */ }
-    return <Redirect to="/notes"/> 
-  }
+    if (props.authenticated) {
+        return <Redirect to="/notebooks/all/notes/none/tags/none" />
+    }
 
-  return (
-    <Route {...props}/>
-  );
+    return (
+        <Route {...props} />
+    );
 };
 
 export default ProtectedRoute;

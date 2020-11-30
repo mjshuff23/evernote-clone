@@ -16,7 +16,8 @@ const useStyles = makeStyles(theme => ({
     editorNoteInput: {
         textAlign: 'center',
         fontSize: '26px',
-        border: 'none'
+        border: 'none',
+        width: '100%',
     }
 }));
 

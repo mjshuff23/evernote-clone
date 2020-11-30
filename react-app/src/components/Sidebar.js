@@ -73,6 +73,7 @@ export default function Sidebar() {
                         openNotebooks ? <ExpandLess onClick={ clickOpenNotebooks } />
                             : <ExpandMore onClick={ clickOpenNotebooks } />
                     }
+                    <MenuBookIcon />
                     <NavLink to={ `/allnotebooks` } >
                         <ListItemText primary="Notebooks" />
                     </NavLink>

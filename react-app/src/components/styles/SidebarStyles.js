@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
         padding: '5px',
         height: '100vh',
         width: '17%',
+        minWidth: '175px',
         // boxSizing: 'border-box',
         // float: 'left',
         // overflowY: 'scroll',

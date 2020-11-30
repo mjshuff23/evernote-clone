@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import useStyles from './styles/TagPanelStyles';
 import { Box, Divider, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from '@material-ui/core';
 import React from 'react';
 import useStyles from './styles/TagPanelStyles';

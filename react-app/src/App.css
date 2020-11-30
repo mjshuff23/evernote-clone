@@ -46,6 +46,16 @@ html, body {
 .MuiListItem-root {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
+    color: darkgrey !important;
+}
+
+:link {
+    color: darkgrey !important;
+    text-decoration: none !important;
+}
+
+:visited {
+    color: darkgrey;
 }
 
 .MuiButton-root {
@@ -78,4 +88,12 @@ html, body {
     margin-right: 10px !important;
     height: 1.25em !important;
     width: 1.25em !important;
+}
+
+.MuiButtonBase-root {
+    color: darkgrey !important;
+}
+
+.MuiBox-root>.MuiTypography-root {
+    color: #1A1A1A !important;
 }

@@ -46,7 +46,7 @@ html, body {
 .MuiListItem-root {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
-    color: darkgrey !important;
+    color: black !important;
 }
 
 :link {
@@ -92,8 +92,21 @@ html, body {
 
 .MuiButtonBase-root {
     color: darkgrey !important;
+    text-transform: capitalize !important;
 }
 
 .MuiBox-root>.MuiTypography-root {
     color: #1A1A1A !important;
+}
+
+.notebook-list-item, .tag-list-item {
+    margin-left: 28px !important;
+}
+
+.MuiButton-text.sidebar-tags {
+    padding: 5px 0px 5px 0px !important;
+}
+
+.MuiListItem-button {
+    width: 80% !important;
 }

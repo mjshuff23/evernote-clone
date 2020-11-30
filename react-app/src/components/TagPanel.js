@@ -1,4 +1,4 @@
-import { Box, ClickAwayListener, Divider, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from '@material-ui/core';
+import { Box, Divider, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from '@material-ui/core';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'

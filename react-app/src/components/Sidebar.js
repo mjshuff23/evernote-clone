@@ -6,7 +6,7 @@ import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleTagPanelThunk } from '../store/actions/ui';
+import { toggleTagPanel } from '../store/actions/ui';
 
 export default function Sidebar() {
     const classes = useStyles();
@@ -32,9 +32,8 @@ export default function Sidebar() {
     }
 
     function clickOpenTags() {
-        dispatch(toggleTagPanelThunk());
+        dispatch(toggleTagPanel());
     }
-
 
     return (
         <Container className={classes.sidebarContainer}>

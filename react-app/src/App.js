@@ -25,13 +25,13 @@ export default function App() {
       <Theme>
         <BrowserRouter>
           <Switch>
-            <ProtectedRoute path="/login" exact={ true } authenticated={ !isNotLoggedIn }>
+            <ProtectedRoute path="/login" exact={true} authenticated={!isNotLoggedIn}>
               <LoginForm />
             </ProtectedRoute>
             <ProtectedRoute path="/signup" exact={true} authenticated={!isNotLoggedIn}>
-                <SignupForm />
+              <SignupForm />
             </ProtectedRoute>
-            <PrivateRoute path="/" authenticated={ !isNotLoggedIn }>
+            <PrivateRoute path="/" authenticated={!isNotLoggedIn}>
               <MainPage />
             </PrivateRoute>
           </Switch>

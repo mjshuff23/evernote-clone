@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch } from "react-router-dom";
 import MainPage from './components/MainPage';
 import LoginForm from "./components/auth/LoginForm";
-import SignupForm from "./components/auth/SignUpForm";
+import SignupForm from "./components/auth/SignupForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { CssBaseline } from '@material-ui/core';

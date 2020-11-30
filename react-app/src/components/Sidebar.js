@@ -58,7 +58,7 @@ export default function Sidebar() {
     return (
         <Container className={classes.sidebarContainer}>
             <UserInfoDisplay />
-            <Button onClick={newNoteClick} className={classes.newNoteBtn}>
+            <Button onClick={ newNoteClick } className={ ` ${classes.newNoteBtn} note-button` }>
                 <AddIcon className="muiAddIcon" />New Note
             </Button>
             <List>

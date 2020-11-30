@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
   ul: {
     backgroundColor: "inherit",
     padding: 0
+  },
+  tagPanelHeader: {
+    padding: 5
   }
 }));
 

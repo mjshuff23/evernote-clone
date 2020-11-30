@@ -9,9 +9,9 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: '#008F26',
         marginTop: '10px',
         marginBottom: '10px',
-        color: 'white',
+        color: 'white !important',
         '&:hover': {
-            backgroundColor: '#007e22'
+            backgroundColor: '#007e22 !important'
         },
         display: 'flex',
         justifyContent: 'flex-start',
@@ -24,8 +24,7 @@ const useStyles = makeStyles(theme => ({
         // marginTop: '0px',
         padding: '5px',
         height: '100vh',
-        width: '17%',
-        minWidth: '175px',
+        minWidth: '225px',
         // boxSizing: 'border-box',
         // float: 'left',
         // overflowY: 'scroll',

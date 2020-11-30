@@ -25,7 +25,7 @@ export default function Editor() {
             setTitle(notesState.dict[uiState.current_note].title);
             setCurrentNote(notesState.dict[uiState.current_note]);
         }
-    }, [uiState.current_note]);
+    }, [uiState.current_note, notesState]);
 
     function updateBody(text) {
         setText(text);

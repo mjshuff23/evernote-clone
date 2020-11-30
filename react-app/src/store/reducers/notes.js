@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
             return newState;
         case DELETE_NOTE:
             delete newState.dict[action.note.id];
-            newState.ids = newState.ids.filter(id => id != action.note.id);
+            newState.ids = newState.ids.filter(id => id !== action.note.id);
             return newState;
         default:
             return state;

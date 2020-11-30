@@ -29,13 +29,15 @@ export default function Sidebar() {
 
     const dispatch = useDispatch();
 
-    function newNoteClick(e) {
+    async function newNoteClick(e) {
         if (!user.id) return;
         let notebook = ui.current_notebook;
         if (!notebook) {
             notebook = notebooks.ids[0];
         }
-        dispatch(createNote(user.id, notebook));
+        const note = await dispatch(createNote(user.id, notebook));
+        ui.current_notebook = note.notebook_id;
+        ui.current_note = note.id;
     }
 
     function clickOpenNotebooks() {
@@ -56,7 +58,7 @@ export default function Sidebar() {
     return (
         <Container className={ classes.sidebarContainer }>
             <UserInfoDisplay />
-            <Button onClick={ newNoteClick } className={ classes.newNoteBtn }>
+            <Button onClick={ newNoteClick } className={ ` ${classes.newNoteBtn} note-button` }>
                 <AddIcon className="muiAddIcon" />New Note
             </Button>
             <List>
@@ -84,15 +86,17 @@ export default function Sidebar() {
                             <ListItem
                                 button
                                 component={ NavLink }
-                                to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none` }>
+                                to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none` }
+                                className="notebook-list-item">
+                                <MenuBookIcon />
                                 <ListItemText primary={ notebooks.dict[id].title } />
                             </ListItem>
                         )) }
                     </List>
                 </Collapse>
-                <ListItem button >
+                <ListItem button>
                     { openTags ? <ExpandLess onClick={ clickOpenTags } /> : <ExpandMore onClick={ clickOpenTags } /> }
-                    <Button onClick={ handleTagsClick } >
+                    <Button className='sidebar-tags' onClick={ handleTagsClick } >
                         <LocalOfferIcon />
                         <ListItemText primary="Tags" />
                     </Button>
@@ -103,7 +107,9 @@ export default function Sidebar() {
                             <ListItem
                                 button
                                 component={ NavLink }
-                                to={ tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}` }>
+                                to={ tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}` }
+                                className="tag-list-item">
+                                <LocalOfferIcon />
                                 <ListItemText primary={ tags.dict[id].title } />
                             </ListItem>
                         )) }

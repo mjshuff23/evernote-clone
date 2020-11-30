@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, session
 from flask_login import login_required
 from app.models import Notebook, db
 from sqlalchemy.sql import func
-from json
+import json
 
 
 notebook_routes = Blueprint('notebook', __name__)

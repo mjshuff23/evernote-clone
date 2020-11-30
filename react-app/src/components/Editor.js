@@ -20,6 +20,7 @@ export default function Editor() {
     useEffect(() => {
         if (uiState.current_note) {
             updateBody(notesState.dict[uiState.current_note].content);
+            updateTitle(notesState.dict[uiState.current_note].title);
         }
     }, [uiState.current_note]);
 
@@ -28,8 +29,15 @@ export default function Editor() {
         // update();
     }
 
+    function updateTitle(title) {
+        setTitle(title);
+    }
+
     return (
         <div className={ classes.editorContainer }>
+            <div className={ classes.editorNoteTitle }>
+                { title }
+            </div>
             <ReactQuill value={ text } onChange={ (text) => updateBody(text) }></ReactQuill>
         </div>
     );

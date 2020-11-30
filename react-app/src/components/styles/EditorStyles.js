@@ -5,6 +5,13 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
         flex: '0.4',
         // boxSizing: 'border-box'
+    },
+    editorNoteTitle: {
+        display: 'flex',
+        justifyContent: 'center',
+        fontSize: "larger",
+        fontWeight: "bolder",
+        border: "1px solid darkgray",
     }
 }));
 

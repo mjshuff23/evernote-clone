@@ -1,85 +1,113 @@
-import React, { useState } from "react";
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../services/auth';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+import Copyright from '../Copyright';
+import AuthStyles from '../styles/AuthStyles';
+import { signupThunk } from "../../store/actions/user";
 
-  const onSignUp = async (e) => {
-    e.preventDefault();
-    if (password === repeatPassword) {
-      const user = await signUp(username, email, password);
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
-    }
-  };
+export default function SignupForm() {
+    const classes = AuthStyles();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch(signupThunk(username, email, password));
+    };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
+    const updateusername = (e) => {
+        setUsername(e.target.value);
+    };
 
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
+    const updateEmail = (e) => {
+        setEmail(e.target.value);
+    };
 
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
-  };
+    const updatePassword = (e) => {
+        setPassword(e.target.value);
+    };
 
-  if (authenticated) {
-    return <Redirect to="/" />;
-  }
-
-  return (
-    <form onSubmit={onSignUp}>
-      <div>
-        <label>User Name</label>
-        <input
-          type="text"
-          name="username"
-          onChange={updateUsername}
-          value={username}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type="password"
-          name="repeat_password"
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type="submit">Sign Up</button>
-    </form>
-  );
-};
-
-export default SignUpForm;
+    return (
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign up
+                </Typography>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                    <TextField
+                        autoComplete="fname"
+                        name="username"
+                        variant="outlined"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Display Name"
+                        autoFocus
+                        margin="normal"
+                        value={username}
+                        onChange={updateusername}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        type="email"
+                        value={email}
+                        onChange={updateEmail}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={password}
+                        onChange={updatePassword}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign Up
+                    </Button>
+                    <Grid container justify="center">
+                        <Grid item>
+                            <Link href="/login" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
+            </div>
+            <Box mt={5}>
+                <Copyright />
+            </Box>
+        </Container>
+    );
+}

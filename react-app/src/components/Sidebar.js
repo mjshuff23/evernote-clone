@@ -54,61 +54,66 @@ export default function Sidebar() {
     if (Object.keys(tags).length === 0) return null;
 
     return (
-        <Container className={ classes.sidebarContainer }>
+        <Container className={classes.sidebarContainer}>
             <UserInfoDisplay />
-            <Button onClick={ newNoteClick } className={ classes.newNoteBtn }>
+            <Button onClick={newNoteClick} className={classes.newNoteBtn}>
                 <AddIcon className="muiAddIcon" />New Note
             </Button>
             <List>
                 <ListItem
                     button
-                    component={ NavLink }
-                    to={ notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none` }
+                    component={NavLink}
+                    to={notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none`}
                 >
                     <NotesIcon />
                     <ListItemText primary="All Notes" />
                 </ListItem>
                 <ListItem button>
                     {
-                        openNotebooks ? <ExpandLess onClick={ clickOpenNotebooks } />
-                            : <ExpandMore onClick={ clickOpenNotebooks } />
+                        openNotebooks ? <ExpandLess onClick={clickOpenNotebooks} />
+                            : <ExpandMore onClick={clickOpenNotebooks} />
                     }
                     <MenuBookIcon />
-                    <NavLink to={ `/allnotebooks` } >
+                    <NavLink to={`/allnotebooks`} >
                         <ListItemText primary="Notebooks" />
                     </NavLink>
                 </ListItem>
-                <Collapse in={ openNotebooks }>
+                <Collapse in={openNotebooks}>
                     <List component="div" disablePadding>
-                        { notebooks.ids.map(id => (
+                        {notebooks.ids.map(id => (
                             <ListItem
+                                key={`notebook-${id}`}
                                 button
-                                component={ NavLink }
-                                to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none` }>
-                                <ListItemText primary={ notebooks.dict[id].title } />
+                                component={NavLink}
+                                to={notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none`}>
+                                <ListItemText primary={notebooks.dict[id].title} />
                             </ListItem>
-                        )) }
+                        ))}
                     </List>
                 </Collapse>
                 <ListItem button >
-                    { openTags ? <ExpandLess onClick={ clickOpenTags } /> : <ExpandMore onClick={ clickOpenTags } /> }
-                    <Button onClick={ handleTagsClick } >
+                    {openTags ? <ExpandLess onClick={clickOpenTags} /> : <ExpandMore onClick={clickOpenTags} />}
+                    <Button onClick={handleTagsClick} >
                         <LocalOfferIcon />
                         <ListItemText primary="Tags" />
                     </Button>
                 </ListItem>
-                <Collapse in={ openTags }>
+                {tags.ids ? <Collapse in={openTags}>
                     <List component="div" disablePadding>
-                        { tags.ids.map(id => (
-                            <ListItem
-                                button
-                                component={ NavLink }
-                                to={ tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}` }>
-                                <ListItemText primary={ tags.dict[id].title } />
-                            </ListItem>
-                        )) }
+                        {tags.ids.map(id => {
+                            console.log(tags.dict[id]);
+                            return (
+                                <ListItem
+                                    button
+                                    component={NavLink}
+                                    key={`tag-${id}`}
+                                    to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}>
+                                    <ListItemText primary={tags.dict[id].title} />
+                                </ListItem>
+                            )})
+                        }}
                     </List>
-                </Collapse>
+                </Collapse> : null}
             </List>
         </Container>
     );

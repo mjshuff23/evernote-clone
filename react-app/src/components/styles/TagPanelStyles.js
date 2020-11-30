@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   tagPanel: {
     backgroundColor: theme.palette.background.paper,
-    left: 200,
+    left: 300,
     zIndex: 1,
     position: 'absolute',
     display: 'flex',

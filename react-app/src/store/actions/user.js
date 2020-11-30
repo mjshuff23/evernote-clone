@@ -1,4 +1,4 @@
-import { authenticate, login, logout } from "../../services/auth";
+import { authenticate, login, logout, signUp } from "../../services/auth";
 import { setTags } from './tags';
 import { setNotebooks } from './notebooks';
 import { setNotes } from './notes';
@@ -36,3 +36,14 @@ export const logoutThunk = () => async (dispatch) => {
     const user = await logout();
     dispatch(removeUser());
 };
+
+export const signupThunk = (username, email, password) => async (dispatch) => {
+    const data = await signUp(username, email, password);
+    if (!data.errors) {
+        const { user, tags, notebooks, notes } = data;
+        dispatch(setUser(user));
+        dispatch(setTags(tags));
+        dispatch(setNotebooks(notebooks));
+        dispatch(setNotes(notes));
+    }
+}

@@ -52,6 +52,23 @@ const TagPanel = (props) => {
     setNewTagName(e.target.value);
   }
 
+  const openDialog = e => {
+    setCreateDialog(true);
+  }
+
+  const closeDialog = e => {
+    setCreateDialog(false);
+  }
+
+  const submitCreatedTag = e => {
+    setCreateDialog(false);
+    dispatch(createTag(user.id, newTagName));
+  }
+
+  const updateNewTagName = e => {
+    setNewTagName(e.target.value);
+  }
+
   if (Object.keys(ui).length === 0) return null;
 
   return (

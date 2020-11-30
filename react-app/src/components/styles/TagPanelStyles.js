@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   tagPanel: {
     backgroundColor: theme.palette.background.paper,
-    left: 300,
+    left: 400,
     zIndex: 1,
     position: 'absolute',
     display: 'flex',
@@ -11,9 +11,6 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     color: "#F8F8F8",
     width: 200
-  },
-  tagIcon: {
-    transform: 'rotate(45deg)'
   },
   listroot: {
     width: '100%',

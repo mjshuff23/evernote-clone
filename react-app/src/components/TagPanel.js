@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
-import { createTag } from '../store/actions/tags';
+import { createTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
 const TagPanel = () => {
@@ -21,7 +21,7 @@ const TagPanel = () => {
     let sectionMapping = {};
     ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'].forEach(section => {
       let filteredIds = tags.ids.filter(tagid => {
-        console.log(tags.dict[tagid]);
+        console.log(tags.dict[tagid].title);
         if (section === '#') {
           return tags.dict[tagid].title.match(/^[^a-z]/i);
         }
@@ -49,10 +49,10 @@ const TagPanel = () => {
     setCreateDialog(false);
   }
 
-  const submitCreatedTag = async e => {
+  const submitCreatedTag = e => {
     e.preventDefault();
     setCreateDialog(false);
-    await dispatch(createTag(user.id, newTagName));
+    dispatch(createTagThunk(user.id, newTagName));
   }
 
   const updateNewTagName = e => {

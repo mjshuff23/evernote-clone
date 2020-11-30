@@ -102,7 +102,7 @@ export default function Sidebar() {
                         <ListItemText primary="Tags" />
                     </Button>
                 </ListItem>
-                {tags.ids ? <Collapse in={openTags}>
+                <Collapse in={openTags}>
                     <List component="div" disablePadding>
                         { tags.ids.map(id => (
                             <ListItem
@@ -115,7 +115,7 @@ export default function Sidebar() {
                             </ListItem>
                         )) }
                     </List>
-                </Collapse> : null}
+                </Collapse>
             </List>
         </Container>
     );

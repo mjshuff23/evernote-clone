@@ -7,7 +7,7 @@ tag_routes = Blueprint('tags', __name__)
 
 
 @tag_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def createTag(userid):
     data = json.loads(request.data)
     tag_name = data['name']

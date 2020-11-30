@@ -12,7 +12,7 @@ export default function NoteInfoPanel() {
     let { current_notebook, current_note, current_tag } = useParams();
     const dispatch = useDispatch();
 
-    console.log('ROUTER STUFF', current_notebook, current_note, current_tag);
+    // console.log('ROUTER STUFF', current_notebook, current_note, current_tag);
 
     useEffect(() => {
         current_note = current_note === 'none' ? null : Number(current_note);
@@ -24,7 +24,7 @@ export default function NoteInfoPanel() {
     }, [current_note, current_notebook, current_tag, dispatch]);
 
     return (
-        <Box className={classes.noteinfopanel}>
+        <Box className={ classes.noteinfopanel }>
 
         </Box>
     );

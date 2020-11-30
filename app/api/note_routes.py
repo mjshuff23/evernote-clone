@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import Note, db
 from sqlalchemy.sql import func
+import json
 
 note_routes = Blueprint('notes', __name__)
 
@@ -23,15 +24,17 @@ def create_note(userid, notebookid):
 @note_routes.route('/<int:id>', methods=['PUT'], strict_slashes=False)
 @login_required
 def edit_note(userid, notebookid, id):
-    req_data = request.get_json()
-    print(req_data)
+    req_data = json.loads(request.data)
     title = req_data["title"]
     content = req_data["content"]
+
     note = Note.query.filter(Note.id == id).first()
+
     note.title = title
     note.content = content
     note.updated_at = func.now()
     db.session.commit()
+
     return note.to_dict()
 
 

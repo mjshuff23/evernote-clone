@@ -56,34 +56,35 @@ export default function Sidebar() {
     if (Object.keys(tags).length === 0) return null;
 
     return (
-        <Container className={ classes.sidebarContainer }>
+        <Container className={classes.sidebarContainer}>
             <UserInfoDisplay />
-            <Button onClick={ newNoteClick } className={ ` ${classes.newNoteBtn} note-button` }>
+            <Button onClick={newNoteClick} className={classes.newNoteBtn}>
                 <AddIcon className="muiAddIcon" />New Note
             </Button>
             <List>
                 <ListItem
                     button
-                    component={ NavLink }
-                    to={ notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none` }
+                    component={NavLink}
+                    to={notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none`}
                 >
                     <NotesIcon />
                     <ListItemText primary="All Notes" />
                 </ListItem>
                 <ListItem button>
                     {
-                        openNotebooks ? <ExpandLess onClick={ clickOpenNotebooks } />
-                            : <ExpandMore onClick={ clickOpenNotebooks } />
+                        openNotebooks ? <ExpandLess onClick={clickOpenNotebooks} />
+                            : <ExpandMore onClick={clickOpenNotebooks} />
                     }
                     <MenuBookIcon />
-                    <NavLink to={ `/allnotebooks` } >
+                    <NavLink to={`/allnotebooks`} >
                         <ListItemText primary="Notebooks" />
                     </NavLink>
                 </ListItem>
-                <Collapse in={ openNotebooks }>
+                <Collapse in={openNotebooks}>
                     <List component="div" disablePadding>
-                        { notebooks.ids.map(id => (
+                        {notebooks.ids.map(id => (
                             <ListItem
+                                key={`notebook-${id}`}
                                 button
                                 component={ NavLink }
                                 to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none` }
@@ -91,7 +92,7 @@ export default function Sidebar() {
                                 <MenuBookIcon />
                                 <ListItemText primary={ notebooks.dict[id].title } />
                             </ListItem>
-                        )) }
+                        ))}
                     </List>
                 </Collapse>
                 <ListItem button>
@@ -101,7 +102,7 @@ export default function Sidebar() {
                         <ListItemText primary="Tags" />
                     </Button>
                 </ListItem>
-                <Collapse in={ openTags }>
+                {tags.ids ? <Collapse in={openTags}>
                     <List component="div" disablePadding>
                         { tags.ids.map(id => (
                             <ListItem
@@ -114,7 +115,7 @@ export default function Sidebar() {
                             </ListItem>
                         )) }
                     </List>
-                </Collapse>
+                </Collapse> : null}
             </List>
         </Container>
     );

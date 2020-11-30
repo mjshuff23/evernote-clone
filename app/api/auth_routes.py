@@ -69,17 +69,17 @@ def login():
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    try:
-      if form.validate_on_submit():
-          # Add the user to the session, we are logged in!
-          user = User.query.filter(User.email == form.data['email']).first()
-          login_user(user)
-          data = get_user_data(user.to_dict())
-          return data
-      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    except NameError as e:
-      print(e)
-      return e
+    # try:
+    if form.validate_on_submit():
+        # Add the user to the session, we are logged in!
+        user = User.query.filter(User.email == form.data['email']).first()
+        login_user(user)
+        data = get_user_data(user.to_dict())
+        return data
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    # except NameError as e:
+    #   print(e)
+    #   return e
 
 
 @auth_routes.route('/logout')
@@ -106,8 +106,12 @@ def sign_up():
         )
         db.session.add(user)
         db.session.commit()
+        notebook = Notebook(title='First Notebook', user_id=user.id)
+        db.session.add(notebook)
+        db.session.commit()
         login_user(user)
-        return user.to_dict()
+        data = get_user_data(user.to_dict())
+        return data
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 

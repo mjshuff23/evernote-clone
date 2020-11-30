@@ -29,13 +29,15 @@ export default function Sidebar() {
 
     const dispatch = useDispatch();
 
-    function newNoteClick(e) {
+    async function newNoteClick(e) {
         if (!user.id) return;
         let notebook = ui.current_notebook;
         if (!notebook) {
             notebook = notebooks.ids[0];
         }
-        dispatch(createNote(user.id, notebook));
+        const note = await dispatch(createNote(user.id, notebook));
+        ui.current_notebook = note.notebook_id;
+        ui.current_note = note.id;
     }
 
     function clickOpenNotebooks() {

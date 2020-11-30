@@ -23,26 +23,37 @@ export default function UserInfoDisplay() {
 
     const handleLogout = () => {
         dispatch(logoutThunk());
-    }
+    };
 
     return (
         <div>
-            <Button variant="contained" color="primary" onClick={handleClick}>
+            <Button variant="contained" color="primary" onClick={ handleClick }>
                 <Avatar />
-                <Typography className={classes.username} component="h3">
-                    {user.username}
+                <Typography className={ classes.username } component="h3">
+                    { user.username }
                 </Typography>
-                {open ? <ExpandLess /> : <ExpandMore />}
+                { open ? <ExpandLess /> : <ExpandMore /> }
             </Button>
             <Menu
                 id="simple-menu"
-                anchorEl={anchorEl}
+                className="userMenu"
+                anchorEl={ anchorEl }
                 keepMounted
-                open={open}
-                onClose={handleClose}
+                open={ open }
+                onClose={ handleClose }
+                anchorReference="anchorPosition"
+                anchorPosition={ { top: 0, left: 200 } }
+                anchorOrigin={ {
+                    vertical: 'top',
+                    horizontal: 'left',
+                } }
+                transformOrigin={ {
+                    vertical: 'top',
+                    horizontal: 'left',
+                } }
             >
-                <MenuItem onClick={handleClose}>{user.email}</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={ handleClose }>{ user.email }</MenuItem>
+                <MenuItem onClick={ handleLogout }>Logout</MenuItem>
             </Menu>
         </div>
     );

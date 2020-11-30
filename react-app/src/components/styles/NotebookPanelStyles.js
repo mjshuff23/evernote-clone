@@ -7,6 +7,13 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     height: '100vh',
   },
+  // notebookpanel: {
+  //   backgroundColor: 'orange',
+  //   flexGrow: 1,
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   height: '100vh',
+  // },
   // nb_panel_sub: {
   //   position: 'absolute',
   //   bottom: 200,

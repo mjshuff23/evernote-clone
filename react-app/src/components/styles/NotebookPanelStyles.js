@@ -7,7 +7,16 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
-  }
+  },
+  // nb_panel_sub: {
+  //   position: 'absolute',
+  //   bottom: 200,
+  //   backgroundColor: 'red'
+  // },
+  // nb_panel_table: {
+  //   position: 'relative',
+  //   top: 20
+  // }
 }));
 
 export default useStyles;

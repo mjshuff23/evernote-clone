@@ -13,15 +13,16 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     boxShadow: 'none'
   },
-  button: {
-    color: '#43a047',
+  nb_panel_button: {
+    color: 'green',
     textTransform: 'none',
     fontWeight: 'normal',
     paddingRight: 50,
   },
-  create_new_icon: {
+  nb_panel_create_new_icon: {
     color: '#43a047',
-    padding: 8
+    padding: 8,
+    // backgroundColor:'red'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -44,9 +45,11 @@ export default function NbPanelSubHeadingBar() {
           <Typography className={classes.title}>
             My notebook list
           </Typography>
-          <Button onHover={classes.hover} className={classes.button}>
-            <CreateNewFolderIcon onHover={classes.hover} className={classes.create_new_icon}/>
+          <Button onHover={classes.hover} className={classes.nb_panel_button}>
+          {/* <div className={classes.nb_panel_button}> */}
+            <CreateNewFolderIcon onHover={classes.hover} className={classes.nb_panel_create_new_icon}/>
             New Notebook
+          {/* </div> */}
           </Button>
         </Toolbar>
       </AppBar>

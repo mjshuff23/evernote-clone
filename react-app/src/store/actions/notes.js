@@ -31,11 +31,12 @@ export const createNote = (userId, notebookId) => async (dispatch) => {
     }
 };
 
-export const updateNote = (userId, notebookId, note) => async (dispatch) => {
-    // Destructure these from passed note object
-    const { title, content, noteId } = note;
+export const updateNote = (userId, notebookId, noteId, content, title) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}/`, {
         method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
         body: JSON.stringify({ title, content })
     });
 

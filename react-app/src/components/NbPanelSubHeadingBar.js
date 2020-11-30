@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import NbPanelDialogue from './NbPanelDialogue';
 
 const useStyles = makeStyles((theme) => ({
   bar: {
@@ -45,12 +46,7 @@ export default function NbPanelSubHeadingBar() {
           <Typography className={classes.title}>
             My notebook list
           </Typography>
-          <Button onHover={classes.hover} className={classes.nb_panel_button}>
-          {/* <div className={classes.nb_panel_button}> */}
-            <CreateNewFolderIcon onHover={classes.hover} className={classes.nb_panel_create_new_icon}/>
-            New Notebook
-          {/* </div> */}
-          </Button>
+          <NbPanelDialogue />
         </Toolbar>
       </AppBar>
     </div>

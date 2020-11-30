@@ -2,29 +2,36 @@ import React, { useState } from 'react';
 import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { NavLink } from 'react-router-dom';
+
 import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
+import { toggleTagPanel } from '../store/actions/ui';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTagPanel } from '../store/actions/ui';
 
 export default function Sidebar() {
     const classes = useStyles();
-    const [ openNotebooks, setOpenNotebooks ] = useState(false);
-    // This is just a test, but since we will be using this across multiple
-    //  components, I believe we should put this in our Redux Store.
-    const [ currentNotebookId, setCurrentNotebookId ] = useState(1);
-    const openTags = useSelector(state => state.ui.display_tag_panel);
-    // const [openTags, setOpenTags] = useState(false);
-    const userState = useSelector(state => state.user);
+
+    const [openNotebooks, setOpenNotebooks] = useState(false);
+    const [openTags, setOpenTags] = useState(false);
+
+    const user = useSelector(state => state.user);
+    const notebooks = useSelector(state => state.notebooks);
+    const notes = useSelector(state => state.notes);
+    const tags = useSelector(state => state.tags);
+    const ui = useSelector(state => state.ui);
+
     const dispatch = useDispatch();
 
-    async function newNoteClick(e) {
-        // Make sure they're logging in
-        if (!userState.id) return;
-        // We have a user id and notebook id, time to dispatch
-        dispatch(createNote(userState.id, currentNotebookId));
-        console.log('NEW NOTE CLICKED');
+    function newNoteClick(e) {
+        if (!user.id) return;
+        let notebook = ui.current_notebook
+        if (!notebook) {
+            notebook = notebooks.ids[0];
+        }
+        dispatch(createNote(user.id, notebook));
     }
 
     function clickOpenNotebooks() {
@@ -32,8 +39,15 @@ export default function Sidebar() {
     }
 
     function clickOpenTags() {
+        setOpenTags(!openTags);
+    }
+
+    const handleTagsClick = () => {
         dispatch(toggleTagPanel());
     }
+
+    if (Object.keys(notebooks).length === 0) return null;
+    if (Object.keys(tags).length === 0) return null;
 
     return (
         <Container className={classes.sidebarContainer}>
@@ -42,28 +56,52 @@ export default function Sidebar() {
                 New Note
             </Button>
             <List>
-                <ListItem button>
+                <ListItem
+                    button
+                    component={NavLink}
+                    to={notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none`}
+                >
                     <ListItemText primary="All Notes" />
                 </ListItem>
-                <ListItem button onClick={clickOpenNotebooks}>
-                    <ListItemText primary="Notebooks" />
-                    {openNotebooks ? <ExpandLess /> : <ExpandMore />}
+                <ListItem button>
+                    {
+                        openNotebooks ? <ExpandLess onClick={clickOpenNotebooks} />
+                            : <ExpandMore onClick={clickOpenNotebooks} />
+                    }
+                    <NavLink to={`/allnotebooks`} >
+                        <ListItemText primary="Notebooks" />
+                    </NavLink>
                 </ListItem>
                 <Collapse in={openNotebooks}>
                     <List component="div" disablePadding>
-                        {/* actuall map through all notebooks creating ListItems*/}
-                        <ListItem button>
-                            <ListItemText primary="First Notebook" />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText primary="Second Notebook" />
-                        </ListItem>
+                        {notebooks.ids.map(id => (
+                            <ListItem
+                                button
+                                component={NavLink}
+                                to={notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none`}>
+                                <ListItemText primary={notebooks.dict[id].title} />
+                            </ListItem>
+                        ))}
                     </List>
                 </Collapse>
-                <ListItem button onClick={clickOpenTags}>
-                    <ListItemText primary="Tags" />
+                <ListItem button >
+                    {openTags ? <ExpandLess onClick={clickOpenTags} /> : <ExpandMore onClick={clickOpenTags} />}
+                    <Button onClick={handleTagsClick} >
+                        <ListItemText primary="Tags" />
+                    </Button>
                 </ListItem>
-
+                <Collapse in={openTags}>
+                    <List component="div" disablePadding>
+                        {tags.ids.map(id => (
+                            <ListItem
+                                button
+                                component={NavLink}
+                                to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}>
+                                <ListItemText primary={tags.dict[id].title} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </Collapse>
             </List>
         </Container>
     );

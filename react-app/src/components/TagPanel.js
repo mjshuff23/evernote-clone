@@ -7,6 +7,7 @@ import { toggleTagPanel } from '../store/actions/ui';
 const TagPanel = (props) => {
   const classes = useStyles();
   const tags = useSelector(state => state.tags);
+  const ui = useSelector(state => state.ui);
   const dispatch = useDispatch();
 
   const sections = () => {
@@ -29,8 +30,10 @@ const TagPanel = (props) => {
     dispatch(toggleTagPanel());
   }
 
+  if (Object.keys(ui).length === 0) return null;
+
   return (
-    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
+    <Slide direction="right" in={ui.display_tag_panel} mountOnEnter unmountOnExit onBlur={hideTagPanel}>
       <Box className={classes.tagPanel}>
         <Typography>Tags</Typography>
         <Divider />

@@ -6,6 +6,6 @@ export const SET_CURRENT_TAG = 'SET_CURRENT_TAG';
 
 export const toggleTagPanel = () => ({ type: TOGGLE_TAG_PANEL });
 export const toggleLogoutPanel = () => ({ type: TOGGLE_LOGOUT_PANEL });
-export const setCurrentNotebook = notebookid => ({ type: SET_CURRENT_NOTEBOOK, notebookid});
-export const setCurrentNote = noteid => ({ type: SET_CURRENT_NOTE, noteid});
+export const setCurrentNotebook = notebookid => ({ type: SET_CURRENT_NOTEBOOK, notebookid });
+export const setCurrentNote = noteid => ({ type: SET_CURRENT_NOTE, noteid });
 export const setCurrentTag = tagid => ({ type: SET_CURRENT_TAG, tagid });

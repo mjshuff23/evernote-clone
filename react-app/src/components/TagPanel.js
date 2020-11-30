@@ -1,14 +1,19 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Divider, List, ListItem, ListItemText, ListSubheader, Slide, Typography } from '@material-ui/core';
-import React from 'react';
-import useStyles from './styles/TagPanelStyles';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide, TextField, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
+import { createTag } from '../store/actions/tags';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
 const TagPanel = (props) => {
   const classes = useStyles();
   const tags = useSelector(state => state.tags);
   const ui = useSelector(state => state.ui);
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const [createDialog, setCreateDialog] = useState(false);
+  const [newTagName, setNewTagName] = useState('');
 
   const sections = () => {
     let sectionMapping = new Map();
@@ -29,6 +34,23 @@ const TagPanel = (props) => {
   const hideTagPanel = e => {
     dispatch(toggleTagPanel());
   };
+
+  const openDialog = e => {
+    setCreateDialog(true);
+  }
+
+  const closeDialog = e => {
+    setCreateDialog(false);
+  }
+
+  const submitCreatedTag = e => {
+    setCreateDialog(false);
+    dispatch(createTag(user.id, newTagName));
+  }
+
+  const updateNewTagName = e => {
+    setNewTagName(e.target.value);
+  }
 
   if (Object.keys(ui).length === 0) return null;
 

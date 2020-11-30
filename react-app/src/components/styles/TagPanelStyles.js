@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   tagPanel: {
-    backgroundColor: 'blue',
+    backgroundColor: theme.palette.background.paper,
     left: 200,
     zIndex: 1,
     position: 'absolute',
@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
   ul: {
     backgroundColor: "inherit",
     padding: 0
+  },
+  tagPanelHeader: {
+    padding: 5
   }
 }));
 

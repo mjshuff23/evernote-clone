@@ -35,8 +35,10 @@ const TagPanel = (props) => {
   return (
     <Slide direction="right" in={ui.display_tag_panel} mountOnEnter unmountOnExit onBlur={hideTagPanel}>
       <Box className={classes.tagPanel}>
-        <Typography>Tags</Typography>
-        <Divider />
+        <Typography variant='h4' className={classes.tagPanelHeader}>
+          Tags
+          <Divider variant="fullWidth" />
+        </Typography>
         <List className={classes.listroot} subheader={<li />}>
           {Object.keys(sections()).map((sectionId) => (
             <li key={`section-${sectionId}`} className={classes.listSection}>

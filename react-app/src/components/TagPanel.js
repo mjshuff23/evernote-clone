@@ -58,9 +58,32 @@ const TagPanel = (props) => {
     <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
       <Box className={classes.tagPanel}>
         <Typography variant='h4' className={classes.tagPanelHeader}>
-          Tags
+          Tags <IconButton className={classes.tagIcon} onClick={openDialog}><LocalOfferIcon /></IconButton>
           <Divider variant="fullWidth" />
         </Typography>
+        <Dialog open={createDialog} onClose={closeDialog}>
+          <DialogTitle id='form-dialog-title'>Add a tag</DialogTitle>
+          <DialogContent>
+          <TextField
+            autoFocus
+            variant="outlined"
+            margin="dense"
+            id="name"
+            label="Tag name"
+            type="text"
+            fullWidth
+            onChange={updateNewTagName}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={submitCreatedTag}  color="primary">
+            Create
+          </Button>
+        </DialogActions>
+        </Dialog>
         <List className={classes.listroot} subheader={<li />}>
           {Object.keys(sections()).map((sectionId) => (
             <li key={`section-${sectionId}`} className={classes.listSection}>

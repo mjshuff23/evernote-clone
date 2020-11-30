@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
 import { createNote } from '../store/actions/notes';
-import { toggleTagPanel } from '../store/actions/ui';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTagPanel } from '../store/actions/ui';
 

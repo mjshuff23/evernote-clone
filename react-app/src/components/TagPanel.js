@@ -55,18 +55,20 @@ const TagPanel = (props) => {
   if (Object.keys(ui).length === 0) return null;
 
   return (
-    <Slide direction="right" in={ ui.display_tag_panel } mountOnEnter unmountOnExit onBlur={ hideTagPanel }>
-      <Box className={ classes.tagPanel }>
-        <Typography>Tags</Typography>
-        <Divider />
-        <List className={ classes.listroot } subheader={ <li /> }>
-          { Object.keys(sections()).map((sectionId) => (
-            <li key={ `section-${sectionId}` } className={ classes.listSection }>
-              <ul className={ classes.ul }>
-                <ListSubheader>{ sectionId }</ListSubheader>
-                { sections()[sectionId].sort(function (tag1, tag2) {
-                  if (tags.dict[tag1].title.toLowerCase() < tags.dict[tag2].title.toLowerCase()) return -1;
-                  if (tags.dict[tag1].title.toLowerCase() > tags.dict[tag2].title.toLowerCase()) return 1;
+    <Slide direction="right" in={props.checked} mountOnEnter unmountOnExit>
+      <Box className={classes.tagPanel}>
+        <Typography variant='h4' className={classes.tagPanelHeader}>
+          Tags
+          <Divider variant="fullWidth" />
+        </Typography>
+        <List className={classes.listroot} subheader={<li />}>
+          {Object.keys(sections()).map((sectionId) => (
+            <li key={`section-${sectionId}`} className={classes.listSection}>
+              <ul className={classes.ul}>
+                <ListSubheader>{sectionId}</ListSubheader>
+                {sections()[ sectionId ].sort(function (tag1, tag2) {
+                  if (tags.dict[ tag1 ].title.toLowerCase() < tags.dict[ tag2 ].title.toLowerCase()) return -1;
+                  if (tags.dict[ tag1 ].title.toLowerCase() > tags.dict[ tag2 ].title.toLowerCase()) return 1;
                   return 0;
                 }).map((item) => (
                   <ListItem key={ `item-${sectionId}-${item}` }>

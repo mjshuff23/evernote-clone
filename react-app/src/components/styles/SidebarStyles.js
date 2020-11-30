@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'flex-start',
         textTransform: 'capitalize',
+        alignSelf: 'center'
     },
     sidebarContainer: {
         display: 'flex',

@@ -3,14 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   tagPanel: {
     backgroundColor: theme.palette.background.paper,
-    left: 400,
+    left: 225,
     zIndex: 1,
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
     color: "#F8F8F8",
-    width: 200
+    width: 300
   },
   listroot: {
     width: '100%',

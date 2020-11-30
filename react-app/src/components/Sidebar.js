@@ -104,7 +104,7 @@ export default function Sidebar() {
                 </ListItem>
                 <Collapse in={openTags}>
                     <List component="div" disablePadding>
-                        { tags.ids.map(id => (
+                        {tags.ids.map(id => (
                             <ListItem
                                 button
                                 component={ NavLink }
@@ -113,7 +113,7 @@ export default function Sidebar() {
                                 <LocalOfferIcon />
                                 <ListItemText primary={ tags.dict[id].title } />
                             </ListItem>
-                        )) }
+                        ))}
                     </List>
                 </Collapse>
             </List>

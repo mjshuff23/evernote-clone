@@ -225,7 +225,8 @@ export default function NbPanelTable() {
                   <Typography
                     button
                     component={ NavLink }
-                    to={ `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` }
+                    to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none`
+                      :`/notebooks/${id}/notes/none/tags/none` }
                   >
                     {notebooks.dict[id].title}
                   </Typography>

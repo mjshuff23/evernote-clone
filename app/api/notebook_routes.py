@@ -12,7 +12,8 @@ notebook_routes = Blueprint('notebook', __name__)
 @notebook_routes.route('/', methods=['POST'], strict_slashes=False)
 @login_required
 def create_notebook(userid):
-    title = json.loads(request.data)
+    data_title = json.loads(request.data)
+    title = data_title["title"]
     user_id = userid
     new_notebook = Notebook(title=title, user_id=user_id)
     db.session.add(new_notebook)

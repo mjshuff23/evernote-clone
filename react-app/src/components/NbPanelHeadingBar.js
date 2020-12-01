@@ -7,12 +7,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
-  bar: {
-    backgroundColor: "white",
-    color: "black",
+  nb_bar: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: "#2e2e2e",
+    color: "white",
     height: 50,
     border: "none",
-    boxShadow: "none"
+    boxShadow: "none",
+    fontSize: 10,
+    // textTransform: 'uppercase',
+    color: 'white',
+    fontWeight: 'normal',
   },
   input_root: {
     color: "inherit",
@@ -26,29 +32,28 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  search_area: {
-    position: "relative",
-    paddingBottom: 15,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto"
-    }
-  },
-  search_icon: {
-    padding: theme.spacing(0.5, 2),
-    height: 20,
-    position: "absolute",
-    pointerEvents: "none"
-  },
+  // search_area: {
+  //   position: "relative",
+  //   paddingBottom: 15,
+  //   width: "100%",
+  //   [theme.breakpoints.up("sm")]: {
+  //     marginLeft: theme.spacing(1),
+  //     width: "auto"
+  //   }
+  // },
+  // search_icon: {
+  //   padding: theme.spacing(0.5, 2),
+  //   height: 20,
+  //   position: "absolute",
+  //   pointerEvents: "none"
+  // },
   title: {
-    flexGrow: 1,
-    display: "none",
-    fontSize: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
-    },
-    paddingBottom: 15
+    // flexGrow: 1,
+    // display: "none",
+    // fontSize: 12,
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block"
+    // },
   },
 }));
 
@@ -57,12 +62,12 @@ export default function NbPanelHeadingBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.bar} position="static">
+      <AppBar className={classes.nb_bar} position="static">
         <Toolbar>
           <Typography className={classes.title} noWrap>
             Notebooks
           </Typography>
-          <div className={classes.search_area}>
+          {/* <div className={classes.search_area}>
             <SearchIcon className={classes.search_icon} />
             <InputBase
               placeholder="Find Notebooks…"
@@ -72,7 +77,7 @@ export default function NbPanelHeadingBar() {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

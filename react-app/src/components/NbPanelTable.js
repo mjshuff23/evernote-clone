@@ -23,8 +23,22 @@ import useStyles from "./styles/NotebookPanelStyles";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
 
 const useRowStyles = makeStyles({
+
+  nb_book_button: {
+    textTranform: 'none',
+    // color: '#9e9e9e',
+    //   '&hover': {
+    //     color: 'green',
+    //     backgroundColor: 'white',
+    //     '& $book_icon': {
+    //       color: "green",
+    //     }
+    // },
+  },
 
   book_icon: {
     color: '#9e9e9e',
@@ -32,14 +46,17 @@ const useRowStyles = makeStyles({
   },
 
   down: {
-    width: 20,
-    color: 'gray'
+    color: 'gray',
+      '&:hover': {
+        color: "black",
+      },
   },
 
   heading: {
     fontWeight: 'normal',
     fontSize: 12,
-    color: 'gray'
+    color: 'gray',
+    padding: 20
   },
 
   hidden: {
@@ -47,7 +64,11 @@ const useRowStyles = makeStyles({
   },
 
   icon_button: {
-    padding: 10
+    height: 30,
+    backgroundColor: "white",
+      '&:hover': {
+        backgroundColor: "white"
+      },
   },
 
   menu_item: {
@@ -56,13 +77,13 @@ const useRowStyles = makeStyles({
 
   more_horiz:{
     fontSize: 15,
-    // backgroundColor: 'white'
+  },
+
+  no_more_border: {
+    boxShadow: 'none',
   },
 
   note_icon: {
-    // transform: "rotate(90deg)",
-    paddingRight:2,
-    paddingLeft:10,
     color: '#9e9e9e',
     height: 20
   },
@@ -73,134 +94,35 @@ const useRowStyles = makeStyles({
     }
   },
 
-  // tooltip: {
-  //   size: 60,
-  //   backgroundColor: 'limegreen'
-  // }
+  typ_nav: {
+    textDecoration: 'none',
+    color: 'black',
+      '&:hover': {
+        color: "gray",
+      },
+  },
 
   up: {
-    width: 20,
-    color: 'gray'
+    color: 'gray',
+      '&:hover': {
+        color: "black",
+      },
   },
 
 });
 
 
 
-
-
-// let notebooks = {
-//   "dict": {
-//     "1": {
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 1,
-//       "note_ids": [
-//         1,
-//         2,
-//         3,
-//         4,
-//         5
-//       ],
-//       "title": "Default",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     }
-//   },
-//   "ids": [
-//     1
-//   ]
-// };
-// let notes = {
-//   "dict": {
-//     "1": {
-//       "content": "jehbwhefwehbdajlksdbkjsdbjlsdbljhsbdjhf",
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 1,
-//       "notebook_id": 1,
-//       "tag_ids": [
-//         1,
-//         2
-//       ],
-//       "title": "Test",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     },
-//     "2": {
-//       "content": "bkjsdbjlsdbljhsbdjhf",
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 2,
-//       "notebook_id": 1,
-//       "tag_ids": [
-//         3,
-//         4
-//       ],
-//       "title": "Another Note",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     },
-//     "3": {
-//       "content": "<code/>",
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 3,
-//       "notebook_id": 1,
-//       "tag_ids": [
-//         5,
-//         6
-//       ],
-//       "title": "Programming Notes",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     },
-//     "4": {
-//       "content": "something super cool is here for sure",
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 4,
-//       "notebook_id": 1,
-//       "tag_ids": [
-//         7,
-//         8
-//       ],
-//       "title": "My Super Cool Note",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     },
-//     "5": {
-//       "content": "My personal journal... don't read this... or else",
-//       "created_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "id": 5,
-//       "notebook_id": 1,
-//       "tag_ids": [
-//         9,
-//         10
-//       ],
-//       "title": "This one is personal",
-//       "updated_at": "Wed, 25 Nov 2020 19:42:32 GMT",
-//       "user_id": 1
-//     },
-
-//   },
-//   "ids": [
-//     1,
-//     2,
-//     3,
-//     4,
-//     5
-//   ]
-// };
-
 export default function NbPanelTable() {
   const notebooks = useSelector(state => state.notebooks)
   const notes = useSelector(state => state.notes)
   const user = useSelector(state => state.user)
-  // const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
-  // if (Object.keys(notebooks.dict).length === 0) return null;
-  // if (Object.keys(notebooks.ids).length === 0) return null;
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className={classes.no_more_border} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -221,18 +143,27 @@ export default function NbPanelTable() {
                   >
                     {open ? <KeyboardArrowUpIcon className={classes.up}/> : <KeyboardArrowDownIcon className={classes.down}/>}
                   </IconButton>
-                  <BookIcon className={classes.book_icon} />
-                  <Typography
-                    button
-                    component={ NavLink }
-                    to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none`
-                      :`/notebooks/${id}/notes/none/tags/none` }
-                  >
-                    {notebooks.dict[id].title}
-                  </Typography>
+                  <span className={classes.nb_book_button}>
+                    <BookIcon className={classes.book_icon} />
+                    <Typography
+                      className={classes.typ_nav}
+                      button
+                      component={ NavLink }
+                      to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none`
+                        :`/notebooks/${id}/notes/none/tags/none` }
+                    >
+                      {notebooks.dict[id].title}
+                    </Typography>
+                  </span>
                 </TableCell>
                 <TableCell align="left">{user.username}</TableCell>
-                <TableCell align="left">{notebooks.dict[id].updated_at}</TableCell>
+                <TableCell align="left">{
+                  `${notebooks.dict[id].updated_at.slice(8, 11)}
+                    ${notebooks.dict[id].updated_at.slice(5, 7)},
+                    ${notebooks.dict[id].updated_at.slice(12, 16)}
+                  `
+                }
+                </TableCell>
                 <TableCell align="left">
                   <NbPanelActionButton />
               </TableCell>
@@ -252,8 +183,9 @@ export default function NbPanelTable() {
                                 <BookIcon className={classes.hidden}/>
                                 <BookIcon className={classes.hidden}/>
                                 <BookIcon className={classes.hidden}/>
-                                <DescriptionOutlinedIcon style={{paddingRight:2, paddingLeft:10}} className={classes.note_icon}/>
+                                <DescriptionOutlinedIcon className={classes.note_icon}/>
                                 <Typography
+                                  className={classes.typ_nav}
                                   button
                                   component={ NavLink }
                                   to={ `/notebooks/${id}/notes/${noteid}/tags/none` }
@@ -262,7 +194,12 @@ export default function NbPanelTable() {
                                 </Typography>
                               </TableCell>
                               <TableCell>{user.username}</TableCell>
-                              <TableCell>{notes.dict[noteid].updated_at}</TableCell>
+                              <TableCell> {
+                                `${notes.dict[noteid].updated_at.slice(8, 11)}
+                                  ${notes.dict[noteid].updated_at.slice(5, 7)},
+                                  ${notes.dict[noteid].updated_at.slice(12, 16)}
+                                `
+                              } </TableCell>
                               <TableCell>
                                   <NbPanelActionButton />
                               </TableCell>

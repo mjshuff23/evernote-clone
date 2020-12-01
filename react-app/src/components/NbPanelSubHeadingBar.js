@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     color: 'black',
     height: 50,
-    boxShadow: 'none'
+    boxShadow: 'none',
   },
   nb_panel_button: {
     color: 'green',
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
   nb_panel_create_new_icon: {
     color: '#43a047',
     padding: 8,
-    // backgroundColor:'red'
   },
   menuButton: {
     marginRight: theme.spacing(2),

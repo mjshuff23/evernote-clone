@@ -21,6 +21,8 @@ import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import NbPanelActionButton from './NbPanelActionButton';
 import useStyles from "./styles/NotebookPanelStyles";
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 const useRowStyles = makeStyles({
 
@@ -219,7 +221,14 @@ export default function NbPanelTable() {
                   >
                     {open ? <KeyboardArrowUpIcon className={classes.up}/> : <KeyboardArrowDownIcon className={classes.down}/>}
                   </IconButton>
-                  <BookIcon className={classes.book_icon} /> {notebooks.dict[id].title}
+                  <BookIcon className={classes.book_icon} />
+                  <Typography
+                    button
+                    component={ NavLink }
+                    to={ `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` }
+                  >
+                    {notebooks.dict[id].title}
+                  </Typography>
                 </TableCell>
                 <TableCell align="left">{user.username}</TableCell>
                 <TableCell align="left">{notebooks.dict[id].updated_at}</TableCell>
@@ -236,14 +245,6 @@ export default function NbPanelTable() {
                       <Table size="small" aria-label="notes">
                         <TableBody>
                           { notebooks.dict[id].note_ids.map((noteid) => (
-                            // <>
-                            //   <div>{`noteid: ${noteid}`}</div>
-                            //   <div>{`notes.dict: ${notes.dict}`}</div>
-                            //   <div>{`notes.dict[noteid]: ${notes.dict[noteid]}`}</div>
-                            //   <div>{`notes.dict[noteid].updated_at: ${notes.dict[noteid].updated_at}`}</div>
-                            // </>
-                            // notes.dict[noteid]
-
                             <TableRow key={ `Note_Id: ${noteid}` }>
                               <TableCell>
                                 <BookIcon className={classes.hidden}/>
@@ -251,7 +252,13 @@ export default function NbPanelTable() {
                                 <BookIcon className={classes.hidden}/>
                                 <BookIcon className={classes.hidden}/>
                                 <DescriptionOutlinedIcon style={{paddingRight:2, paddingLeft:10}} className={classes.note_icon}/>
-                                {notes.dict[noteid].title}
+                                <Typography
+                                  button
+                                  component={ NavLink }
+                                  to={ `/notebooks/${id}/notes/${noteid}/tags/none` }
+                                >
+                                  {notes.dict[noteid].title}
+                                </Typography>
                               </TableCell>
                               <TableCell>{user.username}</TableCell>
                               <TableCell>{notes.dict[noteid].updated_at}</TableCell>

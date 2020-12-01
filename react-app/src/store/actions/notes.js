@@ -1,20 +1,21 @@
-import { baseUrl } from "../../config";
+import { addNoteToNotebook, deleteNoteFromNotebook } from './notebooks';
+import { addNoteToTag, removeNoteFromTag, deleteNoteFromTags } from './tags';
 
 export const SET_NOTES = 'notes/SET_NOTES';
 export const CREATE_NOTE = 'notes/CREATE_NOTE';
 export const UPDATE_NOTE = 'notes/UPDATE_NOTE';
 export const DELETE_NOTE = 'notes/DELETE_NOTE';
-export const TAG_NOTE = 'notes/TAG_NOTE';
-export const UNTAG_NOTE = 'notes/UNTAG_NOTE';
-export const TAG_DELETED = 'noes/TAG_DELETED';
+export const ADD_TAG_TO_NOTE = 'notes/ADD_TAG_TO_NOTE';
+export const REMOVE_TAG_FROM_NOTE = 'notes/REMOVE_TAG_FROM_NOTE';
+export const DELETE_TAG_FROM_NOTES = 'notes/DELETE_TAG_FROM_NOTES';
 
 export const setNotes = (notes) => ({ type: SET_NOTES, notes });
-export const tagNote = (notetag, noteid) => ({ type: TAG_NOTE, notetag, noteid });
-export const untagNote = (notetagid, noteid) => ({ type: UNTAG_NOTE, notetagid, noteid });
+export const addTagToNote = (notetag, noteid) => ({ type: ADD_TAG_TO_NOTE, notetag, noteid });
+export const removeTagFromNote = (notetagid, noteid) => ({ type: REMOVE_TAG_FROM_NOTE, notetagid, noteid });
 export const createNoteAction = (note) => ({ type: CREATE_NOTE, note });
 export const updateNoteAction = (note) => ({ type: UPDATE_NOTE, note });
 export const deleteNoteAction = (noteId) => ({ type: DELETE_NOTE, noteId });
-export const tagDeleted = (tagid) => ({ type: TAG_DELETED, tagid });
+export const deleteTagFromNotes = (tagid, noteids) => ({ type: DELETE_TAG_FROM_NOTES, tagid, noteids });
 
 export const createNote = (userId, notebookId) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/`, {
@@ -27,6 +28,7 @@ export const createNote = (userId, notebookId) => async (dispatch) => {
     if (response.ok) {
         const note = await response.json();
         dispatch(createNoteAction(note));
+        dispatch(addNoteToNotebook(note.notebook_id, note.id));
         return note;
     }
 };
@@ -46,7 +48,7 @@ export const updateNote = (userId, notebookId, noteId, content, title) => async 
     }
 };
 
-export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
+export const deleteNote = (userId, notebookId, noteId, tagIds) => async (dispatch) => {
     const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}/notes/${noteId}/`, {
         method: 'DELETE'
     });
@@ -54,10 +56,12 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
     if (response.ok) {
         const deletedNote = await response.json();
         dispatch(deleteNoteAction(deletedNote.id));
+        dispatch(deleteNoteFromNotebook(notebookId, noteId));
+        if (tagIds) dispatch(deleteNoteFromTags(noteId, tagIds));
     }
 };
 
-export const tagNoteThunk = (noteid, tagid) => async dispatch => {
+export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
     let newNoteTag = await fetch(`/api/notes/${noteid}/tags/`, {
         method: 'POST',
         headers: {
@@ -67,20 +71,18 @@ export const tagNoteThunk = (noteid, tagid) => async dispatch => {
     });
     if (newNoteTag.ok) {
         newNoteTag = await newNoteTag.json();
-        dispatch(tagNote(newNoteTag, noteid));
+        dispatch(addTagToNote(tagid, noteid));
+        dispatch(addNoteToTag(noteid, tagid))
     }
 };
 
-export const untagNoteThunk = (noteid, notetagid) => async dispatch => {
-    let removedTagId = await fetch(`/api/notes/${noteid}/tags/${notetagid}`, {
+export const removeTagFromNoteThunk = (noteid, tagid) => async dispatch => {
+    let removedTagId = await fetch(`/api/notes/${noteid}/tags/${tagid}`, {
         method: 'DELETE'
     });
     if (removedTagId.ok) {
         removedTagId = removedTagId.json();
-        dispatch(untagNote(removedTagId.id, noteid));
+        dispatch(removeTagFromNote(removedTagId.id, noteid));
+        dispatch(removeNoteFromTag(noteid, tagid));
     }
-};
-
-export const tagDeletedThunk = (tagid) => dispatch => {
-    dispatch(tagDeleted(tagid));
 };

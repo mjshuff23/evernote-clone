@@ -29,6 +29,12 @@ def seed_note_tags():
     db.session.add(demo_note_tag)
     demo_note_tag = Note_Tag(note_id='6', tag_id='9')
     db.session.add(demo_note_tag)
+    demo_note_tag = Note_Tag(note_id='7', tag_id='5')
+    db.session.add(demo_note_tag)
+    demo_note_tag = Note_Tag(note_id='8', tag_id='6')
+    db.session.add(demo_note_tag)
+    demo_note_tag = Note_Tag(note_id='9', tag_id='4')
+    db.session.add(demo_note_tag)
     db.session.commit()
 
 

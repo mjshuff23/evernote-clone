@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@material-ui/core';
 import useStyles from './styles/EditorPanelStyles';
 import Editor from './Editor';
-import BottomTagBar from './BottomTagBar';
 
 
 export default function EditorPanel() {
@@ -10,7 +9,6 @@ export default function EditorPanel() {
   return (
     <Box className={classes.editorpanel}>
       <Editor />
-      <BottomTagBar />
     </Box>
   );
 }

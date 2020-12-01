@@ -108,6 +108,7 @@ export default function Sidebar() {
                     <List component="div" disablePadding>
                         { tags.ids.map(id => (
                             <ListItem
+                                key={ `tag-${id}` }
                                 button
                                 component={ NavLink }
                                 to={ tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}` }

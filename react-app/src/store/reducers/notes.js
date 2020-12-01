@@ -27,18 +27,18 @@ export default function reducer(state = initialState, action) {
             newState.dict[action.note.id] = action.note;
             return newState;
         case DELETE_NOTE:
-            delete newState.dict[action.note.id];
-            newState.ids = newState.ids.filter(id => id !== action.note.id);
+            delete newState.dict[action.noteId];
+            newState.ids = newState.ids.filter(id => id !== Number(action.noteId));
             return newState;
         case ADD_TAG_TO_NOTE:
             newState.dict[action.noteid].tag_ids.push(action.notetag.id);
             return newState;
         case REMOVE_TAG_FROM_NOTE:
-            newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(tagid => tagid !== action.noteid);
+            newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(tagid => tagid !== Number(action.noteid));
             return newState;
         case DELETE_TAG_FROM_NOTES:
             action.noteids.forEach(noteid => {
-                newState.dict[noteid].tag_ids = newState.dict[noteid].tag_ids.filter(tag => tag !== action.tagid);
+                newState.dict[noteid].tag_ids = newState.dict[noteid].tag_ids.filter(tag => tag !== Number(action.tagid));
             })
             return newState;
         default:

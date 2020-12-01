@@ -3,20 +3,23 @@ import Typography from "@material-ui/core/Typography";
 import useStyles from './styles/NotecardStyles';
 import { Chip, ListItem } from "@material-ui/core";
 import { useRouteMatch, NavLink } from 'react-router-dom';
+import { removeHTMLTags } from '../services/utils';
 
 function tagList(tag_ids, tags) {
     if (tag_ids.length === 0) return null;
 
     return (tag_ids.map(id => (
-        <div>
-            <Chip label={ tags.dict[id].title }/>
+        <div key={id}>
+            <Chip label={ tags.dict[id].title } />
         </div>
     )));
 }
 
-export default function SimpleCard(props) {
+export default function NoteCard(props) {
     const classes = useStyles();
     const match = useRouteMatch();
+
+    if (!props.note) return null;
 
     return (
         <ListItem
@@ -34,12 +37,12 @@ export default function SimpleCard(props) {
                 </div>
                 <div className={classes.content}>
                     <Typography variant="body1">
-                        {props.note.content}
+                        { removeHTMLTags(props.note.content).slice(0, 50) }
                     </Typography>
                 </div>
                 <div className={classes.infobar}>
                     <Typography variant='body2' component='div'>
-                        { props.note.updated_at }
+                        { props.note.updated_at.slice(0, -4) }
                     </Typography>
                     { tagList(props.note.tag_ids, props.tags) }
                 </div>

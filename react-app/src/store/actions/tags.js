@@ -27,11 +27,11 @@ export const createTagThunk = (userid, name) => async dispatch => {
 }
 
 export const deleteTagThunk = (userid, tagid) => async dispatch => {
-    const deleted = await fetch(`/api/users/${userid}/tags/${tagid}`, {
+    const res = await fetch(`/api/users/${userid}/tags/${tagid}`, {
         method: 'DELETE'
     });
-    if (deleted.ok) {
-        deleted = await deleted.json();
+    if (res.ok) {
+        const deleted = await res.json();
         dispatch(deleteTag(deleted.id));
     }
 }

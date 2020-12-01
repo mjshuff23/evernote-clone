@@ -33,7 +33,7 @@ export const loginThunk = (email, password) => async (dispatch) => {
 };
 
 export const logoutThunk = () => async (dispatch) => {
-    const user = await logout();
+    await logout();
     dispatch(removeUser());
 };
 

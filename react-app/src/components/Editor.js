@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import useStyles from './styles/EditorStyles';
 import debounce from 'lodash/debounce';
 import { updateNote } from '../store/actions/notes';
+import { setCurrentNotebook } from '../store/actions/ui';
 
 export default function Editor() {
     const classes = useStyles();
@@ -24,18 +25,50 @@ export default function Editor() {
             setText(notesState.dict[uiState.current_note].content);
             setTitle(notesState.dict[uiState.current_note].title);
             setCurrentNote(notesState.dict[uiState.current_note]);
+            if (!uiState.current_notebook) {
+                dispatch(setCurrentNotebook(1));
+            }
         }
-    }, [uiState.current_note, notesState]);
+    }, [uiState.current_note, notesState.ids]);
+
+
 
     function updateBody(text) {
         setText(text);
-        dispatch(updateNote(userState.id, uiState.current_notebook, uiState.current_note, text, notesState.dict[uiState.current_note].title));
+        if (!uiState.current_notebook) {
+            dispatch(updateNote(
+                userState.id,
+                notesState.dict[uiState.current_note].notebook_id,
+                uiState.current_note,
+                text,
+                notesState.dict[uiState.current_note].title));
+        }
+        dispatch(updateNote(
+            userState.id,
+            uiState.current_notebook,
+            uiState.current_note,
+            text,
+            notesState.dict[uiState.current_note].title));
     }
 
     function updateTitle(e) {
         setTitle(e.target.value);
 
-        dispatch(updateNote(userState.id, uiState.current_notebook, uiState.current_note, notesState.dict[uiState.current_note].content, e.target.value));
+        if (!uiState.current_notebook) {
+            dispatch(updateNote(
+                userState.id,
+                notesState.dict[uiState.current_note].notebook_id,
+                uiState.current_note,
+                notesState.dict[uiState.current_note].content,
+                e.target.value));
+        }
+
+        dispatch(updateNote(
+            userState.id,
+            uiState.current_notebook,
+            uiState.current_note,
+            notesState.dict[uiState.current_note].content,
+            e.target.value));
 
     }
 

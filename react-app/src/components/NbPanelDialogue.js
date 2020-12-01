@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
-// import { CreateNewNotebookThunk }
+import { createNotebookThunk } from '../store/actions/notebooks';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -31,23 +31,27 @@ const useStyles = makeStyles((theme) => ({
 export default function NbPanelDialogue() {
     const classes = useStyles();
     const dispatch = useDispatch();
-
-    const [open, setOpen] = React.useState(false);
+    const user = useSelector(state => state.user)
+    const [title, setTitle] = useState('');
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleSubmit = () => {
         setOpen(false);
-
+        dispatch(createNotebookThunk(user.id, title))
     }
     const handleClose = () => {
         setOpen(false);
     };
+    const update_title = (e) => {
+        setTitle(e.target.value)
+    }
 
     return (
         <>
-            <Button onClick={handleClickOpen} onHover={classes.hover} className={classes.nb_panel_button}>
+            <Button onClick={handleClickOpen} className={classes.nb_panel_button}>
                 <CreateNewFolderIcon className={classes.nb_panel_create_new_icon}/>
                 New Notebook
             </Button>
@@ -58,6 +62,7 @@ export default function NbPanelDialogue() {
                     Notebooks are useful for grouping notes around a common topic. You can always edit your notebook's name later!
                 </DialogContentText>
                 <TextField
+                    onChange={update_title}
                     autoFocus
                     margin="dense"
                     id="name"
@@ -69,7 +74,7 @@ export default function NbPanelDialogue() {
                 <Button onClick={handleClose}>
                     CANCEL
                 </Button>
-                <Button onClick={handleClose}>
+                <Button onClick={handleSubmit}>
                     SAVE
                 </Button>
                 </DialogActions>

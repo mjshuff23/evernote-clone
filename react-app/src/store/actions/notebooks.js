@@ -1,3 +1,5 @@
+import { ListItemText } from "@material-ui/core";
+
 export const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
 export const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOKS';
 export const RENAME_NOTEBOOK = 'notebooks/RENAME_NOTEBOOKS';
@@ -23,9 +25,10 @@ export const deleteNotebook = (notebookid) => ({
 
 
 export const createNotebookThunk = (userid, title) => async (dispatch) => {
-    const newNotebook = await fetch(`/api/users/${userid}/notebooks/`, {
+    let newNotebook = await fetch(`/api/users/${userid}/notebooks/`, {
         method: 'POST',
-        body: JSON.stringify(title)
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({title})
     });
     if (newNotebook.ok) {
         newNotebook = await newNotebook.json();
@@ -34,9 +37,10 @@ export const createNotebookThunk = (userid, title) => async (dispatch) => {
 };
 
 export const renameNotebookThunk = (userid, notebookid, title) => async (dispatch) => {
-    const renamed = await fetch(`api/users/${userid}/notebooks/${notebookid}`, {
+    let renamed = await fetch(`api/users/${userid}/notebooks/${notebookid}`, {
         method: 'PUT',
-        body: JSON.stringify(title)
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({title})
     });
     if (renamed.ok) {
         renamed = await renamed.json();
@@ -46,7 +50,7 @@ export const renameNotebookThunk = (userid, notebookid, title) => async (dispatc
 
 
 export const deleteNotebookThunk = (userid, notebookid) => async (dispatch) => {
-    const deleted = await fetch(`api/users/${userid}/notebooks/${notebookid}`, {
+    let deleted = await fetch(`api/users/${userid}/notebooks/${notebookid}`, {
         method: 'DELETE'
     });
     if (deleted.ok) {

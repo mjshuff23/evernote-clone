@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     maxHeight: '100vh'
   },
   listSection: {
-    backgroundColor: "inherit"
+    backgroundColor: "inherit",
+    color: "black !important",
   },
   ul: {
     backgroundColor: "inherit",

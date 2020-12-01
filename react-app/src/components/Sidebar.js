@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 
 import UserInfoDisplay from './UserInfoDisplay';
 import useStyles from './styles/SidebarStyles';
@@ -17,6 +17,9 @@ import { toggleTagPanel } from '../store/actions/ui';
 
 export default function Sidebar() {
     const classes = useStyles();
+
+    const history = useHistory();
+    const match = useRouteMatch('/notebooks/:current_notebook/notes/');
 
     const [openNotebooks, setOpenNotebooks] = useState(false);
     const [openTags, setOpenTags] = useState(false);
@@ -36,8 +39,7 @@ export default function Sidebar() {
             notebook = notebooks.ids[0];
         }
         const note = await dispatch(createNote(user.id, notebook));
-        ui.current_notebook = note.notebook_id;
-        ui.current_note = note.id;
+        history.push(`${match.url}/${note.id}/tags/none`);
     }
 
     function clickOpenNotebooks() {

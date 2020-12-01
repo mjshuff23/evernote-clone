@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         maxWidth: '225px',
         // boxSizing: 'border-box',
         // float: 'left',
-        // overflowY: 'scroll',
+        overflowY: 'auto',
         // overflowX: 'hidden',
         backgroundColor: '#1A1A1A',
         zIndex: 2,

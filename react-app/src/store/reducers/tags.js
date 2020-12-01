@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
             return action.tags;
         case CREATE_TAG:
             newState.dict[ action.tag.id ] = action.tag;
-            newState.ids.push(action.tag.id);
+            newState.ids.unshift(action.tag.id);
             return newState;
         case DELETE_TAG:
             delete newState.dict[ action.tagid ];

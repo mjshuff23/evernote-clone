@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action) {
             return newState;
         case CREATE_NOTE:
             newState.dict[action.note.id] = action.note;
-            newState.ids.push(action.note.id);
+            newState.ids.unshift(action.note.id);
             return newState;
         case DELETE_NOTE:
             delete newState.dict[action.note.id];

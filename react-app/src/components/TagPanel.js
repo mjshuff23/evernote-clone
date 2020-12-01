@@ -7,7 +7,7 @@ import { toggleTagPanel } from '../store/actions/ui';
 import { createTagThunk, deleteTag } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { deleteTagFromNotes, removeTagFromNote, addTagToNote } from '../store/actions/notes';
+import { deleteTagFromNotes, removeTagFromNoteThunk } from '../store/actions/notes';
 import { removeNoteFromTag, addNoteToTag, deleteTagThunk } from '../store/actions/tags';
 
 const TagPanel = () => {
@@ -71,18 +71,22 @@ const TagPanel = () => {
     setAnchorEl(null);
   }
 
-  const deleteAction = (tagid, noteids) => {
+  const deleteAction = (tagid) => {
     setAnchorEl(null);
-    dispatch(deleteTagFromNotes(tagid, noteids));
+    dispatch(deleteTagFromNotes(tagid, tags.dict[tagid].note_ids));
     dispatch(deleteTagThunk(tagid))
   }
 
-  const tagNoteAction = e => {
+  const tagNoteAction = (tagid) => {
     setAnchorEl(null);
+    dispatch(addTagToNoteThunk(ui.current_note, tagid));
+    dispatch(addNoteToTag(ui.current_note, tagid));
   }
 
-  const untagNoteAction = e => {
+  const untagNoteAction = (tagid) => {
     setAnchorEl(null);
+    dispatch(removeTagFromNoteThunk(ui.current_note, tagid));
+    dispatch(removeNoteFromTag(ui.current_note, tagid));
   }
 
   if (Object.keys(ui).length === 0 || tags.ids.length === 0) return null;
@@ -142,9 +146,9 @@ const TagPanel = () => {
                       open={Boolean(anchorEl)}
                       onClose={closeActions}
                     >
-                      <MenuItem className={classes.menu_item} onClick={deleteAction}>Delete Tag</MenuItem>
-                      <MenuItem className={classes.menu_item} onClick={tagNoteAction}>Add to Note</MenuItem>
-                      <MenuItem className={classes.menu_item} onClick={untagNoteAction}>Remove from Note</MenuItem>
+                      <MenuItem className={classes.menu_item} onClick={() => deleteAction(item)}>Delete Tag</MenuItem>
+                      <MenuItem className={classes.menu_item} onClick={() => tagNoteAction(item)}>Add to Note</MenuItem>
+                      <MenuItem className={classes.menu_item} onClick={() => untagNoteAction(item)}>Remove from Note</MenuItem>
                     </Menu>
                   </ListItem>
                 ))}

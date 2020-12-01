@@ -13,7 +13,7 @@ class Note(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=func.now())
 
-    tags = db.relationship('Note_Tag', backref='notes', lazy=True)
+    tags = db.relationship('Tag', secondary='note_tags', back_populates='notes', lazy=True) #cascade = "all, delete-orphan"
 
 
     def to_dict(self):

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Chip, Typography } from '@material-ui/core';
 import useStyles from './styles/NoteInfoPanelStyles';
@@ -11,6 +11,8 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 export default function NoteInfoPanel() {
     const classes = useStyles();
     const { current_notebook, current_note, current_tag } = useParams();
+    let [title, setTitle] = useState('');
+    let [noteIds, setNoteIds] = useState([]);
     const notebooks = useSelector(state => state.notebooks);
     const notes = useSelector(state => state.notes);
     const tags = useSelector(state => state.tags);
@@ -25,20 +27,22 @@ export default function NoteInfoPanel() {
         dispatch(setCurrentTag(tag));
     }, [current_note, current_notebook, current_tag, dispatch]);
 
-    if (!Object.keys(notebooks).length || !Object.keys(tags).length ) return null;
-
-    let title, noteIds = null;
-    if (current_notebook === 'all') {
-        title = 'All Notes'
-        if (current_tag === 'none') {
-            noteIds = notes.ids;
+    useEffect(() => {
+        if (current_notebook === 'all') {
+            setTitle('All Notes');
+            if (current_tag === 'none') {
+                setNoteIds(notes.ids);
+            } else {
+                setNoteIds(tags.dict[current_tag].note_ids);
+            }
         } else {
-            noteIds = tags.dict[current_tag].note_ids;
+            setTitle(notebooks.dict[current_notebook].title);
+            setNoteIds(notebooks.dict[current_notebook].note_ids);
         }
-    } else {
-        title = notebooks.dict[current_notebook].title;
-        noteIds = notebooks.dict[current_notebook].note_ids;
-    }
+    }, [current_notebook, current_tag, notes, tags, notebooks]);
+
+    if (!Object.keys(notebooks).length || !Object.keys(tags).length ) return null;
+    
     return (
         <Box className={classes.noteinfopanel}>
             <Box className={classes.header}>

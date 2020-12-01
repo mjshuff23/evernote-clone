@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import useStyles from './styles/EditorStyles';
-import debounce from 'lodash/debounce';
-import { updateNote } from '../store/actions/notes';
-import { setCurrentNotebook } from '../store/actions/ui';
+// import debounce from 'lodash/debounce';
+import { deleteNote, updateNote } from '../store/actions/notes';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+
 
 export default function Editor() {
     const classes = useStyles();
-    const [text, setText] = useState('');
-    const [title, setTitle] = useState('');
-    const [currentNote, setCurrentNote] = useState({});
-    const uiState = useSelector(state => state.ui);
-    const notesState = useSelector(state => state.notes);
-    const userState = useSelector(state => state.user);
+
+    let [text, setText] = useState('');
+    let [title, setTitle] = useState('');
+
+    const history = useHistory();
+    const { current_notebook, current_note, current_tag } = useParams();
+
+    const notes = useSelector(state => state.notes);
+    const user = useSelector(state => state.user);
 
     const dispatch = useDispatch();
     // const update = debounce(() => {
@@ -21,63 +27,78 @@ export default function Editor() {
     // }, 2000);
 
     useEffect(() => {
-        if (uiState.current_note) {
-            setText(notesState.dict[uiState.current_note].content);
-            setTitle(notesState.dict[uiState.current_note].title);
-            setCurrentNote(notesState.dict[uiState.current_note]);
-            if (!uiState.current_notebook) {
-                dispatch(setCurrentNotebook(1));
-            }
-        }
-    }, [uiState.current_note, notesState.ids]);
+        if (current_note === 'none' || !Object.keys(notes).length) return;
+        setText(notes.dict[current_note].content);
+        setTitle(notes.dict[current_note].title);
+    }, [current_note]);
 
 
 
-    function updateBody(text) {
-        setText(text);
-        if (!uiState.current_notebook) {
-            dispatch(updateNote(
-                userState.id,
-                notesState.dict[uiState.current_note].notebook_id,
-                uiState.current_note,
-                text,
-                notesState.dict[uiState.current_note].title));
+    function updateBody(content) {
+        setText(content);
+        let notebook_id = current_notebook;
+        if (current_notebook === 'all') {
+            notebook_id = notes.dict[current_note].notebook_id
         }
         dispatch(updateNote(
-            userState.id,
-            uiState.current_notebook,
-            uiState.current_note,
-            text,
-            notesState.dict[uiState.current_note].title));
+            user.id,
+            notebook_id,
+            current_note,
+            content,
+            notes.dict[current_note].title)
+        );
     }
 
     function updateTitle(e) {
         setTitle(e.target.value);
 
-        if (!uiState.current_notebook) {
-            dispatch(updateNote(
-                userState.id,
-                notesState.dict[uiState.current_note].notebook_id,
-                uiState.current_note,
-                notesState.dict[uiState.current_note].content,
-                e.target.value));
+        let notebook_id = current_notebook;
+        if (current_notebook === 'all') {
+            notebook_id = notes.dict[current_note].notebook_id
         }
-
         dispatch(updateNote(
-            userState.id,
-            uiState.current_notebook,
-            uiState.current_note,
-            notesState.dict[uiState.current_note].content,
-            e.target.value));
-
+            user.id,
+            notebook_id,
+            current_note,
+            text,
+            e.target.value)
+        );
     }
 
+    async function handleDelete() {
+        let notebook_id = current_notebook;
+        if (current_notebook === 'all') {
+            notebook_id = notes.dict[current_note].notebook_id
+        }
+        let tag_ids = notes.dict[current_note].tag_ids;
+        dispatch(deleteNote(
+            user.id,
+            notebook_id,
+            current_note,
+            tag_ids)
+        );
+        history.push(`/notebooks/${current_notebook}/notes/none/tags/${current_tag}`);
+    }
+
+    if (current_note === 'none') return null;
+
     return (
-        <div className={ classes.editorContainer }>
+        <>
             <div className={ classes.editorNoteTitle }>
-                <input className={ classes.editorNoteInput } type="text" value={ title } onChange={ updateTitle } />
+                <input 
+                    className={ classes.editorNoteInput } 
+                    type="text"
+                    value={ title } 
+                    onChange={ updateTitle } 
+                />
+                <IconButton 
+                    aria-label="delete" 
+                    component='div'
+                    onClick={handleDelete}>
+                    <DeleteIcon />
+                </IconButton>
             </div>
-            <ReactQuill value={ text } onChange={ (text) => updateBody(text) }></ReactQuill>
-        </div>
+            <ReactQuill value={text} onChange={ updateBody }></ReactQuill>
+        </>
     );
 }

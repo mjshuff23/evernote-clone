@@ -8,15 +8,17 @@ function tagList(tag_ids, tags) {
     if (tag_ids.length === 0) return null;
 
     return (tag_ids.map(id => (
-        <div>
-            <Chip label={ tags.dict[id].title }/>
+        <div key={id}>
+            <Chip label={ tags.dict[id].title } />
         </div>
     )));
 }
 
-export default function SimpleCard(props) {
+export default function NoteCard(props) {
     const classes = useStyles();
     const match = useRouteMatch();
+
+    if (!props.note) return null;
 
     return (
         <ListItem

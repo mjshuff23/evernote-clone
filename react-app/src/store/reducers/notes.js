@@ -27,8 +27,8 @@ export default function reducer(state = initialState, action) {
             newState.dict[action.note.id] = action.note;
             return newState;
         case DELETE_NOTE:
-            delete newState.dict[action.note.id];
-            newState.ids = newState.ids.filter(id => id !== action.note.id);
+            delete newState.dict[action.noteId];
+            newState.ids = newState.ids.filter(id => id !== action.noteId);
             return newState;
         case ADD_TAG_TO_NOTE:
             newState.dict[action.noteid].tag_ids.push(action.notetag.id);

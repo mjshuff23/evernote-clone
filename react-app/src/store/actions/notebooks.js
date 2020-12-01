@@ -1,9 +1,9 @@
-import { ListItemText } from "@material-ui/core";
-
 export const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
 export const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOKS';
 export const RENAME_NOTEBOOK = 'notebooks/RENAME_NOTEBOOKS';
 export const DELETE_NOTEBOOK = 'notebooks/DELETE_NOTEBOOKS';
+export const ADD_NOTE_TO_NOTEBOOK = 'notebooks/ADD_NOTE_TO_NOTEBOOK';
+export const DELETE_NOTE_FROM_NOTEBOOK = 'notebooks/DELETE_NOTE_FROM_NOTEBOOK';
 
 
 export const setNotebooks = (notebooks) => ({
@@ -21,6 +21,16 @@ export const renameNotebook = (notebook) => ({
 export const deleteNotebook = (notebookid) => ({
     type: DELETE_NOTEBOOK,
     notebookid
+});
+export const addNoteToNotebook = (notebookid, noteid) => ({
+    type: ADD_NOTE_TO_NOTEBOOK,
+    notebookid,
+    noteid
+});
+export const deleteNoteFromNotebook = (notebookid, noteid) => ({
+    type: DELETE_NOTE_FROM_NOTEBOOK,
+    notebookid,
+    noteid
 });
 
 
@@ -55,6 +65,7 @@ export const deleteNotebookThunk = (userid, notebookid) => async (dispatch) => {
     });
     if (deleted.ok) {
         deleted = await deleted.json();
-        dispatch(deleteNotebook(deleted.id))
+        dispatch(deleteNotebook(deleted.id)) 
+        // TODO: have this just refresh the state
     }
 };

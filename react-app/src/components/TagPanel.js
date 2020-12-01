@@ -7,7 +7,7 @@ import { toggleTagPanel } from '../store/actions/ui';
 import { createTagThunk, deleteTag } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { deleteTagFromNotes, removeTagFromNoteThunk } from '../store/actions/notes';
+import { deleteTagFromNotes, addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 import { removeNoteFromTag, addNoteToTag, deleteTagThunk } from '../store/actions/tags';
 
 const TagPanel = () => {

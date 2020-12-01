@@ -49,12 +49,6 @@ html, body {
     color: black !important;
 } */
 
-.nb_bar {
-    background-color: red !important;
-    font-size: x-large !important;
-    color: yellow;
-}
-
 .notebooks-link:link {
     color: darkgrey !important;
     text-decoration: none !important;

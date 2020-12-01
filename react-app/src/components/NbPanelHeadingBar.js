@@ -7,12 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
-  bar: {
-    backgroundColor: "white",
-    color: "black",
+  nb_bar: {
+    backgroundColor: "#2e2e2e",
+    color: "white",
     height: 50,
     border: "none",
-    boxShadow: "none"
+    boxShadow: "none",
+    fontSize: 10,
+    textTransform: 'uppercase',
   },
   input_root: {
     color: "inherit",
@@ -42,12 +44,13 @@ const useStyles = makeStyles((theme) => ({
     pointerEvents: "none"
   },
   title: {
+    color: 'white',
     flexGrow: 1,
-    display: "none",
-    fontSize: 20,
-    [theme.breakpoints.up("sm")]: {
-      display: "block"
-    },
+    // display: "none",
+    // fontSize: 12,
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block"
+    // },
     paddingBottom: 15
   },
 }));
@@ -57,12 +60,12 @@ export default function NbPanelHeadingBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.bar} position="static">
+      <AppBar className={classes.nb_bar} position="static">
         <Toolbar>
           <Typography className={classes.title} noWrap>
             Notebooks
           </Typography>
-          <div className={classes.search_area}>
+          {/* <div className={classes.search_area}>
             <SearchIcon className={classes.search_icon} />
             <InputBase
               placeholder="Find Notebooks…"
@@ -72,7 +75,7 @@ export default function NbPanelHeadingBar() {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

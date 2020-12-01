@@ -8,13 +8,17 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   nb_bar: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     backgroundColor: "#2e2e2e",
     color: "white",
     height: 50,
     border: "none",
     boxShadow: "none",
     fontSize: 10,
-    textTransform: 'uppercase',
+    // textTransform: 'uppercase',
+    color: 'white',
+    fontWeight: 'normal',
   },
   input_root: {
     color: "inherit",
@@ -28,30 +32,28 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  search_area: {
-    position: "relative",
-    paddingBottom: 15,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto"
-    }
-  },
-  search_icon: {
-    padding: theme.spacing(0.5, 2),
-    height: 20,
-    position: "absolute",
-    pointerEvents: "none"
-  },
+  // search_area: {
+  //   position: "relative",
+  //   paddingBottom: 15,
+  //   width: "100%",
+  //   [theme.breakpoints.up("sm")]: {
+  //     marginLeft: theme.spacing(1),
+  //     width: "auto"
+  //   }
+  // },
+  // search_icon: {
+  //   padding: theme.spacing(0.5, 2),
+  //   height: 20,
+  //   position: "absolute",
+  //   pointerEvents: "none"
+  // },
   title: {
-    color: 'white',
-    flexGrow: 1,
+    // flexGrow: 1,
     // display: "none",
     // fontSize: 12,
     // [theme.breakpoints.up("sm")]: {
     //   display: "block"
     // },
-    paddingBottom: 15
   },
 }));
 

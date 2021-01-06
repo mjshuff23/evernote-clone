@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Chip, Grid, IconButton, TextField } from '@material-ui/core';
 import { LocalOfferIcon } from '@material-ui/icons/LocalOffer';
+import { useSelector } from 'react-redux';
+import { createTagThunk } from '../store/actions/tags';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,19 +21,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TagsToolbar() {
     const classes = useStyles();
-    
+    const tags = useSelector(state => state.tags);
+    const ui = useSelector(state => state.ui);
+    const notes = useSelector(state => state.notes);
+    const [tagName, setTagName] = useState('');
+    const dispatch = useDispatch();
+
+    const updateTagName = e => {
+        setTagName(e.target.value);
+    }
+
+    const addTag = () => {
+        dispatch(createTagThunk(tagName));
+    }
 
     return (
         <Grid item xs={12} className={classes.root}>
             <IconButton>
                 <LocalOfferIcon size="small" />
             </IconButton>
-            <Chip className={classes.paper} label="tag1" />
-            <Chip className={classes.paper} label="Tag2" />
+            {notes[ui.currentNote].tagIds.map(tagId => (
+                <Chip className={classes.paper} label={tags[tagId].name} />
+            ))}
             <TextField
                 variant="outlined"
                 margin="dense"
-                placeholder="Add tag"/>
+                placeholder="Add tag"
+                value={tagName}
+                onChange={updateTagName} />
+            <Button onClick={addTag}>Add Tag</Button>
         </Grid>
     );
 }

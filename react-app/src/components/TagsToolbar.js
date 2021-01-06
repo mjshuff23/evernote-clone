@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -9,6 +10,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 import { useParams } from 'react-router-dom';
+=======
+import { Chip, Grid, IconButton, TextField } from '@material-ui/core';
+import { LocalOfferIcon } from '@material-ui/icons/LocalOffer';
+import { useSelector } from 'react-redux';
+import { createTagThunk } from '../store/actions/tags';
+import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
+>>>>>>> delete tags functionality I think is about right... or close
 
 const useStyles = makeStyles((theme) => ({
     root: {

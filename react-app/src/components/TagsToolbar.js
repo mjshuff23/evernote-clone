@@ -4,6 +4,7 @@ import { Chip, Grid, IconButton, TextField } from '@material-ui/core';
 import { LocalOfferIcon } from '@material-ui/icons/LocalOffer';
 import { useSelector } from 'react-redux';
 import { createTagThunk } from '../store/actions/tags';
+import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,8 +32,13 @@ export default function TagsToolbar() {
         setTagName(e.target.value);
     }
 
-    const addTag = () => {
-        dispatch(createTagThunk(tagName));
+    const addTag = async () => {
+        let tagId = await dispatch(createTagThunk(tagName));
+        await dispatch(addTagToNoteThunk(ui.currentNote, tagId));
+    }
+
+    const removeTag = e => {
+        await dispatch(removeTagFromNoteThunk(ui.currentNote, e.target.id));
     }
 
     return (
@@ -41,7 +47,7 @@ export default function TagsToolbar() {
                 <LocalOfferIcon size="small" />
             </IconButton>
             {notes[ui.currentNote].tagIds.map(tagId => (
-                <Chip className={classes.paper} label={tags[tagId].name} />
+                <Chip key={tagId} id={tagId} className={classes.paper} label={tags[tagId].name} onDelete={removeTag} />
             ))}
             <TextField
                 variant="outlined"

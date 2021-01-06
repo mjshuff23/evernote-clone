@@ -23,6 +23,7 @@ export const createTagThunk = (userid, name) => async dispatch => {
     if (newTag.ok) {
         let data = await newTag.json();
         dispatch(createTag(data));
+        return newTag.id;
     }
 }
 

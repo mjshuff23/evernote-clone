@@ -125,6 +125,12 @@ html, body {
     .userMenu>.MuiPaper-root {
         left: 60px !important;
     }
+    .MuiListItem-button>.MuiSvgIcon-root:first-child {
+        display: none;
+    }
+    .MuiList-root>.MuiCollapse-entered {
+        display: none;
+    }
 }
 
 .notebooks-link {

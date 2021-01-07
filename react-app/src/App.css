@@ -110,3 +110,23 @@ html, body {
 /* .MuiListItem-button {
     width: 80% !important;
 } */
+
+[class*="makeStyles-userInfoAvatar"]>.MuiSvgIcon-root {
+    margin-right: 0 !important
+}
+
+@media (max-width: 599.95px) {
+    .MuiListItem-button>.MuiSvgIcon-root:first-child {
+        display: none;
+    }
+    button span>h3+svg {
+        display: none !important;
+    }
+    .userMenu>.MuiPaper-root {
+        left: 60px !important;
+    }
+}
+
+.notebooks-link {
+    display: flex;
+}

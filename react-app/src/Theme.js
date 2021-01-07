@@ -1,6 +1,7 @@
 import React from "react";
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-const theme = createMuiTheme({
+import { createMuiTheme, ThemeProvider, responsiveFontSizes } from '@material-ui/core/styles';
+
+let theme = createMuiTheme({
     fontFamily: [
         'Fira Sans',
         'sans-serif',
@@ -32,6 +33,9 @@ const theme = createMuiTheme({
         contrastThreshold: 3,
     },
 });
+
+theme = responsiveFontSizes(theme)
+
 const Theme = props => {
     return (
         <ThemeProvider theme={ theme }>

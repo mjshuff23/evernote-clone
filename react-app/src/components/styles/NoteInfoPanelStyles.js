@@ -7,7 +7,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     height: '100vh',
     width: 300,
-    backgroundColor: "#ebebeb"
+    backgroundColor: "#ebebeb",
+    [theme.breakpoints.down('s')]: {
+      width: 250,
+    }
   },
   header: {
     zIndex: 0,

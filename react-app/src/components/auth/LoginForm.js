@@ -133,7 +133,7 @@ const LoginForm = () => {
                     <div className={classes.dev}>
                         Michael Shuff
                         <div className={classes.icons}>
-                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://www.Linkedin.com')} />
+                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://mjshuff23.github.io/')} />
                             <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/mjshuff23')} />
                             <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/michael-shuff-4b7514174/')} />
                         </div>

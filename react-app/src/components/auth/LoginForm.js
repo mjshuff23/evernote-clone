@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AuthStyles from '../styles/AuthStyles';
+import { Paper } from "@material-ui/core";
 
 const LoginForm = () => {
     const classes = AuthStyles();
@@ -34,68 +35,70 @@ const LoginForm = () => {
 
 
     return (
-        <Container component="main" maxWidth="xs">
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Evernote
-                </Typography>
-                <Typography component="span" variant="subtitle1">
-                    Remember everything important.
-                </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        type="text"
-                        value={email}
-                        onChange={updateEmail}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={updatePassword}
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Continue
-                    </Button>
-                    <Grid container justify="center">
-                        <Grid item>
-                            <Typography component="p" variant="caption">
-                                Don't have an account?
-                            </Typography>
+        <Container className={classes.container} component="main" maxWidth="xs">
+            <Paper className={classes.actual_paper}>
+                <div className={classes.paper}>
+                    <div className={classes.elephant}></div>
+                    <Typography className={classes.lora} component="h1" variant="h5">
+                        Klevernote
+                    </Typography>
+                    <Typography className={classes.remember} component="span" variant="subtitle1">
+                        Remember everything important.
+                    </Typography>
+                    <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            type="text"
+                            value={email}
+                            onChange={updateEmail}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={updatePassword}
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Continue
+                        </Button>
+                        <Grid container justify="center">
+                            <Grid item>
+                                <Typography component="p" >
+                                    Don't have an account?
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <div className={classes.create}>
+                                    <Link className={classes.create_font} href="/signup" variant="body2" >
+                                        Create account
+                                    </Link>
+                                </div>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <Link href="/signup" variant="body2">
-                                Create account
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </form>
-            </div>
+                    </form>
+                </div>
+            </Paper>
         </Container>
     );
 };

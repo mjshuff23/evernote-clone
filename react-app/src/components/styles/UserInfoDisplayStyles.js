@@ -11,8 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
   userInfoButton: {
     [theme.breakpoints.down('xs')]: {
-      width: '50px',
-      minWidth: '0'
+      width: '48px',
+      minWidth: '0',
+      marginBottom: '10px'
     }
   },
   userInfoAvatar: {
@@ -20,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      marginRight: '0',
-      marginLeft: '5px',
     }
   }
 }));

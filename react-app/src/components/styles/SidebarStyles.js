@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('xs')]: {
             width: '30px',
             minWidth: '30px',
-            height: '35px',
+            height: '30px',
             padding: '0',
             borderBottom: '1px solid black',
             borderRadius: '20px',

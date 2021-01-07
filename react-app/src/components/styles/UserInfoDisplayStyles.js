@@ -1,27 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  typography: {
-    // padding: theme.spacing(2),
-  },
   username: {
     [theme.breakpoints.down('xs')]: {
       display: 'none'
     }
   },
   userInfoButton: {
+    width: '100%',
+    boxShadow: 'none',
+    justifyContent: 'left',
+    padding: 0,
+    textTransform: 'capitalize',
     [theme.breakpoints.down('xs')]: {
-      width: '45px',
-      height: '45px',
-      borderRadius: '20px',
       minWidth: '0',
-      marginBottom: '20px'
+      justifyContent: 'center',
     },
-    [theme.breakpoints.up('xs')]: {
-      marginBottom: '20px'
-    }
   },
   userInfoAvatar: {
+    marginRight: 0,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
     [theme.breakpoints.down('xs')]: {
       display: 'flex',
       justifyContent: 'center',
@@ -29,8 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   userInfoPanel: {
-    display: 'flex',
-    justifyContent: 'center'
+    width: '100%',
   }
 }));
 

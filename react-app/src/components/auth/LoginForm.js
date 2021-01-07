@@ -11,7 +11,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AuthStyles from '../styles/AuthStyles';
-import { Paper } from "@material-ui/core";
+import { IconButton, Paper } from "@material-ui/core";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import PortraitIcon from '@material-ui/icons/Portrait';
 
 const LoginForm = () => {
     const classes = AuthStyles();
@@ -108,6 +113,42 @@ const LoginForm = () => {
                   ) : null}
                 </div>
             </Paper>
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar className={classes.toolbar}>
+                    <div className={classes.dev}>
+                        Bonnie Hardie
+                        <div className={classes.icons}>
+                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://bonniehardie.github.io./')} />
+                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/bonniehardie')} />
+                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/bonnie-hardie-3843a81ba/')} />
+                        </div>
+                    </div>
+                    <div className={classes.dev}>
+                        Cynthia Spence
+                        <div className={classes.icons}>
+                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
+                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/cynthiaspence7827/cynthiaspence7827.github.io')} />
+                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
+                        </div>
+                    </div>
+                    <div className={classes.dev}>
+                        Harrison Higgins
+                        <div className={classes.icons}>
+                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://the-harry-higgins.github.io/portfolio/')} />
+                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/the-harry-higgins')} />
+                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/harry-higgins-82a8661bb/')} />
+                        </div>
+                    </div>
+                    <div className={classes.dev}>
+                        Michael Shuff
+                        <div className={classes.icons}>
+                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://mjshuff23.github.io/')} />
+                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/mjshuff23')} />
+                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/michael-shuff-4b7514174/')} />
+                        </div>
+                    </div>
+                </Toolbar>
+            </AppBar>
         </Container>
     );
 };

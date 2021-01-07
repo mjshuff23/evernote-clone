@@ -110,3 +110,13 @@ html, body {
 /* .MuiListItem-button {
     width: 80% !important;
 } */
+
+@media (max-width: 599.95px) {
+    .MuiListItem-button>.MuiSvgIcon-root:first-child {
+        display: none;
+    }
+}
+
+.notebooks-link {
+    display: flex;
+}

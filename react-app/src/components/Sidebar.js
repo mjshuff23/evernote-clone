@@ -41,9 +41,9 @@ export default function Sidebar() {
         const note = await dispatch(createNote(user.id, notebook));
         // You are not looking at the notes page
         if (!match) {
-          history.push(`/notebooks/${notebook}/notes/${note.id}/tags/none`);
+            history.push(`/notebooks/${notebook}/notes/${note.id}/tags/none`);
         } else {
-          history.push(`${match.url}/${note.id}/tags/none`);
+            history.push(`${match.url}/${note.id}/tags/none`);
         }
     }
 
@@ -66,7 +66,7 @@ export default function Sidebar() {
         <Container className={ classes.sidebarContainer }>
             <UserInfoDisplay />
             <Button onClick={ newNoteClick } className={ ` ${classes.newNoteBtn} note-button` }>
-                <AddIcon className="muiAddIcon" />New Note
+                <AddIcon className={ `muiAddIcon ${classes.muiAddIcon}` } /><span className={ classes.newNote__text }>New Note</span>
             </Button>
             <List>
                 <ListItem
@@ -74,17 +74,17 @@ export default function Sidebar() {
                     component={ NavLink }
                     to={ notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none` }
                 >
-                    <NotesIcon />
-                    <ListItemText primary="All Notes" />
+                    <NotesIcon className={ classes.allNotes__icon } />
+                    <ListItemText className={ classes.allNotes__text } primary="All Notes" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button className={ classes.listItem__icon }>
                     {
                         openNotebooks ? <ExpandLess onClick={ clickOpenNotebooks } />
                             : <ExpandMore onClick={ clickOpenNotebooks } />
                     }
-                    <MenuBookIcon />
                     <NavLink to={ `/allnotebooks` } className='notebooks-link' >
-                        <ListItemText primary="Notebooks" />
+                        <MenuBookIcon />
+                        <ListItemText className={ classes.allNotes__text } primary="Notebooks" />
                     </NavLink>
                 </ListItem>
                 <Collapse in={ openNotebooks }>
@@ -106,7 +106,7 @@ export default function Sidebar() {
                     { openTags ? <ExpandLess onClick={ clickOpenTags } /> : <ExpandMore onClick={ clickOpenTags } /> }
                     <Button className='sidebar-tags' onClick={ handleTagsClick } >
                         <LocalOfferIcon />
-                        <ListItemText primary="Tags" />
+                        <ListItemText className={ classes.allNotes__text } primary="Tags" />
                     </Button>
                 </ListItem>
                 <Collapse in={ openTags }>

@@ -50,7 +50,10 @@ const AuthStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
         fontSize: '14pt',
         textTransform: 'none',
-        backgroundColor: '#79c043'
+        backgroundColor: '#79c043',
+            '&:hover':{
+                backgroundColor: '#477226'
+            }
     },
 }));
 

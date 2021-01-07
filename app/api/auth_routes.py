@@ -7,24 +7,32 @@ from sqlalchemy.orm import joinedload
 
 auth_routes = Blueprint('auth', __name__)
 
+
 def get_user_data(user):
-    tags = Tag.query.filter(Tag.user_id == user['id']).options(joinedload(Tag.notes)).all()
+    tags = Tag.query.filter(Tag.user_id == user['id']).options(
+        joinedload(Tag.notes)).all()
     tags_data = {
-        "dict": {tag.id:tag.to_dict() for tag in tags},
+        "dict": {tag.id: tag.to_dict() for tag in tags},
         "ids": [tag.id for tag in tags]
     }
 
-    notebooks = Notebook.query.filter(Notebook.user_id == user['id']).options(
-        joinedload(Notebook.notes).joinedload(Note.tags)).all()
+    notebooks = (Notebook.query
+                 .join(Note)
+                 .filter(Notebook.user_id == user['id'])
+                 .options(
+                     joinedload(Notebook.notes)
+                     .joinedload(Note.tags)
+                 ).all())
     notebooks_data = [notebook.to_dict() for notebook in notebooks]
     notebooks_data = {
-        "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
+        "dict": {notebook.id: notebook.to_dict() for notebook in notebooks},
         "ids": [notebook.id for notebook in notebooks]
     }
 
-    notes = []
-    for notebook in notebooks:
-        notes.extend(notebook.notes)
+    notes = (Note.query
+                 .filter(Note.user_id == user['id'])
+                 .order_by(Note.updated_at.desc())
+                 .all())
     notes_data = {
         "dict": {note.id: note.to_dict() for note in notes},
         "ids": [note.id for note in notes],
@@ -36,6 +44,7 @@ def get_user_data(user):
         "notebooks": notebooks_data,
         "notes": notes_data
     }
+
 
 def validation_errors_to_error_messages(validation_errors):
     """
@@ -54,7 +63,6 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
-        print(f'user id: {current_user}')
         data = get_user_data(current_user.to_dict())
         return data
     return {'errors': ['Unauthorized']}, 401
@@ -69,7 +77,7 @@ def login():
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form['csrf_token'].data = request.cookies['csrf_token']
-    # try:
+
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
@@ -77,9 +85,6 @@ def login():
         data = get_user_data(user.to_dict())
         return data
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
-    # except NameError as e:
-    #   print(e)
-    #   return e
 
 
 @auth_routes.route('/logout')

@@ -17,11 +17,16 @@ export default function SignupForm() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(signupThunk(username, email, password));
+        const data = await dispatch(signupThunk(username, email, password));
+        console.log(data);
+        if (data.errors) {
+            setErrors(data.errors);
+        }
     };
 
     const updateusername = (e) => {
@@ -110,6 +115,12 @@ export default function SignupForm() {
                         </Grid>
                     </Grid>
                 </form>
+            </div>
+            <div>
+              {errors ? errors.map(error => (
+                <div key={error}>{error}</div>
+              )
+              ) : null}
             </div>
         </Container>
     );

@@ -30,6 +30,7 @@ export const loginThunk = (email, password) => async (dispatch) => {
         dispatch(setNotebooks(notebooks));
         dispatch(setNotes(notes));
     }
+    return data;
 };
 
 export const logoutThunk = () => async (dispatch) => {
@@ -46,4 +47,5 @@ export const signupThunk = (username, email, password) => async (dispatch) => {
         dispatch(setNotebooks(notebooks));
         dispatch(setNotes(notes));
     }
+    return data;
 }

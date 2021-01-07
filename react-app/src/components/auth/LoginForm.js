@@ -15,14 +15,17 @@ import { Paper } from "@material-ui/core";
 
 const LoginForm = () => {
     const classes = AuthStyles();
-    // const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState("demo@aa.io");
     const [password, setPassword] = useState("password");
+    const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(loginThunk(email, password));
+        const data = await dispatch(loginThunk(email, password));
+        if (data.errors) {
+          setErrors(data.errors);
+        }
     };
 
     const updateEmail = (e) => {
@@ -97,6 +100,12 @@ const LoginForm = () => {
                             </Grid>
                         </Grid>
                     </form>
+                </div>
+                <div>
+                  {errors ? errors.map(error => (
+                    <div key={error}>{error}</div>
+                  )
+                  ) : null}
                 </div>
             </Paper>
         </Container>

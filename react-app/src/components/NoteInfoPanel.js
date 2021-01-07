@@ -46,7 +46,7 @@ export default function NoteInfoPanel() {
     return (
         <Box className={classes.noteinfopanel}>
             <Box className={classes.header}>
-                <Typography variant="h5" component='div'>
+                <Typography className={classes.title} variant="h4" component='div'>
                     { title }
                 </Typography>
                 <Box className={classes.headerInfo}>
@@ -59,7 +59,7 @@ export default function NoteInfoPanel() {
                 current_tag === 'none' ? null :
                 <Box className={classes.tagbox}>
                     <Chip
-                        className={classes.chip}
+                        className="chip"
                         icon={<LocalOfferIcon />}
                         label={tags.dict[current_tag].title}
                     />

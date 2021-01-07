@@ -1,3 +1,3 @@
 export function removeHTMLTags(str) {
-    return str.replace(/<[^>]*>?/gm, '');
+    return str.replace(/<[^>]*>?/gm, ' ');
 }

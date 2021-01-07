@@ -11,6 +11,14 @@ const theme = createMuiTheme({
             'sans-serif',
         ].join(','),
     },
+    overrides: {
+        MuiChip: {
+            root: {
+                backgroundColor: 'green',
+                color: 'white',
+            },
+        }
+    },
     palette: {
         primary: {
             main: '#1A1A1A',

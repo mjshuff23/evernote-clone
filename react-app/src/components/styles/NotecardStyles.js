@@ -6,10 +6,10 @@ const useStyles = makeStyles(theme => ({
         borderBottom: "1px solid black",
         display: 'flex',
         flexDirection: 'column',
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
     },
     title: {
-        fontSize: '1.2rem',
+        // fontSize: '1.2rem',
         fontWeight: 'bold',
     },
     content: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     infobar: {
         display: 'flex',
         width: '100%',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         alignItems: 'center',
     },
     listitem: {
@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     },
     selected: {
         border: "2px solid green",
+    },
+    left: {
+      marginLeft: theme.spacing(1)
     }
 }));
 

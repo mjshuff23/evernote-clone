@@ -39,7 +39,12 @@ export default function Sidebar() {
             notebook = notebooks.ids[0];
         }
         const note = await dispatch(createNote(user.id, notebook));
-        history.push(`${match.url}/${note.id}/tags/none`);
+        // You are not looking at the notes page
+        if (!match) {
+          history.push(`/notebooks/${notebook}/notes/${note.id}/tags/none`);
+        } else {
+          history.push(`${match.url}/${note.id}/tags/none`);
+        }
     }
 
     function clickOpenNotebooks() {

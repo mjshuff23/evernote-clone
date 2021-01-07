@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch } from "react-router-dom";
 import MainPage from './components/MainPage';
@@ -6,6 +6,7 @@ import LoginForm from "./components/auth/LoginForm";
 import SignupForm from "./components/auth/SignupForm";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import SimpleBackdrop from './components/SimpleBackdrop';
 import { CssBaseline } from '@material-ui/core';
 import Theme from './Theme';
 import { authenticateThunk } from "./store/actions/user";
@@ -13,11 +14,19 @@ import './App.css';
 
 export default function App() {
   const isNotLoggedIn = useSelector((state) => !state.user);
+  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authenticateThunk());
+    (async () => {
+      await dispatch(authenticateThunk());
+      setLoaded(true);
+    })();
   }, [dispatch]);
+
+  if (!loaded) {
+    return <SimpleBackdrop />;
+  }
 
   return (
     <>

@@ -122,6 +122,9 @@ html, body {
     button span>h3+svg {
         display: none !important;
     }
+    .userMenu>.MuiPaper-root {
+        left: 60px !important;
+    }
 }
 
 .notebooks-link {

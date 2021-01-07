@@ -7,24 +7,25 @@ from sqlalchemy.orm import joinedload
 
 auth_routes = Blueprint('auth', __name__)
 
+
 def get_user_data(user):
-    tags = Tag.query.filter(Tag.user_id == user['id']).options(joinedload(Tag.notes)).all()
+    tags = Tag.query.filter(Tag.user_id == user['id']).options(
+        joinedload(Tag.notes)).all()
     tags_data = {
-        "dict": {tag.id:tag.to_dict() for tag in tags},
+        "dict": {tag.id: tag.to_dict() for tag in tags},
         "ids": [tag.id for tag in tags]
     }
 
     notebooks = (Notebook.query
-                        .join(Note)
-                        .filter(Notebook.user_id == user['id'])
-                        .order_by(Note.updated_at.desc())
-                        .options(
-                          joinedload(Notebook.notes)
-                          .joinedload(Note.tags)
-                        ).all())
+                 .join(Note)
+                 .filter(Notebook.user_id == user['id'])
+                 .options(
+                     joinedload(Notebook.notes)
+                     .joinedload(Note.tags)
+                 ).all())
     notebooks_data = [notebook.to_dict() for notebook in notebooks]
     notebooks_data = {
-        "dict": {notebook.id:notebook.to_dict() for notebook in notebooks},
+        "dict": {notebook.id: notebook.to_dict() for notebook in notebooks},
         "ids": [notebook.id for notebook in notebooks]
     }
 
@@ -43,6 +44,7 @@ def get_user_data(user):
         "notebooks": notebooks_data,
         "notes": notes_data
     }
+
 
 def validation_errors_to_error_messages(validation_errors):
     """

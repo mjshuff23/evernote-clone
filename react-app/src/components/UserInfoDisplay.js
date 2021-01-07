@@ -27,8 +27,8 @@ export default function UserInfoDisplay() {
 
     return (
         <div>
-            <Button variant="contained" color="primary" onClick={ handleClick }>
-                <Avatar />
+            <Button variant="contained" color="primary" onClick={ handleClick } className={ classes.userInfoButton }>
+                <Avatar className={ classes.userInfoAvatar } />
                 <Typography className={ classes.username } component="h3">
                     { user.username }
                 </Typography>

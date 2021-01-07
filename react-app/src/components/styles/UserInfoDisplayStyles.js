@@ -11,7 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
   userInfoButton: {
     [theme.breakpoints.down('xs')]: {
-      width: '48px',
+      width: '45px',
+      height: '45px',
+      borderRadius: '20px',
       minWidth: '0',
       marginBottom: '20px'
     },

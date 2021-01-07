@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       width: '48px',
       minWidth: '0',
-      marginBottom: '10px'
+      marginBottom: '20px'
+    },
+    [theme.breakpoints.up('xs')]: {
+      marginBottom: '20px'
     }
   },
   userInfoAvatar: {
@@ -22,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       alignItems: 'center',
     }
+  },
+  userInfoPanel: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 

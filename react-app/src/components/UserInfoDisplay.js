@@ -26,7 +26,7 @@ export default function UserInfoDisplay() {
     };
 
     return (
-        <div>
+        <div className={ classes.userInfoPanel }>
             <Button variant="contained" color="primary" onClick={ handleClick } className={ classes.userInfoButton }>
                 <Avatar className={ classes.userInfoAvatar } />
                 <Typography className={ classes.username } component="h3">

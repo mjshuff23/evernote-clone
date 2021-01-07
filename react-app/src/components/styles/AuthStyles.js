@@ -7,6 +7,7 @@ const AuthStyles = makeStyles((theme) => ({
         top: '60px',
         padding: 40,
         paddingTop:  0,
+        maxWidth: '35%'
     },
     appBar: {
         top: 'auto',
@@ -45,24 +46,23 @@ const AuthStyles = makeStyles((theme) => ({
             '&:hover': {
                 color: 'white'
             },
-        fontSize: 'large'
+        fontSize: 'large',
     },
     icons: {
         display: 'flex',
         justifyContent: 'center',
         fontSize: 'large',
-        padding: 5
+        padding: 5,
     },
     dev:{
         padding: 120,
         fontFamily: 'Lora',
         fontSize: '10pt',
-
+        color: '#b7b7b7',
     },
     lora: {
         fontFamily: 'Lora',
         fontSize: '50px',
-        paddingBottom: 10
     },
     paper: {
         marginTop: theme.spacing(8),
@@ -71,7 +71,8 @@ const AuthStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     remember: {
-        fontSize: '15pt'
+        fontSize: '15pt',
+        paddingBottom: 40,
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -85,6 +86,10 @@ const AuthStyles = makeStyles((theme) => ({
     toolbar: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    tooltip: {
+        // backgroundColor: 'white',
+
     }
 }));
 

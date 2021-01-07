@@ -139,10 +139,14 @@ html, body {
 
 .chip >
 .MuiChip-icon {
-  color: white;
+    color: white;
 }
 
 .chip >
 .MuiChip-label {
-  padding-left: 0;
+    padding-left: 0;
+}
+
+.trashcan {
+    margin-right: 0px !important;
 }

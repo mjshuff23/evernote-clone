@@ -95,7 +95,7 @@ export default function Editor() {
                     aria-label="delete" 
                     component='div'
                     onClick={handleDelete}>
-                    <DeleteIcon />
+                    <DeleteIcon className="trashcan"/>
                 </IconButton>
             </div>
             <ReactQuill value={text} onChange={ updateBody }></ReactQuill>

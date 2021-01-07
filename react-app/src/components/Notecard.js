@@ -57,7 +57,7 @@ export default function NoteCard(props) {
     >
       <div className={classes.notecard}>
         <div>
-          <Typography className={classes.title} variant='h5'>
+          <Typography className={classes.title} variant='h6'>
             {props.note.title}
           </Typography>
         </div>

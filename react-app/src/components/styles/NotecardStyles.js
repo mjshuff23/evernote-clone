@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         padding: 0,
     },
     selected: {
-        border: "2px solid green",
+      border: "2px solid #008F26",
     },
     left: {
       marginLeft: theme.spacing(1)

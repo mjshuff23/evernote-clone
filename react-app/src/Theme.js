@@ -15,22 +15,19 @@ let theme = createMuiTheme({
     overrides: {
         MuiChip: {
             root: {
-                backgroundColor: 'green',
-                color: 'white',
+            backgroundColor: '#008F26',
+            color: '#f8f8ff',
             },
         }
     },
     palette: {
         primary: {
-            main: '#1A1A1A',
+        main: '#1A1A1A',
             contrastText: '#f8f8ff',
         },
         secondary: {
-            main: '#211522',
-            // dark: will be calculated from palette.secondary.main,
-            contrastText: '#D3B1C2',
+          main: '#008F26',
         },
-        contrastThreshold: 3,
     },
 });
 

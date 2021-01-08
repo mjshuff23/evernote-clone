@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginThunk } from "../../store/actions/user";
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import AuthStyles from '../styles/AuthStyles';
-import { IconButton, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import PortraitIcon from '@material-ui/icons/Portrait';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const LoginForm = () => {
     const classes = AuthStyles();
@@ -118,33 +116,57 @@ const LoginForm = () => {
                     <div className={classes.dev}>
                         Bonnie Hardie
                         <div className={classes.icons}>
-                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://bonniehardie.github.io./')} />
-                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/bonniehardie')} />
-                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/bonnie-hardie-3843a81ba/')} />
+                            <Tooltip title="Bonnie's Portfolio" arrow>
+                                <PortraitIcon className={classes.icon} onClick={() => window.open('https://bonniehardie.github.io./')} />
+                            </Tooltip>
+                            <Tooltip title="Bonnie's GitHub" arrow>
+                                <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/bonniehardie')} />
+                            </Tooltip>
+                            <Tooltip title="Bonnie's LinkedIn" arrow>
+                                <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/bonnie-hardie-3843a81ba/')} />
+                            </Tooltip>
                         </div>
                     </div>
                     <div className={classes.dev}>
                         Cynthia Spence
                         <div className={classes.icons}>
-                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
-                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/cynthiaspence7827/cynthiaspence7827.github.io')} />
-                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
+                            <Tooltip title="Cynthia's Portfolio" arrow>
+                                <PortraitIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
+                            </Tooltip>
+                            <Tooltip title="Cynthia's GitHub" arrow>
+                                <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/cynthiaspence7827/cynthiaspence7827.github.io')} />
+                            </Tooltip>
+                            <Tooltip title="Cynthia's LinkedIn" arrow>
+                                <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
+                            </Tooltip>
                         </div>
                     </div>
                     <div className={classes.dev}>
                         Harrison Higgins
                         <div className={classes.icons}>
-                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://the-harry-higgins.github.io/portfolio/')} />
-                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/the-harry-higgins')} />
-                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/harry-higgins-82a8661bb/')} />
+                            <Tooltip title="Harrison's Portfolio" arrow>
+                                <PortraitIcon className={classes.icon} onClick={() => window.open('https://the-harry-higgins.github.io/portfolio/')} />
+                            </Tooltip>
+                            <Tooltip title="Harrison's GitHub" arrow>
+                                <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/the-harry-higgins')} />
+                            </Tooltip>
+                            <Tooltip title="Harrison's LinkedIn" arrow>
+                                <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/harry-higgins-82a8661bb/')} />
+                            </Tooltip>
                         </div>
                     </div>
                     <div className={classes.dev}>
                         Michael Shuff
                         <div className={classes.icons}>
-                            <PortraitIcon className={classes.icon} onClick={() => window.open('https://mjshuff23.github.io/')} />
-                            <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/mjshuff23')} />
-                            <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/michael-shuff-4b7514174/')} />
+                            <Tooltip title="Michael's Portfolio" arrow>
+                                <PortraitIcon className={classes.icon} onClick={() => window.open('https://mjshuff23.github.io/')} />
+                            </Tooltip>
+                            <Tooltip title="Michael's GitHub" arrow>
+                                <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/mjshuff23')} />
+                            </Tooltip>
+                            <Tooltip title="Michael's LinkedIn" arrow>
+                                <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/michael-shuff-4b7514174/')} />
+                            </Tooltip>
                         </div>
                     </div>
                 </Toolbar>

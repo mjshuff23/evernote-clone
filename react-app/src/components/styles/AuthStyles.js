@@ -7,12 +7,15 @@ const AuthStyles = makeStyles((theme) => ({
         top: '60px',
         padding: 40,
         paddingTop:  0,
+        maxWidth: '35%'
     },
     appBar: {
         top: 'auto',
         bottom: 0,
-        height: '70px',
-        backgroundColor: '#555555',
+        height: '75px',
+        // backgroundColor: '#555555',
+        backgroundColor: '#ABABAC',
+
         display: 'flex',
         alignItems: 'stretch',
         color: '#9a9a9a'
@@ -30,6 +33,14 @@ const AuthStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         color: '#4d4f4b'
     },
+    dev:{
+        padding: 120,
+        fontFamily: 'Lora',
+        fontSize: '10pt',
+        // color: '#b7b7b7',
+        color: 'white',
+
+    },
     elephant: {
         backgroundImage: `url(${Elephant})`,
         width: '90px',
@@ -41,28 +52,25 @@ const AuthStyles = makeStyles((theme) => ({
         // marginTop: theme.spacing(1),
     },
     icon: {
-        color: '#9a9a9a',
+        color: 'white',
             '&:hover': {
-                color: 'white'
+                color: '#666667'
             },
-        fontSize: 'large'
+        // color: '#b7b7b7',
+        //     '&:hover': {
+        //         color: 'white'
+        //     },
+        fontSize: 'large',
     },
     icons: {
         display: 'flex',
         justifyContent: 'center',
         fontSize: 'large',
-        padding: 5
-    },
-    dev:{
-        padding: 120,
-        fontFamily: 'Lora',
-        fontSize: '10pt',
-
+        padding: 5,
     },
     lora: {
         fontFamily: 'Lora',
         fontSize: '50px',
-        paddingBottom: 10
     },
     paper: {
         marginTop: theme.spacing(8),
@@ -71,7 +79,8 @@ const AuthStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     remember: {
-        fontSize: '15pt'
+        fontSize: '15pt',
+        paddingBottom: 40,
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
@@ -85,7 +94,8 @@ const AuthStyles = makeStyles((theme) => ({
     toolbar: {
         display: 'flex',
         justifyContent: 'center',
-    }
+    },
+
 }));
 
 export default AuthStyles;

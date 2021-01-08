@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
-import { toggleTagPanel } from '../store/actions/ui';
 import { createTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
@@ -31,11 +30,6 @@ const TagPanel = () => {
       }
     });
     return sectionMapping;
-  };
-
-  const hideTagPanel = e => {
-    e.preventDefault()
-    dispatch(toggleTagPanel());
   };
 
   const openDialog = e => {

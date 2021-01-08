@@ -43,6 +43,7 @@ export const createNotebookThunk = (userid, title) => async (dispatch) => {
     if (newNotebook.ok) {
         newNotebook = await newNotebook.json();
         dispatch(createNotebook(newNotebook));
+        return newNotebook;
     }
 };
 
@@ -65,7 +66,7 @@ export const deleteNotebookThunk = (userid, notebookid) => async (dispatch) => {
     });
     if (deleted.ok) {
         deleted = await deleted.json();
-        dispatch(deleteNotebook(deleted.id)) 
+        dispatch(deleteNotebook(deleted.id))
         // TODO: have this just refresh the state
     }
 };

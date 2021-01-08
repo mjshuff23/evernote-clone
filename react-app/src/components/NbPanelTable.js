@@ -165,7 +165,7 @@ export default function NbPanelTable() {
                 }
                 </TableCell>
                 <TableCell align="left">
-                  <NbPanelActionButton />
+                  <NbPanelActionButton notebookid={id}/>
               </TableCell>
             </TableRow>
               <TableRow>

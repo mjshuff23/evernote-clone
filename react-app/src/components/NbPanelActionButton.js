@@ -18,6 +18,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 import BookIcon from "@material-ui/icons/Book";
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteNotebookThunk } from '../store/actions/notebooks';
+
 
 const useRowStyles = makeStyles({
 
@@ -82,8 +85,9 @@ const useRowStyles = makeStyles({
 
 
 
-export default function NbPanelActionButton(){
-
+export default function NbPanelActionButton(props){
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -92,8 +96,8 @@ export default function NbPanelActionButton(){
 
   const handleClose = () => {
     setAnchorEl(null);
+    dispatch(deleteNotebookThunk(user.id, props.notebookid))
   };
-
   const classes = useRowStyles();
 
   return (
@@ -109,12 +113,8 @@ export default function NbPanelActionButton(){
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Copy to...</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Duplicate...</MenuItem>
         <MenuItem className={classes.menu_item} onClick={handleClose}>Edit tags</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Note info</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move to trash</MenuItem>
+        <MenuItem className={classes.menu_item} onClick={handleClose}>Delete</MenuItem>
       </Menu>
     </>
   )

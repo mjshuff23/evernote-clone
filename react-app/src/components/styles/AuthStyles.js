@@ -12,8 +12,10 @@ const AuthStyles = makeStyles((theme) => ({
     appBar: {
         top: 'auto',
         bottom: 0,
-        height: '70px',
-        backgroundColor: '#555555',
+        height: '75px',
+        // backgroundColor: '#555555',
+        backgroundColor: '#ABABAC',
+
         display: 'flex',
         alignItems: 'stretch',
         color: '#9a9a9a'
@@ -31,6 +33,14 @@ const AuthStyles = makeStyles((theme) => ({
         fontWeight: 'bold',
         color: '#4d4f4b'
     },
+    dev:{
+        padding: 120,
+        fontFamily: 'Lora',
+        fontSize: '10pt',
+        // color: '#b7b7b7',
+        color: 'white',
+
+    },
     elephant: {
         backgroundImage: `url(${Elephant})`,
         width: '90px',
@@ -42,10 +52,14 @@ const AuthStyles = makeStyles((theme) => ({
         // marginTop: theme.spacing(1),
     },
     icon: {
-        color: '#9a9a9a',
+        color: 'white',
             '&:hover': {
-                color: 'white'
+                color: '#666667'
             },
+        // color: '#b7b7b7',
+        //     '&:hover': {
+        //         color: 'white'
+        //     },
         fontSize: 'large',
     },
     icons: {
@@ -53,12 +67,6 @@ const AuthStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         fontSize: 'large',
         padding: 5,
-    },
-    dev:{
-        padding: 120,
-        fontFamily: 'Lora',
-        fontSize: '10pt',
-        color: '#b7b7b7',
     },
     lora: {
         fontFamily: 'Lora',
@@ -87,10 +95,7 @@ const AuthStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
     },
-    tooltip: {
-        // backgroundColor: 'white',
 
-    }
 }));
 
 export default AuthStyles;

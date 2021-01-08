@@ -134,13 +134,13 @@ export default function SignupForm() {
                     <div className={classes.dev}>
                         Bonnie Hardie
                         <div className={classes.icons}>
-                            <Tooltip className={classes.tooltip} title="Bonnie's Portfolio" arrow>
+                            <Tooltip title="Bonnie's Portfolio" arrow>
                                 <PortraitIcon className={classes.icon} onClick={() => window.open('https://bonniehardie.github.io./')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Bonnie's GitHub" arrow>
+                            <Tooltip title="Bonnie's GitHub" arrow>
                                 <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/bonniehardie')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Bonnie's LinkedIn" arrow>
+                            <Tooltip title="Bonnie's LinkedIn" arrow>
                                 <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/bonnie-hardie-3843a81ba/')} />
                             </Tooltip>
                         </div>
@@ -148,13 +148,13 @@ export default function SignupForm() {
                     <div className={classes.dev}>
                         Cynthia Spence
                         <div className={classes.icons}>
-                            <Tooltip className={classes.tooltip} title="Cynthia's Portfolio" arrow>
+                            <Tooltip title="Cynthia's Portfolio" arrow>
                                 <PortraitIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Cynthia's GitHub" arrow>
+                            <Tooltip title="Cynthia's GitHub" arrow>
                                 <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/cynthiaspence7827/cynthiaspence7827.github.io')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Cynthia's LinkedIn" arrow>
+                            <Tooltip title="Cynthia's LinkedIn" arrow>
                                 <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/cynthia-spence-68a226194/')} />
                             </Tooltip>
                         </div>
@@ -162,13 +162,13 @@ export default function SignupForm() {
                     <div className={classes.dev}>
                         Harrison Higgins
                         <div className={classes.icons}>
-                            <Tooltip className={classes.tooltip} title="Harrison's Portfolio" arrow>
+                            <Tooltip title="Harrison's Portfolio" arrow>
                                 <PortraitIcon className={classes.icon} onClick={() => window.open('https://the-harry-higgins.github.io/portfolio/')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Harrison's GitHub" arrow>
+                            <Tooltip title="Harrison's GitHub" arrow>
                                 <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/the-harry-higgins')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Harrison's LinkedIn" arrow>
+                            <Tooltip title="Harrison's LinkedIn" arrow>
                                 <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/harry-higgins-82a8661bb/')} />
                             </Tooltip>
                         </div>
@@ -176,20 +176,19 @@ export default function SignupForm() {
                     <div className={classes.dev}>
                         Michael Shuff
                         <div className={classes.icons}>
-                            <Tooltip className={classes.tooltip} title="Michael's Portfolio" arrow>
+                            <Tooltip title="Michael's Portfolio" arrow>
                                 <PortraitIcon className={classes.icon} onClick={() => window.open('https://mjshuff23.github.io/')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Michael's GitHub" arrow>
+                            <Tooltip title="Michael's GitHub" arrow>
                                 <GitHubIcon className={classes.icon} onClick={() => window.open('https://github.com/mjshuff23')} />
                             </Tooltip>
-                            <Tooltip className={classes.tooltip} title="Michael's LinkedIn" arrow>
+                            <Tooltip title="Michael's LinkedIn" arrow>
                                 <LinkedInIcon className={classes.icon} onClick={() => window.open('https://www.linkedin.com/in/michael-shuff-4b7514174/')} />
                             </Tooltip>
                         </div>
                     </div>
                 </Toolbar>
             </AppBar>
-
         </Container>
     );
 }

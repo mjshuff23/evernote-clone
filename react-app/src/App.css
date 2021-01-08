@@ -2,20 +2,11 @@ html, body {
     height: 100vh;
     width: 100vw;
     box-sizing: border-box;
-    /* margin: 0; */
-    /* padding: 0; */
-    /* overflow: hidden; */
 }
 
-/* .appContainer {
-    display: flex;
-    width: 100vw;
-    box-sizing: border-box;
-} */
-
+/* Editor Styles */
 .quill {
     box-sizing: border-box;
-    /* width: 80vw; */
     overflow: scroll;
 }
 
@@ -25,7 +16,6 @@ html, body {
 }
 
 .ql-container {
-    /* box-sizing: border-box; */
     overflow-y: scroll;
 }
 
@@ -39,15 +29,10 @@ html, body {
     height: 100vh;
 }
 
+/* Sidebar styles */
 .MuiListItem-root.Mui-selected {
     background-color: #d4d8e8 !important;
 }
-
-/* .MuiListItem-root {
-    padding-top: 5px !important;
-    padding-bottom: 5px !important;
-    color: black !important;
-} */
 
 .notebooks-link:link {
     color: darkgrey !important;
@@ -56,64 +41,7 @@ html, body {
 
 .notebooks-link:visited {
     color: darkgrey;
-}
-
-.MuiButton-root {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-
-.MuiAvatar-colorDefault {
-    margin: 5px;
-    background-color: #1A1A1A !important;
-    color: #008F26 !important;
-}
-
-.muiAddIcon {
-    margin-right: 5px !important;
-    size: 1.25em !important;
-}
-
-/* .MuiPopover-paper {
-    background-color: #dfdfdf !important;
-    color: #1A1A1A !important;
-} */
-
-.MuiTypography-body1 {
-    font-size: .95rem !important;
-}
-
-.MuiSvgIcon-root {
-    font-size: 1em !important;
-    margin-right: 10px !important;
-    height: 1.25em !important;
-    width: 1.25em !important;
-}
-
-.sidebar-tags.MuiButtonBase-root {
-    color: darkgrey !important;
-    text-transform: capitalize !important;
-}
-
-.MuiBox-root>.MuiTypography-root {
-    color: #1A1A1A !important;
-}
-
-.notebook-list-item, .tag-list-item {
-    margin-left: 28px !important;
-}
-
-.MuiButton-text.sidebar-tags {
-    padding: 5px 0px 5px 0px !important;
-}
-
-/* .MuiListItem-button {
-    width: 80% !important;
-} */
-
-[class*="makeStyles-userInfoAvatar"]>.MuiSvgIcon-root {
-    margin-right: 0 !important
-}
+} 
 
 @media (max-width: 599.95px) {
     .MuiListItem-button>.MuiSvgIcon-root:first-child {
@@ -133,20 +61,7 @@ html, body {
     }
 }
 
-.notebooks-link {
-    display: flex;
-}
-
 .chip >
 .MuiChip-icon {
     color: white;
-}
-
-.chip >
-.MuiChip-label {
-    padding-left: 0;
-}
-
-.trashcan {
-    margin-right: 0px !important;
 }

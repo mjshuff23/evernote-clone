@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Collapse, Container, List, ListItem, ListItemText } from '@material-ui/core';
+import { Button, Collapse, Container, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
@@ -16,115 +16,169 @@ import { toggleTagPanel } from '../store/actions/ui';
 
 
 export default function Sidebar() {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const history = useHistory();
-    const match = useRouteMatch('/notebooks/:current_notebook/notes/');
+  const history = useHistory();
+  const match = useRouteMatch('/notebooks/:current_notebook/notes/');
 
-    const [openNotebooks, setOpenNotebooks] = useState(false);
-    const [openTags, setOpenTags] = useState(false);
+  const [openNotebooks, setOpenNotebooks] = useState(false);
+  const [openTags, setOpenTags] = useState(false);
 
-    const user = useSelector(state => state.user);
-    const notebooks = useSelector(state => state.notebooks);
-    const notes = useSelector(state => state.notes);
-    const tags = useSelector(state => state.tags);
-    const ui = useSelector(state => state.ui);
+  const user = useSelector(state => state.user);
+  const notebooks = useSelector(state => state.notebooks);
+  const notes = useSelector(state => state.notes);
+  const tags = useSelector(state => state.tags);
+  const ui = useSelector(state => state.ui);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    async function newNoteClick(e) {
-        if (!user.id) return;
-        let notebook = ui.current_notebook;
-        if (!notebook) {
-            notebook = notebooks.ids[0];
-        }
-        const note = await dispatch(createNote(user.id, notebook));
-        // You are not looking at the notes page
-        if (!match) {
-            history.push(`/notebooks/${notebook}/notes/${note.id}/tags/none`);
-        } else {
-            history.push(`${match.url}/${note.id}/tags/none`);
-        }
+  async function newNoteClick(e) {
+    if (!user.id) return;
+    let notebook = ui.current_notebook;
+    if (!notebook) {
+      notebook = notebooks.ids[0];
     }
-
-    function clickOpenNotebooks() {
-        setOpenNotebooks(!openNotebooks);
+    const note = await dispatch(createNote(user.id, notebook));
+    // You are not looking at the notes page
+    if (!match) {
+      history.push(`/notebooks/${notebook}/notes/${note.id}/tags/none`);
+    } else {
+      history.push(`${match.url}/${note.id}/tags/none`);
     }
+  }
 
-    function clickOpenTags() {
-        setOpenTags(!openTags);
-    }
+  function clickOpenNotebooks() {
+    setOpenNotebooks(!openNotebooks);
+  }
 
-    const handleTagsClick = () => {
-        dispatch(toggleTagPanel());
-    };
+  function clickOpenTags() {
+    setOpenTags(!openTags);
+  }
 
-    if (Object.keys(notebooks).length === 0) return null;
-    if (Object.keys(tags).length === 0) return null;
+  const handleTagsClick = () => {
+    dispatch(toggleTagPanel());
+  };
 
-    return (
-        <Container className={ classes.sidebarContainer }>
-            <UserInfoDisplay />
-            <Button onClick={ newNoteClick } className={ ` ${classes.newNoteBtn} note-button` }>
-                <AddIcon className={ `muiAddIcon ${classes.muiAddIcon}` } /><span className={ classes.newNote__text }>New Note</span>
-            </Button>
-            <List>
-                <ListItem
-                    button
-                    component={ NavLink }
-                    to={ notes.ids.length ? `/notebooks/all/notes/${notes.ids[0]}/tags/none` : `/notebooks/all/notes/none/tags/none` }
-                >
-                    <NotesIcon className={ classes.allNotes__icon } />
-                    <ListItemText className={ classes.allNotes__text } primary="All Notes" />
-                </ListItem>
-                <ListItem button className={ classes.listItem__icon }>
-                    {
-                        openNotebooks ? <ExpandLess onClick={ clickOpenNotebooks } />
-                            : <ExpandMore onClick={ clickOpenNotebooks } />
-                    }
-                    <NavLink to={ `/allnotebooks` } className='notebooks-link' >
-                        <MenuBookIcon />
-                        <ListItemText className={ classes.allNotes__text } primary="Notebooks" />
-                    </NavLink>
-                </ListItem>
-                <Collapse in={ openNotebooks }>
-                    <List component="div" disablePadding>
-                        { notebooks.ids.map(id => (
-                            <ListItem
-                                key={ `notebook-${id}` }
-                                button
-                                component={ NavLink }
-                                to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : `/notebooks/${id}/notes/none/tags/none` }
-                                className="notebook-list-item">
-                                <MenuBookIcon />
-                                <ListItemText primary={ notebooks.dict[id].title } />
-                            </ListItem>
-                        )) }
-                    </List>
-                </Collapse>
-                <ListItem button>
-                    { openTags ? <ExpandLess onClick={ clickOpenTags } /> : <ExpandMore onClick={ clickOpenTags } /> }
-                    <Button className='sidebar-tags' onClick={ handleTagsClick } >
-                        <LocalOfferIcon />
-                        <ListItemText className={ classes.allNotes__text } primary="Tags" />
-                    </Button>
-                </ListItem>
-                <Collapse in={ openTags }>
-                    <List component="div" disablePadding>
-                        { tags.ids.map(id => (
-                            <ListItem
-                                key={ `tag-${id}` }
-                                button
-                                component={ NavLink }
-                                to={ tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}` }
-                                className="tag-list-item">
-                                <LocalOfferIcon />
-                                <ListItemText primary={ tags.dict[id].title } />
-                            </ListItem>
-                        )) }
-                    </List>
-                </Collapse>
-            </List>
-        </Container>
-    );
+  if (Object.keys(notebooks).length === 0) return null;
+  if (Object.keys(tags).length === 0) return null;
+
+  return (
+    <Container className={classes.sidebarContainer}>
+      <UserInfoDisplay />
+      <Button onClick={newNoteClick} className={classes.newNoteBtn}>
+        <AddIcon className={classes.icon} />
+        <span className={classes.buttonText}>
+          <Typography>
+            New Note
+          </Typography>
+        </span>
+      </Button>
+      <List disablePadding>
+        <ListItem
+          disableGutters
+          button
+          component={NavLink}
+          className={classes.listItem}
+          to={notes.ids.length ?
+            `/notebooks/all/notes/${notes.ids[0]}/tags/none` :
+            `/notebooks/all/notes/none/tags/none`
+          }
+        >
+          <div className={classes.arrow} />
+          <div className={classes.notArrow}>
+            <NotesIcon className={classes.icon} />
+            <ListItemText
+              className={classes.buttonText}
+              primary="All Notes"
+            />
+          </div>
+        </ListItem>
+        <ListItem
+          disableGutters
+          button
+          className={classes.listItem}
+        >
+          {
+            openNotebooks ?
+              <ExpandLess onClick={clickOpenNotebooks} className={classes.arrow} /> :
+              <ExpandMore onClick={clickOpenNotebooks} className={classes.arrow} />
+          }
+          <NavLink 
+            to={`/allnotebooks`} 
+            className={`${classes.notArrow} notebooks-link`} 
+          >
+            <MenuBookIcon className={classes.icon} />
+            <ListItemText className={classes.buttonText} primary="Notebooks" />
+          </NavLink>
+        </ListItem>
+        <Collapse in={openNotebooks}>
+          <List 
+            component="div" 
+            disablePadding
+            className={classes.subList}
+          >
+            {notebooks.ids.map(id => (
+              <ListItem
+                className={classes.subListItem}
+                disableGutters
+                key={`notebook-${id}`}
+                button
+                component={NavLink}
+                to={
+                  notebooks.dict[id].note_ids.length ? 
+                    `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` : 
+                    `/notebooks/${id}/notes/none/tags/none`
+                }
+              >
+                <MenuBookIcon className={classes.subIcon} />
+                <ListItemText 
+                  primary={notebooks.dict[id].title} 
+                  className={classes.buttonText}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+        <ListItem
+          disableGutters
+          button
+          className={classes.listItem}
+        >
+          {
+            openTags ?
+              <ExpandLess onClick={clickOpenTags} className={classes.arrow} /> :
+              <ExpandMore onClick={clickOpenTags} className={classes.arrow} />
+          }
+          <div className={classes.notArrow} onClick={handleTagsClick}>
+            <LocalOfferIcon className={classes.icon} />
+            <ListItemText className={classes.buttonText} primary="Tags" />
+          </div>
+        </ListItem>
+        <Collapse in={openTags}>
+          <List
+            component="div"
+            disablePadding
+            className={classes.subList}
+          >            
+            {tags.ids.map(id => (
+              <ListItem
+                className={classes.subListItem}
+                disableGutters
+                key={`tag-${id}`}
+                button
+                component={NavLink}
+                to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}
+              >
+                <LocalOfferIcon className={classes.subIcon} />
+                <ListItemText 
+                  primary={tags.dict[id].title} 
+                  className={classes.buttonText}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Collapse>
+      </List>
+    </Container>
+  );
 }

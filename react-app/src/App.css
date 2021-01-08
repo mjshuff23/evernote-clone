@@ -6,27 +6,22 @@ html, body {
 
 /* Editor Styles */
 .quill {
-    box-sizing: border-box;
-    overflow: scroll;
-}
-
-.quill::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    height: calc(100vh - 164px);
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .ql-container {
-    overflow-y: scroll;
-}
-
-.ql-container::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    /* overflow-y: scroll; */
+    font-family: inherit;
+    font-size: inherit;
 }
 
 .ql-editor {
-    cursor: text;
-    height: 100vh;
+    font-family: inherit;
+    font-size: inherit;
+    overflow-y: scroll;
 }
 
 /* Sidebar styles */

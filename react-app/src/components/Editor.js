@@ -30,7 +30,7 @@ export default function Editor() {
         if (current_note === 'none' || !Object.keys(notes).length) return;
         setText(notes.dict[current_note].content);
         setTitle(notes.dict[current_note].title);
-    }, [current_note]);
+    }, [current_note, notes]);
 
 
 
@@ -95,10 +95,12 @@ export default function Editor() {
                     aria-label="delete" 
                     component='div'
                     onClick={handleDelete}>
-                    <DeleteIcon className="trashcan"/>
+                    <DeleteIcon/>
                 </IconButton>
             </div>
             <ReactQuill value={text} onChange={ updateBody }></ReactQuill>
+            <div className={classes.tagBar}>Tag Panel Stuff</div>
+
         </>
     );
 }

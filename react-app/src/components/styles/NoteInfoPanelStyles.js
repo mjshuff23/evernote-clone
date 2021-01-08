@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
     height: '100vh',
     width: 300,
     backgroundColor: "#ebebeb",
-    [theme.breakpoints.down('s')]: {
+    [theme.breakpoints.down('sm')]: {
       width: 250,
     }
   },

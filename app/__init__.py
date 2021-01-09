@@ -77,6 +77,9 @@ def inject_csrf_token(response):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
-    if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
+    if path.startswith('favicon')
+      or path.startswith('android')
+      or path.startswith('apple')
+      or path.startswith('mstile'):
+        return app.send_static_file(path)
     return app.send_static_file('index.html')

@@ -62,7 +62,8 @@ export const deleteNote = (userId, notebookId, noteId, tagIds) => async (dispatc
 };
 
 export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
-    let newNoteTag = await fetch(`/api/notes/${noteid}/tags/`, {
+    // /api/notes/<int:noteid>/tags
+    let newNoteTag = await fetch(`/api/notes/${noteid}/tags`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

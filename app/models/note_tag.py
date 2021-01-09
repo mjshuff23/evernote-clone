@@ -1,5 +1,4 @@
 from .db import db
-from sqlalchemy.sql import func
 
 class Note_Tag(db.Model):
     __tablename__ = 'note_tags'

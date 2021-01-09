@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-<<<<<<< HEAD
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -10,13 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 import { useParams } from 'react-router-dom';
-=======
-import { Chip, Grid, IconButton, TextField } from '@material-ui/core';
-import { LocalOfferIcon } from '@material-ui/icons/LocalOffer';
-import { useSelector } from 'react-redux';
-import { createTagThunk } from '../store/actions/tags';
-import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
->>>>>>> delete tags functionality I think is about right... or close
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,8 +37,9 @@ export default function TagsToolbar() {
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
+    const history = useHistory();
 
-    const { current_note } = useParams();
+    const { current_notebook, current_note, current_tag } = useParams();
     const [tagName, setTagName] = useState('');
 
     const dispatch = useDispatch();
@@ -55,12 +48,10 @@ export default function TagsToolbar() {
         setTagName(e.target.value);
     }
 
-    const addTag = () => {
-        const tagId = dispatch(createTagThunk(user.id, tagName));
-        dispatch(addTagToNoteThunk(current_note, tagId));
-        setTagName('');
-        // console.log(tagId, tags, notes);
-    }
+    const tagId = dispatch(createTagThunk(user.id, tagName));
+    dispatch(addTagToNoteThunk(current_note, tagId));
+    setTagName('');
+    // console.log(tagId, tags, notes);
 
     const removeTag = tagId => {
         dispatch(removeTagFromNoteThunk(current_note, tagId));
@@ -70,11 +61,10 @@ export default function TagsToolbar() {
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
         return null;
     } else {
-        // console.log(tags, notes, notes.dict[current_note]);
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (
-                    <Chip key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
+                    <Chip size='small' key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
                 ))}
                 <TextField
                     variant="outlined"
@@ -92,5 +82,4 @@ export default function TagsToolbar() {
             </Grid>
         );
     }
-
 }

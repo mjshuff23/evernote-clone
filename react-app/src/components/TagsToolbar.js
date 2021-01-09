@@ -37,9 +37,8 @@ export default function TagsToolbar() {
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
-    const history = useHistory();
 
-    const { current_notebook, current_note, current_tag } = useParams();
+    const { current_note } = useParams();
     const [tagName, setTagName] = useState('');
 
     const dispatch = useDispatch();
@@ -48,10 +47,12 @@ export default function TagsToolbar() {
         setTagName(e.target.value);
     }
 
-    const tagId = dispatch(createTagThunk(user.id, tagName));
-    dispatch(addTagToNoteThunk(current_note, tagId));
-    setTagName('');
-    // console.log(tagId, tags, notes);
+    const addTag = () => {
+        const tagId = dispatch(createTagThunk(user.id, tagName));
+        dispatch(addTagToNoteThunk(current_note, tagId));
+        setTagName('');
+        // console.log(tagId, tags, notes);
+    }
 
     const removeTag = tagId => {
         dispatch(removeTagFromNoteThunk(current_note, tagId));
@@ -64,7 +65,7 @@ export default function TagsToolbar() {
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (
-                    <Chip size='small' key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
+                    <Chip key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
                 ))}
                 <TextField
                     variant="outlined"

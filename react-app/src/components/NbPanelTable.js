@@ -120,6 +120,10 @@ export default function NbPanelTable() {
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
+  const [open1, setOpen1] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
 
   return (
     <TableContainer className={classes.no_more_border} component={Paper}>
@@ -139,9 +143,22 @@ export default function NbPanelTable() {
                 <TableCell align="left">
                   <IconButton className={classes.icon_button}
                     aria-label="expand row"
-                    onClick={() => setOpen(!open)}
+                  //   onClick={() => `setOpen${id}`(!`open${id}`)
+                  //   }
+                  // >
+                  //   {`open${id}` ? < KeyboardArrowUpIcon className = {
+                  //       classes.up
+                  //     }
+                  //     /> : <KeyboardArrowDownIcon className={classes.down} />
+                  //   }
+                  onClick={() => setOpen(!open)
+                    }
                   >
-                    {open ? <KeyboardArrowUpIcon className={classes.up}/> : <KeyboardArrowDownIcon className={classes.down}/>}
+                    {open ? < KeyboardArrowUpIcon className = {
+                        classes.up
+                      }
+                      /> : <KeyboardArrowDownIcon className={classes.down} />
+                    }
                   </IconButton>
                   <span className={classes.nb_book_button}>
                     <BookIcon className={classes.book_icon} />
@@ -201,7 +218,7 @@ export default function NbPanelTable() {
                                 `
                               } </TableCell>
                               <TableCell>
-                                  <NbPanelActionButton />
+                                  <NbPanelActionButton notebookid={id}/>
                               </TableCell>
                             </TableRow>
                           ))}

@@ -30,14 +30,7 @@ const useRowStyles = makeStyles({
 
   nb_book_button: {
     textTranform: 'none',
-    // color: '#9e9e9e',
-    //   '&hover': {
-    //     color: 'green',
-    //     backgroundColor: 'white',
-    //     '& $book_icon': {
-    //       color: "green",
-    //     }
-    // },
+
   },
 
   book_icon: {
@@ -93,7 +86,10 @@ const useRowStyles = makeStyles({
       borderBottom: "unset"
     }
   },
-
+  set_width: {
+    width: '400px',
+    backgroundColor: 'tan'
+  },
   typ_nav: {
     textDecoration: 'none',
     color: 'black',
@@ -120,86 +116,76 @@ export default function NbPanelTable() {
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
-  const [open3, setOpen3] = React.useState(false);
-  const [open4, setOpen4] = React.useState(false);
-
   return (
     <TableContainer className={classes.no_more_border} component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell className={classes.heading} align="left">TITLE</TableCell>
-            <TableCell className={classes.heading} align="left">CREATED BY</TableCell>
-            <TableCell className={classes.heading} align="left">UPDATED AT</TableCell>
-            <TableCell className={classes.heading} align="left">ACTIONS</TableCell>
+            <TableCell className={classes.heading} >TITLE</TableCell>
+            <TableCell className={classes.heading} >CREATED BY</TableCell>
+            <TableCell className={classes.heading} >UPDATED AT</TableCell>
+            <TableCell className={classes.heading} >ACTIONS</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           { notebooks.ids.map(id => (
             <>
               <TableRow className={classes.root}>
-                <TableCell align="left">
-                  <IconButton className={classes.icon_button}
+                <TableCell className={classes.set_width}>
+                  {/* <IconButton className={classes.icon_button}
                     aria-label="expand row"
-                  //   onClick={() => `setOpen${id}`(!`open${id}`)
-                  //   }
-                  // >
-                  //   {`open${id}` ? < KeyboardArrowUpIcon className = {
-                  //       classes.up
-                  //     }
-                  //     /> : <KeyboardArrowDownIcon className={classes.down} />
-                  //   }
-                  onClick={() => setOpen(!open)
-                    }
+
                   >
                     {open ? < KeyboardArrowUpIcon className = {
                         classes.up
                       }
                       /> : <KeyboardArrowDownIcon className={classes.down} />
                     }
-                  </IconButton>
+                  </IconButton> */}
                   <span className={classes.nb_book_button}>
                     <BookIcon className={classes.book_icon} />
-                    <Typography
-                      className={classes.typ_nav}
-                      button
-                      component={ NavLink }
-                      to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none`
-                        :`/notebooks/${id}/notes/none/tags/none` }
-                    >
-                      {notebooks.dict[id].title}
-                    </Typography>
+                      <Typography
+                        className={classes.typ_nav}
+                        button
+                        component={ NavLink }
+                        to={ notebooks.dict[id].note_ids.length ? `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none`
+                          :`/notebooks/${id}/notes/none/tags/none` }
+                      >
+                        {notebooks.dict[id].title}
+                      </Typography>
+
                   </span>
                 </TableCell>
-                <TableCell align="left">{user.username}</TableCell>
-                <TableCell align="left">{
+                <TableCell >{user.username}</TableCell>
+                <TableCell >{
                   `${notebooks.dict[id].updated_at.slice(8, 11)}
                     ${notebooks.dict[id].updated_at.slice(5, 7)},
                     ${notebooks.dict[id].updated_at.slice(12, 16)}
                   `
                 }
                 </TableCell>
-                <TableCell align="left">
+                <TableCell >
                   <NbPanelActionButton notebookid={id}/>
               </TableCell>
             </TableRow>
               <TableRow>
                 <TableCell
-                style={{ paddingBottom:0, paddingTop: 0 }}
-                colSpan={6}>
-                  <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Box margin={0}>
-                      <Table size="small" aria-label="notes">
+                //  {/* style={{ paddingBottom:0, paddingTop: 0 }} */}
+                colSpan={4}>
+
+                  {/* <Collapse in={open} timeout="auto" unmountOnExit> */}
+                    <Box>
+                      <Table
+                      // size="small"
+                      aria-label="notes">
                         <TableBody>
                           { notebooks.dict[id].note_ids.map((noteid) => (
                             <TableRow key={ `Note_Id: ${noteid}` }>
-                              <TableCell>
+                              <TableCell className={classes.set_width}>
+                                {/* <BookIcon className={classes.hidden}/>
                                 <BookIcon className={classes.hidden}/>
                                 <BookIcon className={classes.hidden}/>
-                                <BookIcon className={classes.hidden}/>
-                                <BookIcon className={classes.hidden}/>
+                                <BookIcon className={classes.hidden}/> */}
                                 <DescriptionOutlinedIcon className={classes.note_icon}/>
                                 <Typography
                                   className={classes.typ_nav}
@@ -210,22 +196,24 @@ export default function NbPanelTable() {
                                   {notes.dict[noteid].title}
                                 </Typography>
                               </TableCell>
-                              <TableCell>{user.username}</TableCell>
-                              <TableCell> {
+                              <TableCell >
+                                {user.username}
+                              </TableCell>
+                              <TableCell > {
                                 `${notes.dict[noteid].updated_at.slice(8, 11)}
                                   ${notes.dict[noteid].updated_at.slice(5, 7)},
                                   ${notes.dict[noteid].updated_at.slice(12, 16)}
                                 `
                               } </TableCell>
-                              <TableCell>
-                                  <NbPanelActionButton notebookid={id}/>
+                              <TableCell >
+                                <NbPanelActionButton notebookid={id}/>
                               </TableCell>
                             </TableRow>
                           ))}
                         </TableBody>
                       </Table>
                     </Box>
-                  </Collapse>
+                  {/* </Collapse> */}
                 </TableCell>
               </TableRow>
             </>
@@ -235,47 +223,3 @@ export default function NbPanelTable() {
     </TableContainer>
   );
 }
-
-// let notes_array = [
-//   {
-//     note_title: "Note One",
-//     note_created_by: "Bonnie Hardie",
-//     note_updated: "2020-11-25",
-//     note_actions: "..."
-//   },
-//   {
-//     note_title: "Note Two",
-//     note_created_by: "Bonnie Hardie",
-//     note_updated: "2020-11-25",
-//     note_actions: "..."
-//   }
-// ]
-// const rows = [
-//   createData("Notebook One", "Bonnie Hardie", "2020-11-25", notes_array),
-//   createData("Notebook Two", "Bonnie Hardie", "2020-11-25", notes_array),
-//   createData("Notebook Three", "Bonnie Hardie", "2020-11-25", notes_array),
-//   createData("Notebook Four", "Bonnie Hardie", "2020-11-25", notes_array),
-//   createData("Notebook Five", "Bonnie Hardie", "2020-11-25", notes_array)
-// ];
-
-// export default function NbPanelTable() {
-//   return (
-    // <TableContainer component={Paper}>
-    //   <Table aria-label="collapsible table">
-    //     <TableHead>
-    //       <TableRow>
-    //         <TableCell className={classes.heading} align="left">TITLE</TableCell>
-    //         <TableCell className={classes.heading} align="left">CREATED BY</TableCell>
-    //         <TableCell className={classes.heading} align="left">UPDATED AT</TableCell>
-    //         <TableCell className={classes.heading} align="left">ACTIONS</TableCell>
-    //       </TableRow>
-    //     </TableHead>
-    //     <TableBody>
-    //       {rows.map((row) => (
-    //         <Row key={row.title} row={row} />
-    //       ))}
-    //     </TableBody>
-    //   </Table>
-    // </TableContainer>
-  // );
-// }

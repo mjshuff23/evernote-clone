@@ -8,23 +8,26 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        margin: 0,
         backgroundColor: "green",
-        position: 'fixed',
-        bottom: 0,
-        right: 0,
-        height: '10vh',
-        backgroundColor: '#555'
+        maxHeight: '3.5em',
     },
     paper: {
         margin: theme.spacing(0.25),
-        textAlign: "center"
+        textAlign: "center",
+        backgroundColor: '#999',
+        marginLeft: '0.25em'
+    },
+    newTagInput: {
+        height: '2.85em',
+        alignSelf: 'flex-start',
+        marginTop: '0.4em',
+        marginLeft: '0.25em'
     }
 }));
 
@@ -34,9 +37,8 @@ export default function TagsToolbar() {
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
-    const history = useHistory();
 
-    const { current_notebook, current_note, current_tag } = useParams();
+    const { current_note } = useParams();
     const [tagName, setTagName] = useState('');
 
     const dispatch = useDispatch();
@@ -49,6 +51,7 @@ export default function TagsToolbar() {
         let tagId = await dispatch(createTagThunk(user.id, tagName));
         await dispatch(addTagToNoteThunk(current_note, tagId));
         setTagName('');
+        console.log(tagId, tags, notes);
     }
 
     const removeTag = async tagId => {
@@ -59,19 +62,24 @@ export default function TagsToolbar() {
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
         return null;
     } else {
-        console.log(tags.dict);
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (
-                    <Chip size='small' key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
+                    <Chip key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
                 ))}
                 <TextField
                     variant="outlined"
                     margin="dense"
                     placeholder="Add tag"
+                    className={classes.newTagInput}
                     value={tagName}
                     onChange={updateTagName} />
-                <Button onClick={addTag}>Add Tag</Button>
+                <Button
+                    variant='outlined'
+                    className={classes.newTagInput}
+                    onClick={addTag}>
+                    Add Tag
+                </Button>
             </Grid>
         );
     }

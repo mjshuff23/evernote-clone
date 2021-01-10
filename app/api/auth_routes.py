@@ -29,6 +29,14 @@ def get_user_data(user):
         "ids": [notebook.id for notebook in notebooks]
     }
 
+    notebooks_2 = (Notebook.query.filter(Notebook.user_id == user['id']).options(joinedload(Notebook.notes).joinedload(Note.tags)).all())
+    notebooks_2_data = [notebook.to_dict() for notebook in notebooks_2]
+    notebooks_2_data = {
+        "dict": {notebook.id: notebook.to_dict() for notebook in notebooks_2},
+        "ids": [notebook.id for notebook in notebooks_2]
+    }
+    print(notebooks_2_data)
+
     notes = (Note.query
                  .filter(Note.user_id == user['id'])
                  .order_by(Note.updated_at.desc())
@@ -41,7 +49,7 @@ def get_user_data(user):
     return {
         "user": user,
         "tags": tags_data,
-        "notebooks": notebooks_data,
+        "notebooks": notebooks_2_data,
         "notes": notes_data
     }
 

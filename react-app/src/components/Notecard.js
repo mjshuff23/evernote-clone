@@ -1,80 +1,59 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Typography from "@material-ui/core/Typography";
 import useStyles from './styles/NotecardStyles';
 import { Chip, ListItem } from "@material-ui/core";
 import { useRouteMatch, NavLink } from 'react-router-dom';
 import { removeHTMLTags } from '../services/utils';
-import Moment from 'react-moment';
+import { removeTagFromNoteThunk } from '../store/actions/notes';
+import { deleteTagThunk } from '../store/actions/tags';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 
-function tagList(tag_ids, tags, classes) {
-  if (tag_ids.length === 0) return null;
+export default function NoteCard({ noteId }) {
+    const dispatch = useDispatch();
+    const notes = useSelector(state => state.notes);
+    const tags = useSelector(state => state.tags);
+    const user = useSelector(state => state.user);
 
-  const extra = tag_ids.slice(2).length;
+    const classes = useStyles();
+    const match = useRouteMatch();
 
-  tag_ids = tag_ids.slice(0, 2);
+    const removeTag = tagId => {
+        dispatch(removeTagFromNoteThunk(noteId, tagId));
+        dispatch(deleteTagThunk(user.id, tagId));
+    }
 
-  const jsx = (tag_ids.map(id => (
-    <div className={classes.left} key={id}>
-      <Chip label={tags.dict[id].title.length < 12 ?
-        tags.dict[id].title :
-        tags.dict[id].title.slice(0, 10) + '...'} />
-    </div>
-  )));
-
-  if (extra) {
-    jsx.push(
-      <div className={classes.left}>
-        <Chip label={'+' + extra} />
-      </div>
-    )
-  }
-  return jsx;
-}
-
-function displayContent(content) {
-  content = removeHTMLTags(content);
-  if (content.length > 75) {
-    return content.slice(0, 72) + '...';
-  } else {
-    return content;
-  }
-}
-
-
-export default function NoteCard(props) {
-  const classes = useStyles();
-  const match = useRouteMatch();
-
-  if (!props.note) return null;
-
-  return (
-    <ListItem
-      button
-      className={classes.listitem}
-      activeClassName={classes.selected}
-      component={NavLink}
-      to={`/notebooks/${match.params.current_notebook}/notes/${props.note.id}/tags/${match.params.current_tag}`}
-    >
-      <div className={classes.notecard}>
-        <div>
-          <Typography className={classes.title} variant='h6'>
-            {props.note.title}
-          </Typography>
-        </div>
-        <div className={classes.content}>
-          <Typography variant="body1">
-            { displayContent(props.note.content) }
-          </Typography>
-        </div>
-        <div className={classes.infobar}>
-          <Typography variant='body2' component='div'>
-            <Moment format='LL' >
-              {props.note.updated_at}
-            </Moment>
-          </Typography>
-          {tagList(props.note.tag_ids, props.tags, classes)}
-        </div>
-      </div>
-    </ListItem>
-  );
+    if (!noteId || !Object.keys(notes.dict).length || !Object.keys(tags.dict).length || !notes.dict[noteId]) return null;
+    return (
+        <ListItem
+            button
+            className={classes.listitem}
+            activeClassName={classes.selected}
+            component={NavLink}
+            to={`/notebooks/${match.params.current_notebook}/notes/${noteId}/tags/${match.params.current_tag}`}
+        >
+            <div className={classes.notecard}>
+                <div>
+                    <Typography className={classes.title} variant='h6'>
+                        {notes.dict[noteId].title}
+                    </Typography>
+                </div>
+                <div className={classes.content}>
+                    <Typography variant="body1">
+                        {removeHTMLTags(notes.dict[noteId].content).slice(0, 50)}
+                    </Typography>
+                </div>
+                <div className={classes.infobar}>
+                    <Typography variant='body2' component='div'>
+                        {notes.dict[noteId].updated_at.slice(0, -4)}
+                    </Typography>
+                    <div>
+                        {notes.dict[noteId].tag_ids.map(tagId => (
+                            <Chip size='small' icon={<LocalOfferIcon />} className={classes.singleTag} key={tagId} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </ListItem>
+    );
 }

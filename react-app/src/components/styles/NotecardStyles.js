@@ -18,18 +18,22 @@ const useStyles = makeStyles(theme => ({
     },
     infobar: {
         display: 'flex',
+        flexDirection: 'column',
         width: '100%',
-        // justifyContent: 'space-between',
-        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     listitem: {
         padding: 0,
     },
     selected: {
-      border: "2px solid #008F26",
+        border: "2px solid green",
     },
-    left: {
-      marginLeft: theme.spacing(1)
+    cardTags: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    singleTag: {
+        margin: '0.25em 0.25em 0.25em 0'
     }
 }));
 

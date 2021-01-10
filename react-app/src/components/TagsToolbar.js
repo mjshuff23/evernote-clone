@@ -47,21 +47,22 @@ export default function TagsToolbar() {
         setTagName(e.target.value);
     }
 
-    const addTag = async () => {
-        let tagId = await dispatch(createTagThunk(user.id, tagName));
-        await dispatch(addTagToNoteThunk(current_note, tagId));
+    const addTag = () => {
+        const tagId = dispatch(createTagThunk(user.id, tagName));
+        dispatch(addTagToNoteThunk(current_note, tagId));
         setTagName('');
-        console.log(tagId, tags, notes);
+        // console.log(tagId, tags, notes);
     }
 
-    const removeTag = async tagId => {
-        await dispatch(removeTagFromNoteThunk(current_note, tagId));
-        await dispatch(deleteTagThunk(user.id, tagId));
+    const removeTag = tagId => {
+        dispatch(removeTagFromNoteThunk(current_note, tagId));
+        dispatch(deleteTagThunk(user.id, tagId));
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
         return null;
     } else {
+        // console.log(tags, notes, notes.dict[current_note]);
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (

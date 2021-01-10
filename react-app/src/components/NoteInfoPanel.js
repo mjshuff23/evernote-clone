@@ -67,7 +67,7 @@ export default function NoteInfoPanel() {
             }
             <Box className={classes.notelist}>
                 { noteIds.map(id => (
-                    <Notecard note={notes.dict[id]} tags={tags} key={id}/>
+                    <Notecard noteId={id} key={id}/>
                 )) }
             </Box>
         </Box>

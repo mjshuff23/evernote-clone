@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
     newTagInput: {
         height: '2.85em',
-        marginLeft: '0.25em',
-        color: '#FFF'
+        alignSelf: 'flex-start',
+        marginTop: '0.4em',
+        marginLeft: '0.25em'
     }
 }));
 

@@ -62,6 +62,7 @@ export default function TagsToolbar() {
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
         return null;
     } else {
+        // console.log(tags, notes, notes.dict[current_note]);
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (

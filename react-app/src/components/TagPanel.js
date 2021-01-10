@@ -1,14 +1,16 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Menu, MenuItem, Slide, TextField, Tooltip, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
 import { createTagThunk, deleteTag } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { deleteTagFromNotes, addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
+import { deleteTagFromNotes } from '../store/actions/notes';
 import { removeNoteFromTag, addNoteToTag, deleteTagThunk } from '../store/actions/tags';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const TagPanel = () => {
   const classes = useStyles();
@@ -20,6 +22,8 @@ const TagPanel = () => {
   const [createDialog, setCreateDialog] = useState(false);
   const [newTagName, setNewTagName] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
+  const { current_notebook, current_note, current_tag } = useParams();
+  const history = useHistory();
 
   const sections = () => {
     if (tags.ids.length === 0) return;
@@ -58,30 +62,13 @@ const TagPanel = () => {
     setNewTagName(e.target.value);
   }
 
-  const openActions = e => {
-    setAnchorEl(e.currentTarget);
-  }
-
-  const closeActions = e => {
-    setAnchorEl(null);
-  }
-
-  const deleteAction = (tagid) => {
-    setAnchorEl(null);
-    dispatch(deleteTagFromNotes(tagid, tags.dict[tagid].note_ids));
-    dispatch(deleteTagThunk(tagid))
-  }
-
-  const tagNoteAction = (tagid) => {
-    setAnchorEl(null);
-    dispatch(addTagToNoteThunk(ui.current_note, tagid));
-    dispatch(addNoteToTag(ui.current_note, tagid));
-  }
-
-  const untagNoteAction = (tagid) => {
-    setAnchorEl(null);
-    dispatch(removeTagFromNoteThunk(ui.current_note, tagid));
-    dispatch(removeNoteFromTag(ui.current_note, tagid));
+  const removeTag = tagId => {
+    let noteIds = tags.dict[tagId].note_ids;
+    if (current_tag === tagId) {
+      history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
+    }
+    dispatch(deleteTagFromNotes(tagId, noteIds));
+    dispatch(deleteTagThunk(user.id, tagId));
   }
 
   if (Object.keys(ui).length === 0 || tags.ids.length === 0) return null;
@@ -131,20 +118,8 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    <Tooltip className={classes.tooltip} title="More actions" placement="top" arrow>
-                      <MoreHorizIcon className={classes.more_horiz} aria-controls="simple-menu" aria-haspopup="true" onClick={openActions} />
-                    </Tooltip>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={closeActions}
-                    >
-                      <MenuItem className={classes.menu_item} onClick={() => deleteAction(item)}>Delete Tag</MenuItem>
-                      <MenuItem className={classes.menu_item} onClick={() => tagNoteAction(item)}>Add to Note</MenuItem>
-                      <MenuItem className={classes.menu_item} onClick={() => untagNoteAction(item)}>Remove from Note</MenuItem>
-                    </Menu>
+                    <AddCircleOutlineIcon />
+                    <DeleteForeverIcon onClick={() => removeTag(item)} />
                   </ListItem>
                 ))}
               </ul>

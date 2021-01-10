@@ -19,11 +19,8 @@ const useStyles = makeStyles(theme => ({
         // fontWeight: 'bold'
     },
     tagBar: {
-      marginTop: 42,
-      height: 60,
-      backgroundColor: 'cyan',
-      padding: theme.spacing(2),
-      fontSize: theme.typography.h4.fontSize,
+        marginTop: 42,
+        height: 60,
     }
 }));
 

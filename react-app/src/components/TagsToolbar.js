@@ -8,14 +8,16 @@ import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { SET_CURRENT_NOTEBOOK } from '../store/actions/ui';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         alignItems: 'center',
         backgroundColor: "green",
-        maxHeight: '3.5em',
+        marginTop: 42,
+        height: 60,
     },
     paper: {
         margin: theme.spacing(0.25),
@@ -25,9 +27,8 @@ const useStyles = makeStyles((theme) => ({
     },
     newTagInput: {
         height: '2.85em',
-        alignSelf: 'flex-start',
-        marginTop: '0.4em',
-        marginLeft: '0.25em'
+        marginLeft: '0.25em',
+        color: '#FFF'
     }
 }));
 
@@ -38,7 +39,8 @@ export default function TagsToolbar() {
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
 
-    const { current_note } = useParams();
+    const history = useHistory();
+    const { current_notebook, current_note, current_tag } = useParams();
     const [tagName, setTagName] = useState('');
 
     const dispatch = useDispatch();
@@ -55,8 +57,10 @@ export default function TagsToolbar() {
     }
 
     const removeTag = tagId => {
+        if (current_tag === tagId) {
+            history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
+        }
         dispatch(removeTagFromNoteThunk(current_note, tagId));
-        dispatch(deleteTagThunk(user.id, tagId));
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {

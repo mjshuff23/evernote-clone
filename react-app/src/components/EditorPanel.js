@@ -10,7 +10,6 @@ export default function EditorPanel() {
   return (
     <Box className={classes.editorpanel}>
       <Editor />
-      <TagsToolbar />
     </Box>
   );
 }

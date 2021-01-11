@@ -9,8 +9,8 @@ tag_routes = Blueprint('tags', __name__)
 @tag_routes.route('/', methods=['POST'])
 @login_required
 def createTag(userid):
-    data = json.loads(request.data)
-    tag_name = data['name']
+    req_data = json.loads(request.data)
+    tag_name = req_data['name']
     new_tag = Tag(title=tag_name, user_id=userid)
     db.session.add(new_tag)
     db.session.commit()

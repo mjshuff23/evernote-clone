@@ -62,6 +62,10 @@ const TagPanel = () => {
     setNewTagName(e.target.value);
   }
 
+  const addTagToNote = tagId => {
+    
+  }
+
   const removeTag = tagId => {
     let noteIds = tags.dict[tagId].note_ids;
     if (current_tag === tagId) {
@@ -118,8 +122,8 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    <AddCircleOutlineIcon />
-                    <DeleteForeverIcon onClick={() => removeTag(item)} />
+                    {typeof(current_note) === 'number' ? <></> : <AddCircleOutlineIcon onClick={e => {e.preventDefault(); addTagToNote(item);}} />}
+                    <DeleteForeverIcon onClick={e => {e.preventDefault(); removeTag(item);}} />
                   </ListItem>
                 ))}
               </ul>

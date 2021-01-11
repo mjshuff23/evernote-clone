@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import Note_Tag, db
+from sqlalchemy import and_
 import json
 
 note_tag_routes = Blueprint('note_tags', __name__)
@@ -11,6 +12,9 @@ note_tag_routes = Blueprint('note_tags', __name__)
 def addTagToNote(noteid):
     req_data = json.loads(request.data)
     tag_id = req_data['tagid']
+    tag_rel = Note_Tag.query.filter(and_(Note_Tag.tag_id == tag_id, NoteTag.note_id == noteid)).all()
+    if len(tag_rel) == 1:
+        return tag_rel[0]
     new_note_tag = Note_Tag(tag_id=tag_id, note_id=noteid)
     db.session.add(new_note_tag)
     db.session.commit()

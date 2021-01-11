@@ -51,8 +51,9 @@ export default function TagsToolbar() {
     }
 
     const addTag = () => {
-        const tagId = dispatch(createTagThunk(user.id, tagName));
-        dispatch(addTagToNoteThunk(current_note, tagId));
+        const tag = dispatch(createTagThunk(user.id, tagName));
+        // console.log(tag);
+        dispatch(addTagToNoteThunk(current_note, tag.id));
         setTagName('');
         // console.log(tagId, tags, notes);
     }

@@ -61,7 +61,7 @@ export default function NoteInfoPanel() {
                     <Chip
                         className="chip"
                         icon={<LocalOfferIcon />}
-                        label={tags.dict[current_tag].title}
+                        label={tags.dict[current_tag].title}z
                     />
                 </Box>
             }

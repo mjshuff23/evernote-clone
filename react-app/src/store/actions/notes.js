@@ -72,7 +72,7 @@ export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
     });
     if (newNoteTag.ok) {
         newNoteTag = await newNoteTag.json();
-        console.log(newNoteTag);
+        // console.log(newNoteTag);
         dispatch(addTagToNote(newNoteTag.tag_id, newNoteTag.note_id));
         dispatch(addNoteToTag(newNoteTag.note_id, newNoteTag.tag_id))
     }

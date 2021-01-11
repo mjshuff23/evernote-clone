@@ -6,7 +6,6 @@ import { Chip, ListItem } from "@material-ui/core";
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { removeHTMLTags } from '../services/utils';
 import { removeTagFromNoteThunk } from '../store/actions/notes';
-import { deleteTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import Moment from 'react-moment';
 
@@ -29,12 +28,10 @@ export default function NoteCard({ noteId }) {
   const classes = useStyles();
   let { current_notebook, current_note, current_tag } = useParams();
 
-  const removeTag = tagId => {
-    if (current_tag === tagId) {
-      history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
-    }
-    // dispatch(removeTagFromNoteThunk(noteId, tagId));
-    // dispatch(deleteTagThunk(user.id, tagId));
+  const removeTag = (tagId) => {
+    history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/${current_tag === tagId ? 'none' : current_tag}`);
+    dispatch(removeTagFromNoteThunk(noteId, tagId));
+    window.location.reload(false);
   }
 
   if (!noteId || !Object.keys(notes.dict).length || !Object.keys(tags.dict).length || !notes.dict[noteId]) return null;
@@ -69,7 +66,8 @@ export default function NoteCard({ noteId }) {
                 size='small'
                 icon={<LocalOfferIcon />}
                 className={classes.singleTag}
-                key={tagId} label={tags.dict[tagId].title.length < 12 ?
+                key={tagId}
+                label={tags.dict[tagId].title.length < 12 ?
                   tags.dict[tagId].title :
                   tags.dict[tagId].title.slice(0, 10) + '...'}
                 onClick={e => e.preventDefault()}

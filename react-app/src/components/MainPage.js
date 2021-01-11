@@ -12,16 +12,16 @@ export default function MainPage() {
   const classes = useStyles();
 
   return (
-    <Box className={ classes.mainpageContainer }>
+    <Box className={classes.mainpageContainer}>
       <Sidebar />
-      <main className={ classes.main }>
-        <TagPanel />
+      <main className={classes.main}>
         <Switch>
           <Route path="/allnotebooks">
             <NotebookPanel />
           </Route>
           <Route path="/notebooks/:current_notebook/notes/:current_note/tags/:current_tag">
-            <Box className={ classes.noteviewcontainer }>
+            <TagPanel />
+            <Box className={classes.noteviewcontainer}>
               <NoteInfoPanel />
               <EditorPanel />
             </Box>

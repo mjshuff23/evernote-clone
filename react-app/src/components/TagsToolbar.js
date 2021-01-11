@@ -67,10 +67,9 @@ export default function TagsToolbar() {
     }
 
     const removeTag = tagId => {
-        if (current_tag === tagId) {
-            history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
-        }
-        // dispatch(removeTagFromNoteThunk(current_note, tagId));
+        history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/${current_tag === tagId ? 'none' : current_tag}`);
+        dispatch(removeTagFromNoteThunk(Number(current_note), tagId));
+        window.location.reload(false);
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
@@ -81,14 +80,12 @@ export default function TagsToolbar() {
                 {notes.dict[current_note].tag_ids.map(tagId => (
                     <Chip
                         key={tagId}
-                        id={tagId}
                         icon={<LocalOfferIcon />}
                         className={classes.paper}
-                        label={tags.dict[tagId].title}
-                        onClick={() => { }}
-                        component={NavLink}
-                        to={`/notebooks/${current_notebook}/notes/${current_note}/tags/${tagId}`}
-                        onDelete={() => removeTag(tagId)} />
+                        label={tags.dict[tagId].title.length < 12 ?
+                            tags.dict[tagId].title :
+                            tags.dict[tagId].title.slice(0, 10) + '...'}
+                        onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
                 ))}
                 <TextField
                     variant="outlined"

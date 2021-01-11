@@ -4,11 +4,10 @@ import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
-import { createTagThunk, deleteTag } from '../store/actions/tags';
+import { createTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { deleteTagFromNotes } from '../store/actions/notes';
-import { removeNoteFromTag, addNoteToTag, deleteTagThunk } from '../store/actions/tags';
+import { addTagToNoteThunk } from '../store/actions/notes';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
@@ -62,7 +61,7 @@ const TagPanel = () => {
   }
 
   const addTagToNote = tagId => {
-
+    dispatch(addTagToNoteThunk(current_note, tagId));
   }
 
   const removeTag = tagId => {
@@ -71,8 +70,7 @@ const TagPanel = () => {
     if (Number(current_tag) === tagId) {
       history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
     }
-    // dispatch(deleteTagFromNotes(tagId, noteIds));
-    // dispatch(deleteTagThunk(user.id, tagId));
+    dispatch(deleteTagFromNotes(tagId, noteIds));
   }
 
   if (Object.keys(ui).length === 0 || tags.ids.length === 0) return null;
@@ -123,8 +121,11 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    {current_note ? <>no</> : <div onClick={() => console.log(current_note)}>note</div>}
-                    <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />
+                    {current_note === 'none' ? 
+                      <></> : 
+                      notes.dict[current_note].tag_ids.includes(item) ? 
+                        <></> : 
+                        <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}
                     <DeleteForeverIcon onClick={e => { e.preventDefault(); removeTag(item); }} />
                   </ListItem>
                 ))}

@@ -121,12 +121,11 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    {current_note === 'none' ? 
+                    {current_note === 'none' || !current_note ? 
                       <></> : 
                       notes.dict[current_note].tag_ids.includes(item) ? 
-                        <></> : 
-                        <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}
-                    <DeleteForeverIcon onClick={e => { e.preventDefault(); removeTag(item); }} />
+                        <DeleteForeverIcon onClick={e => { e.preventDefault(); removeTag(item); }} /> : 
+                        <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}     
                   </ListItem>
                 ))}
               </ul>

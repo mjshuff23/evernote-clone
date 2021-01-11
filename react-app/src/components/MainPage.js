@@ -17,6 +17,7 @@ export default function MainPage() {
       <main className={classes.main}>
         <Switch>
           <Route path="/allnotebooks">
+            <TagPanel />
             <NotebookPanel />
           </Route>
           <Route path="/notebooks/:current_notebook/notes/:current_note/tags/:current_tag">

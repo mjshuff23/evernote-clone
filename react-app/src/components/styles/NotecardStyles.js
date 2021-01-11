@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles(theme => ({
   notecard: {

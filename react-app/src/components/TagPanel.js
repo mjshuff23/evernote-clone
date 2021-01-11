@@ -8,8 +8,8 @@ import { createTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { deleteTagFromNotes } from '../store/actions/notes';
 import { addTagToNoteThunk } from '../store/actions/notes';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import ClearIcon from '@material-ui/icons/Clear';
+import AddIcon from '@material-ui/icons/Add';
 
 const TagPanel = () => {
   let { current_notebook, current_note, current_tag } = useParams();
@@ -79,7 +79,7 @@ const TagPanel = () => {
     <Slide direction="right" in={ui.display_tag_panel} mountOnEnter unmountOnExit>
       <Box className={classes.tagPanel}>
         <Typography variant='h4' className={classes.tagPanelHeader}>
-          Tags <IconButton className={classes.tagIcon} onClick={openDialog}><LocalOfferIcon /></IconButton>
+          <LocalOfferIcon className={classes.mainIcon} />Tags<IconButton className={classes.addTagIconBtn} onClick={openDialog}><AddIcon /></IconButton>
           <Divider variant="fullWidth" />
         </Typography>
         <Dialog open={createDialog} onClose={closeDialog}>
@@ -121,11 +121,12 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    {current_note === 'none' || !current_note ? 
-                      <></> : 
-                      notes.dict[current_note].tag_ids.includes(item) ? 
-                        <DeleteForeverIcon onClick={e => { e.preventDefault(); removeTag(item); }} /> : 
-                        <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}     
+                    {current_note === 'none' ?
+                      <></> :
+                      notes.dict[current_note].tag_ids.includes(item) ?
+                        <></> :
+                        <AddIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}
+                    <ClearIcon onClick={e => { e.preventDefault(); removeTag(item); }} />
                   </ListItem>
                 ))}
               </ul>

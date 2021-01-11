@@ -9,14 +9,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 import { useParams, useHistory } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        alignItems: 'center',
-        backgroundColor: 'darkgray',
+        justifyContent: 'space-evenly',
+        backgroundColor: '#1A1A1A',
         marginTop: 42,
         height: 60,
     },
@@ -36,10 +35,47 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     newTagInput: {
-        height: '2.85em',
-        alignSelf: 'center',
-        color: 'green',
-        borderColor: 'green'
+        margin: 'auto 0.25em',
+        '& .MuiOutlinedInput-root': {
+            margin: 'auto 0.25em',
+            '& fieldset': {
+                borderColor: 'white',
+                borderRadius: '20px',
+            },
+            '&:hover fieldset': {
+                borderColor: 'green',
+                borderRadius: '20px',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'green',
+                borderRadius: '20px',
+            },
+        },
+        '& .MuiOutlinedInput-input': {
+            color: 'white',
+            "&::placeholder": {
+                color: "lightgray"
+            },
+        }
+    },
+    addTagBtn: {
+        backgroundColor: '#008F26',
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#007E22'
+        },
+        margin: 'auto 0',
+        borderRadius: '20px'
+    },
+    newTagFormBar: {
+        display: 'flex',
+        alignItems: 'center',
+        margin: 'auto'
+    },
+    noteTags: {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '0.5em'
     }
 }));
 
@@ -69,7 +105,6 @@ export default function TagsToolbar() {
     const removeTag = tagId => {
         history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/${current_tag === tagId ? 'none' : current_tag}`);
         dispatch(removeTagFromNoteThunk(Number(current_note), tagId));
-        window.location.reload(false);
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
@@ -77,29 +112,33 @@ export default function TagsToolbar() {
     } else {
         return (
             <Grid item xs={12} className={classes.root}>
-                {notes.dict[current_note].tag_ids.map(tagId => (
-                    <Chip
-                        key={tagId}
-                        icon={<LocalOfferIcon />}
-                        className={classes.paper}
-                        label={tags.dict[tagId].title.length < 12 ?
-                            tags.dict[tagId].title :
-                            tags.dict[tagId].title.slice(0, 10) + '...'}
-                        onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
-                ))}
-                <TextField
-                    variant="outlined"
-                    margin="dense"
-                    placeholder="Add tag"
-                    className={classes.newTagInput}
-                    value={tagName}
-                    onChange={updateTagName} />
-                <Button
-                    variant='contained'
-                    className={classes.newTagInput}
-                    onClick={addTag}>
-                    Add Tag
-                </Button>
+                <div className={classes.noteTags}>
+                    {notes.dict[current_note].tag_ids.map(tagId => (
+                        <Chip
+                            key={tagId}
+                            icon={<LocalOfferIcon />}
+                            className={classes.paper}
+                            label={tags.dict[tagId].title.length < 12 ?
+                                tags.dict[tagId].title :
+                                tags.dict[tagId].title.slice(0, 10) + '...'}
+                            onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
+                    ))}
+                </div>
+                <div className={classes.newTagFormBar}>
+                    <TextField
+                        variant="outlined"
+                        margin="dense"
+                        placeholder="Add tag"
+                        className={classes.newTagInput}
+                        value={tagName}
+                        onChange={updateTagName} />
+                    <Button
+                        variant='contained'
+                        className={classes.addTagBtn}
+                        onClick={addTag}>
+                        Add Tag
+                    </Button>
+                </div>
             </Grid>
         );
     }

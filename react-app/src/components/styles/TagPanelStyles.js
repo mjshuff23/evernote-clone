@@ -42,7 +42,16 @@ const useStyles = makeStyles(theme => ({
     padding: 0
   },
   tagPanelHeader: {
-    padding: 5
+    padding: 5,
+    display: 'flex',
+    alignItems: 'center',
+    color: '#1A1A1A'
+  },
+  addTagIconBtn: {
+    marginLeft: 'auto'
+  },
+  mainIcon: {
+    margin: '0.5em'
   }
 }));
 

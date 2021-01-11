@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     content: {
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
+        wordWrap: 'break-word',
     },
     infobar: {
         display: 'flex',

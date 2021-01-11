@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Menu, MenuItem, Slide, TextField, Tooltip, Typography } from '@material-ui/core';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const TagPanel = () => {
+  let { current_notebook, current_note, current_tag } = useParams();
   const classes = useStyles();
   const notes = useSelector(state => state.notes);
   const tags = useSelector(state => state.tags);
@@ -21,9 +22,7 @@ const TagPanel = () => {
   const dispatch = useDispatch();
   const [createDialog, setCreateDialog] = useState(false);
   const [newTagName, setNewTagName] = useState('');
-  const [anchorEl, setAnchorEl] = useState(null);
-  const { current_notebook, current_note, current_tag } = useParams();
-  const history = useHistory();
+  let history = useHistory();
 
   const sections = () => {
     if (tags.ids.length === 0) return;
@@ -63,16 +62,17 @@ const TagPanel = () => {
   }
 
   const addTagToNote = tagId => {
-    
+
   }
 
   const removeTag = tagId => {
     let noteIds = tags.dict[tagId].note_ids;
-    if (current_tag === tagId) {
+    console.log(current_tag)
+    if (Number(current_tag) === tagId) {
       history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
     }
-    dispatch(deleteTagFromNotes(tagId, noteIds));
-    dispatch(deleteTagThunk(user.id, tagId));
+    // dispatch(deleteTagFromNotes(tagId, noteIds));
+    // dispatch(deleteTagThunk(user.id, tagId));
   }
 
   if (Object.keys(ui).length === 0 || tags.ids.length === 0) return null;
@@ -119,11 +119,13 @@ const TagPanel = () => {
                 }).map((item) => (
                   <ListItem key={`item-${sectionId}-${item}`}
                     button
+                    onClick={toggleTagPanel}
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    {typeof(current_note) === 'number' ? <></> : <AddCircleOutlineIcon onClick={e => {e.preventDefault(); addTagToNote(item);}} />}
-                    <DeleteForeverIcon onClick={e => {e.preventDefault(); removeTag(item);}} />
+                    {current_note ? <>no</> : <div onClick={() => console.log(current_note)}>note</div>}
+                    <AddCircleOutlineIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />
+                    <DeleteForeverIcon onClick={e => { e.preventDefault(); removeTag(item); }} />
                   </ListItem>
                 ))}
               </ul>

@@ -62,6 +62,8 @@ export const deleteNote = (userId, notebookId, noteId, tagIds) => async (dispatc
 };
 
 export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
+    noteid = Number(noteid);
+    tagid = Number(tagid);
     // /api/notes/<int:noteid>/tags
     let newNoteTag = await fetch(`/api/notes/${noteid}/tags`, {
         method: 'POST',
@@ -79,11 +81,13 @@ export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
 };
 
 export const removeTagFromNoteThunk = (noteid, tagid) => async dispatch => {
+    noteid = Number(noteid);
+    tagid = Number(tagid);
     let removedTagId = await fetch(`/api/notes/${noteid}/tags/${tagid}`, {
         method: 'DELETE'
     });
     if (removedTagId.ok) {
-        removedTagId = removedTagId.json();
+        removedTagId = await removedTagId.json();
         dispatch(removeTagFromNote(removedTagId.id, noteid));
         dispatch(removeNoteFromTag(noteid, tagid));
     }

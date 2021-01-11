@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles(theme => ({
     notecard: {
@@ -35,6 +36,15 @@ const useStyles = makeStyles(theme => ({
     },
     singleTag: {
         margin: '0.25em 0.25em 0.25em 0',
+        WebkitTapHighlightColor: theme.palette.common.transparent,
+        cursor: 'pointer',
+        '&:focus': {
+            backgroundColor: emphasize('#008000', 0.08),
+        },
+        '&:active': {
+            boxShadow: theme.shadows[1],
+            backgroundColor: emphasize('#008000', 0.12),
+        },
     }
 }));
 

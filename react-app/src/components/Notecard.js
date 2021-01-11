@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Typography from "@material-ui/core/Typography";
 import useStyles from './styles/NotecardStyles';
 import { Chip, ListItem } from "@material-ui/core";
-import { useRouteMatch, NavLink } from 'react-router-dom';
+import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { removeHTMLTags } from '../services/utils';
 import { removeTagFromNoteThunk } from '../store/actions/notes';
 import { deleteTagThunk } from '../store/actions/tags';
@@ -21,16 +21,20 @@ function displayContent(content) {
 
 export default function NoteCard({ noteId }) {
   const dispatch = useDispatch();
+  let history = useHistory();
   const notes = useSelector(state => state.notes);
   const tags = useSelector(state => state.tags);
   const user = useSelector(state => state.user);
 
   const classes = useStyles();
-  const match = useRouteMatch();
+  let { current_notebook, current_note, current_tag } = useParams();
 
   const removeTag = tagId => {
-    dispatch(removeTagFromNoteThunk(noteId, tagId));
-    dispatch(deleteTagThunk(user.id, tagId));
+    if (current_tag === tagId) {
+      history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
+    }
+    // dispatch(removeTagFromNoteThunk(noteId, tagId));
+    // dispatch(deleteTagThunk(user.id, tagId));
   }
 
   if (!noteId || !Object.keys(notes.dict).length || !Object.keys(tags.dict).length || !notes.dict[noteId]) return null;
@@ -40,7 +44,7 @@ export default function NoteCard({ noteId }) {
       className={classes.listitem}
       activeClassName={classes.selected}
       component={NavLink}
-      to={`/notebooks/${match.params.current_notebook}/notes/${noteId}/tags/${match.params.current_tag}`}
+      to={`/notebooks/${current_notebook}/notes/${noteId}/tags/${current_tag}`}
     >
       <div className={classes.notecard}>
         <div>
@@ -68,7 +72,8 @@ export default function NoteCard({ noteId }) {
                 key={tagId} label={tags.dict[tagId].title.length < 12 ?
                   tags.dict[tagId].title :
                   tags.dict[tagId].title.slice(0, 10) + '...'}
-                onDelete={() => removeTag(tagId)} />
+                onClick={e => e.preventDefault()}
+                onDelete={e => { e.preventDefault(); removeTag(tagId) }} />
             ))}
           </div>
         </div>

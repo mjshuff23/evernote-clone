@@ -6,42 +6,52 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useSelector, useDispatch } from 'react-redux';
-import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
+import { createTagThunk } from '../store/actions/tags';
 import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
 import { useParams, useHistory } from 'react-router-dom';
-import { SET_CURRENT_NOTEBOOK } from '../store/actions/ui';
+import { NavLink } from 'react-router-dom';
+import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: "green",
+        backgroundColor: 'darkgray',
         marginTop: 42,
         height: 60,
     },
     paper: {
         margin: theme.spacing(0.25),
         textAlign: "center",
-        backgroundColor: '#999',
-        marginLeft: '0.25em'
+        backgroundColor: 'green',
+        marginLeft: '0.25em',
+        WebkitTapHighlightColor: theme.palette.common.transparent,
+        cursor: 'pointer',
+        '&:focus': {
+            backgroundColor: emphasize('#008000', 0.08),
+        },
+        '&:active': {
+            boxShadow: theme.shadows[1],
+            backgroundColor: emphasize('#008000', 0.12),
+        },
     },
     newTagInput: {
         height: '2.85em',
-        alignSelf: 'flex-start',
-        marginTop: '0.4em',
-        marginLeft: '0.25em'
+        alignSelf: 'center',
+        color: 'green',
+        borderColor: 'green'
     }
 }));
 
 
 export default function TagsToolbar() {
+    let { current_notebook, current_note, current_tag } = useParams();
     const classes = useStyles();
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
 
-    const history = useHistory();
-    const { current_notebook, current_note, current_tag } = useParams();
+    let history = useHistory();
     const [tagName, setTagName] = useState('');
 
     const dispatch = useDispatch();
@@ -52,27 +62,33 @@ export default function TagsToolbar() {
 
     const addTag = async () => {
         const tagId = await dispatch(createTagThunk(user.id, tagName));
-        console.log(tagId);
         dispatch(addTagToNoteThunk(current_note, tagId));
         setTagName('');
-        // console.log(tagId, tags, notes);
     }
 
     const removeTag = tagId => {
         if (current_tag === tagId) {
             history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
         }
-        dispatch(removeTagFromNoteThunk(current_note, tagId));
+        // dispatch(removeTagFromNoteThunk(current_note, tagId));
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {
         return null;
     } else {
-        // console.log(tags, notes, notes.dict[current_note]);
         return (
             <Grid item xs={12} className={classes.root}>
                 {notes.dict[current_note].tag_ids.map(tagId => (
-                    <Chip key={tagId} id={tagId} icon={<LocalOfferIcon />} className={classes.paper} label={tags.dict[tagId].title} onDelete={() => removeTag(tagId)} />
+                    <Chip
+                        key={tagId}
+                        id={tagId}
+                        icon={<LocalOfferIcon />}
+                        className={classes.paper}
+                        label={tags.dict[tagId].title}
+                        onClick={() => { }}
+                        component={NavLink}
+                        to={`/notebooks/${current_notebook}/notes/${current_note}/tags/${tagId}`}
+                        onDelete={() => removeTag(tagId)} />
                 ))}
                 <TextField
                     variant="outlined"
@@ -82,7 +98,7 @@ export default function TagsToolbar() {
                     value={tagName}
                     onChange={updateTagName} />
                 <Button
-                    variant='outlined'
+                    variant='contained'
                     className={classes.newTagInput}
                     onClick={addTag}>
                     Add Tag

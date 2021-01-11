@@ -13,6 +13,7 @@ export const removeNoteFromTag = (noteid, tagid) => ({ type: REMOVE_NOTE_FROM_TA
 export const deleteNoteFromTags = (noteid, tagids) => ({ type: DELETE_NOTE_FROM_TAGS, noteid, tagids });
 
 export const createTagThunk = (userid, name) => async dispatch => {
+    userid = Number(userid);
     let newTag = await fetch(`/api/users/${userid}/tags/`, {
         method: 'POST',
         headers: {
@@ -29,6 +30,8 @@ export const createTagThunk = (userid, name) => async dispatch => {
 }
 
 export const deleteTagThunk = (userid, tagid) => async dispatch => {
+    userid = Number(userid);
+    tagid = Number(tagid);
     const res = await fetch(`/api/users/${userid}/tags/${tagid}`, {
         method: 'DELETE'
     });

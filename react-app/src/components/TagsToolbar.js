@@ -69,7 +69,7 @@ export default function TagsToolbar() {
     const removeTag = tagId => {
         history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/${current_tag === tagId ? 'none' : current_tag}`);
         dispatch(removeTagFromNoteThunk(Number(current_note), tagId));
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {

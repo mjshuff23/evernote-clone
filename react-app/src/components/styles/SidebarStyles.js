@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
         minWidth: '225px',
         maxWidth: '225px',
         overflowY: 'auto',
+        overflowX: 'hidden',
         backgroundColor: '#1A1A1A',
         zIndex: 2,
         [theme.breakpoints.down('xs')]: {

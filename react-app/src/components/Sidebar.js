@@ -11,7 +11,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import NotesIcon from '@material-ui/icons/Notes';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
 import { toggleTagPanel } from '../store/actions/ui';
 
 
@@ -130,7 +132,10 @@ export default function Sidebar() {
                     `/notebooks/${id}/notes/none/tags/none`
                 }
               >
-                <MenuBookIcon className={classes.subIcon} />
+                <MenuBookOutlinedIcon 
+                  fontSize='small' 
+                  className={classes.subIcon} 
+                />
                 <ListItemText 
                   primary={notebooks.dict[id].title} 
                   className={classes.buttonText}
@@ -169,7 +174,10 @@ export default function Sidebar() {
                 component={NavLink}
                 to={tags.dict[id].note_ids.length ? `/notebooks/all/notes/${tags.dict[id].note_ids[0]}/tags/${id}` : `/notebooks/all/notes/none/tags/${id}`}
               >
-                <LocalOfferIcon className={classes.subIcon} />
+                <LocalOfferOutlinedIcon 
+                  fontSize='small' 
+                  className={classes.subIcon} 
+                />
                 <ListItemText 
                   primary={tags.dict[id].title} 
                   className={classes.buttonText}

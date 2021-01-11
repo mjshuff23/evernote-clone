@@ -31,7 +31,7 @@ export default function Editor() {
         if (current_note === 'none' || !Object.keys(notes).length) return;
         setText(notes.dict[current_note].content);
         setTitle(notes.dict[current_note].title);
-    }, [current_note, notes]);
+    }, [current_note]);
 
 
 

@@ -55,7 +55,9 @@ export default function NoteCard({ noteId }) {
         </div>
         <div className={classes.infobar}>
           <Typography variant='body2' component='div'>
-            {notes.dict[noteId].updated_at.slice(0, -4)}
+            <Moment format='LL' >
+              {notes.dict[noteId].updated_at}
+            </Moment>
           </Typography>
           <div>
             {notes.dict[noteId].tag_ids.map(tagId => (
@@ -63,7 +65,7 @@ export default function NoteCard({ noteId }) {
                 size='small'
                 icon={<LocalOfferIcon />}
                 className={classes.singleTag}
-                key={tagId} label={tags.dict[tagId].title < 12 ?
+                key={tagId} label={tags.dict[tagId].title.length < 12 ?
                   tags.dict[tagId].title :
                   tags.dict[tagId].title.slice(0, 10) + '...'}
                 onDelete={() => removeTag(tagId)} />

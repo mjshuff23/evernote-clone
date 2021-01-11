@@ -18,6 +18,9 @@ let theme = createMuiTheme({
             backgroundColor: '#008F26',
             color: '#f8f8ff',
             },
+            icon: {
+              color: '#f8f8ff',
+            }
         }
     },
     palette: {

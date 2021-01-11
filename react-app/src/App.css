@@ -55,8 +55,3 @@ html, body {
         display: none;
     }
 }
-
-.chip >
-.MuiChip-icon {
-    color: white;
-}

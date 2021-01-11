@@ -20,20 +20,20 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
     },
     listitem: {
         padding: 0,
     },
     selected: {
-        border: "2px solid green",
+        border: "2px solid #008F26",
     },
     cardTags: {
         display: 'flex',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
     singleTag: {
-        margin: '0.25em 0.25em 0.25em 0'
+        margin: '0.25em 0.25em 0.25em 0',
     }
 }));
 

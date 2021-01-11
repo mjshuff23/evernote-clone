@@ -2,8 +2,7 @@ import {
     TOGGLE_TAG_PANEL,
     SET_CURRENT_NOTE,
     SET_CURRENT_NOTEBOOK,
-    SET_CURRENT_TAG,
-    CREATE_TAG_DIALOG_OPEN
+    SET_CURRENT_TAG
 } from '../actions/ui';
 
 let initialState = {

@@ -15,18 +15,21 @@ let theme = createMuiTheme({
     overrides: {
         MuiChip: {
             root: {
-            backgroundColor: '#008F26',
-            color: '#f8f8ff',
+                backgroundColor: '#008F26',
+                color: '#f8f8ff',
             },
+            icon: {
+                color: '#f8f8ff',
+            }
         }
     },
     palette: {
         primary: {
-        main: '#1A1A1A',
+            main: '#1A1A1A',
             contrastText: '#f8f8ff',
         },
         secondary: {
-          main: '#008F26',
+            main: '#008F26',
         },
     },
 });
@@ -35,8 +38,8 @@ theme = responsiveFontSizes(theme)
 
 const Theme = props => {
     return (
-        <ThemeProvider theme={ theme }>
-            { props.children }
+        <ThemeProvider theme={theme}>
+            { props.children}
         </ThemeProvider>
     );
 };

@@ -1,11 +1,11 @@
 import {
     SET_NOTES,
-    CREATE_NOTE, 
-    UPDATE_NOTE, 
-    DELETE_NOTE, 
-    ADD_TAG_TO_NOTE, 
-    REMOVE_TAG_FROM_NOTE, 
-    DELETE_TAG_FROM_NOTES 
+    CREATE_NOTE,
+    UPDATE_NOTE,
+    DELETE_NOTE,
+    ADD_TAG_TO_NOTE,
+    REMOVE_TAG_FROM_NOTE,
+    DELETE_TAG_FROM_NOTES
 } from '../actions/notes';
 
 let initialState = {
@@ -31,7 +31,8 @@ export default function reducer(state = initialState, action) {
             newState.ids = newState.ids.filter(id => id !== Number(action.noteId));
             return newState;
         case ADD_TAG_TO_NOTE:
-            newState.dict[action.noteid].tag_ids.push(action.notetag.id);
+            newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(id => id !== action.notetag);
+            newState.dict[action.noteid].tag_ids.push(action.notetag);
             return newState;
         case REMOVE_TAG_FROM_NOTE:
             newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(tagid => tagid !== Number(action.noteid));

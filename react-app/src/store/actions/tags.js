@@ -13,7 +13,8 @@ export const removeNoteFromTag = (noteid, tagid) => ({ type: REMOVE_NOTE_FROM_TA
 export const deleteNoteFromTags = (noteid, tagids) => ({ type: DELETE_NOTE_FROM_TAGS, noteid, tagids });
 
 export const createTagThunk = (userid, name) => async dispatch => {
-    const newTag = await fetch(`/api/users/${userid}/tags/`, {
+    userid = Number(userid);
+    let newTag = await fetch(`/api/users/${userid}/tags/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -21,12 +22,16 @@ export const createTagThunk = (userid, name) => async dispatch => {
         body: JSON.stringify({ name })
     });
     if (newTag.ok) {
-        let data = await newTag.json();
-        dispatch(createTag(data));
+        newTag = await newTag.json();
+        // console.log(newTag);
+        await dispatch(createTag(newTag));
+        return newTag.id;
     }
 }
 
 export const deleteTagThunk = (userid, tagid) => async dispatch => {
+    userid = Number(userid);
+    tagid = Number(tagid);
     const res = await fetch(`/api/users/${userid}/tags/${tagid}`, {
         method: 'DELETE'
     });

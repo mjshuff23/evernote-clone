@@ -62,7 +62,10 @@ export const deleteNote = (userId, notebookId, noteId, tagIds) => async (dispatc
 };
 
 export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
-    let newNoteTag = await fetch(`/api/notes/${noteid}/tags/`, {
+    noteid = Number(noteid);
+    tagid = Number(tagid);
+    // /api/notes/<int:noteid>/tags
+    let newNoteTag = await fetch(`/api/notes/${noteid}/tags`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -71,17 +74,20 @@ export const addTagToNoteThunk = (noteid, tagid) => async dispatch => {
     });
     if (newNoteTag.ok) {
         newNoteTag = await newNoteTag.json();
-        dispatch(addTagToNote(tagid, noteid));
-        dispatch(addNoteToTag(noteid, tagid))
+        // console.log(newNoteTag);
+        dispatch(addTagToNote(newNoteTag.tag_id, newNoteTag.note_id));
+        dispatch(addNoteToTag(newNoteTag.note_id, newNoteTag.tag_id))
     }
 };
 
 export const removeTagFromNoteThunk = (noteid, tagid) => async dispatch => {
+    noteid = Number(noteid);
+    tagid = Number(tagid);
     let removedTagId = await fetch(`/api/notes/${noteid}/tags/${tagid}`, {
         method: 'DELETE'
     });
     if (removedTagId.ok) {
-        removedTagId = removedTagId.json();
+        removedTagId = await removedTagId.json();
         dispatch(removeTagFromNote(removedTagId.id, noteid));
         dispatch(removeNoteFromTag(noteid, tagid));
     }

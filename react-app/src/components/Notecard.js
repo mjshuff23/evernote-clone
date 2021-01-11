@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import Typography from "@material-ui/core/Typography";
 import useStyles from './styles/NotecardStyles';
 import { Chip, ListItem } from "@material-ui/core";
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useRouteMatch, NavLink } from 'react-router-dom';
 import { removeHTMLTags } from '../services/utils';
 import Moment from 'react-moment';
@@ -14,18 +16,18 @@ function tagList(tag_ids, tags, classes) {
   tag_ids = tag_ids.slice(0, 2);
 
   const jsx = (tag_ids.map(id => (
-    <div className={classes.left} key={id}>
-      <Chip label={tags.dict[id].title.length < 12 ?
+    <Chip
+      size='small'
+      icon={<LocalOfferIcon />}
+      className={classes.singleTag}
+      label={tags.dict[id].title.length < 7 ?
         tags.dict[id].title :
-        tags.dict[id].title.slice(0, 10) + '...'} />
-    </div>
+        tags.dict[id].title.slice(0, 4) + '...'} />
   )));
 
   if (extra) {
     jsx.push(
-      <div className={classes.left}>
-        <Chip label={'+' + extra} />
-      </div>
+      <Chip size='small' className={classes.singleTag} label={'+' + extra} />
     )
   }
   return jsx;
@@ -41,11 +43,13 @@ function displayContent(content) {
 }
 
 
-export default function NoteCard(props) {
+export default function NoteCard({ noteId }) {
+  const note = useSelector(state => state.notes.dict[noteId]);
+  const tags = useSelector(state => state.tags);
   const classes = useStyles();
   const match = useRouteMatch();
 
-  if (!props.note) return null;
+  if (!noteId) return null;
 
   return (
     <ListItem
@@ -53,26 +57,28 @@ export default function NoteCard(props) {
       className={classes.listitem}
       activeClassName={classes.selected}
       component={NavLink}
-      to={`/notebooks/${match.params.current_notebook}/notes/${props.note.id}/tags/${match.params.current_tag}`}
+      to={`/notebooks/${match.params.current_notebook}/notes/${noteId}/tags/${match.params.current_tag}`}
     >
       <div className={classes.notecard}>
         <div>
           <Typography className={classes.title} variant='h6'>
-            {props.note.title}
+            {note.title}
           </Typography>
         </div>
         <div className={classes.content}>
           <Typography variant="body1">
-            { displayContent(props.note.content) }
+            {displayContent(note.content)}
           </Typography>
         </div>
         <div className={classes.infobar}>
           <Typography variant='body2' component='div'>
-            <Moment format='LL' >
-              {props.note.updated_at}
+            <Moment format='ll' className={classes.date}>
+              {note.updated_at}
             </Moment>
           </Typography>
-          {tagList(props.note.tag_ids, props.tags, classes)}
+          <div className={classes.tags}>
+            {tagList(note.tag_ids, tags, classes)}
+          </div>
         </div>
       </div>
     </ListItem>

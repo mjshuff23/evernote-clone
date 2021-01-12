@@ -18,9 +18,9 @@ export const renameNotebook = (notebook) => ({
     type: RENAME_NOTEBOOK,
     notebook
 });
-export const deleteNotebook = (notebookid) => ({
+export const deleteNotebook = (notebook) => ({
     type: DELETE_NOTEBOOK,
-    notebookid
+    notebook
 });
 export const addNoteToNotebook = (notebookid, noteid) => ({
     type: ADD_NOTE_TO_NOTEBOOK,
@@ -54,7 +54,7 @@ export const renameNotebookThunk = (userid, notebookid, title) => async (dispatc
     });
     if (renamed.ok) {
         renamed = await renamed.json();
-        dispatch(renameNotebook(renamed))
+        dispatch(renameNotebook(renamed));
     }
 };
 
@@ -66,7 +66,6 @@ export const deleteNotebookThunk = (userid, notebookid) => async (dispatch) => {
     if (deleted.ok) {
         deleted = await deleted.json();
         console.log(deleted);
-        dispatch(deleteNotebook(deleted.id)) 
-        // TODO: have this just refresh the state
+        dispatch(deleteNotebook(deleted));
     }
 };

@@ -54,7 +54,7 @@ export const renameNotebookThunk = (userid, notebookid, title) => async (dispatc
     });
     if (renamed.ok) {
         renamed = await renamed.json();
-        dispatch(renameNotebook(renamed.title))
+        dispatch(renameNotebook(renamed))
     }
 };
 

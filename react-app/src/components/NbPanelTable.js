@@ -73,7 +73,7 @@ export default function NbPanelTable() {
           </Moment>
         </TableCell>
         <TableCell>
-          <NotebookActionButton />
+          <NotebookActionButton notebookId={id}/>
         </TableCell>
       </TableRow>
     )
@@ -82,38 +82,38 @@ export default function NbPanelTable() {
   const createNoteTable = (id) => {
     return (
       <TableRow key={`notebook-${id}-noteTable`}>
-        <TableCell style={{ padding: 0}}>
-        <Collapse in={open[id]} timeout="auto" unmountOnExit>
-          <Table size="small" aria-label="notes">
-            <TableBody>
-              {notebooks.dict[id].note_ids.map((noteid) => (
-                <TableRow key={`Note_Id: ${noteid}`} className={classes.row}>
-                  <TableCell>
-                    <div className={`${classes.title} ${classes.padLeft}`}>
-                      <DescriptionOutlinedIcon className={classes.icon} />
-                      <Typography
-                        className={classes.title_text}
-                        component={NavLink}
-                        to={`/notebooks/${id}/notes/${noteid}/tags/none`}
-                      >
-                        {notes.dict[noteid].title}
-                      </Typography>
-                    </div>
-                  </TableCell>
-                  <TableCell>{user.username}</TableCell>
-                  <TableCell>
-                    <Moment format='ll'>
-                      {notebooks.dict[id].updated_at}
-                    </Moment>
-                  </TableCell>
-                  <TableCell>
-                    <NbPanelActionButton />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Collapse>
+        <TableCell style={{ padding: 0 }}>
+          <Collapse in={open[id]} timeout="auto" unmountOnExit>
+            <Table size="small" aria-label="notes">
+              <TableBody>
+                {notebooks.dict[id].note_ids.map((noteid) => (
+                  <TableRow key={`Note_Id: ${noteid}`} className={classes.row}>
+                    <TableCell>
+                      <div className={`${classes.title} ${classes.padLeft}`}>
+                        <DescriptionOutlinedIcon className={classes.icon} />
+                        <Typography
+                          className={classes.title_text}
+                          component={NavLink}
+                          to={`/notebooks/${id}/notes/${noteid}/tags/none`}
+                        >
+                          {notes.dict[noteid].title}
+                        </Typography>
+                      </div>
+                    </TableCell>
+                    <TableCell>{user.username}</TableCell>
+                    <TableCell>
+                      <Moment format='ll'>
+                        {notes.dict[noteid].updated_at}
+                      </Moment>
+                    </TableCell>
+                    <TableCell>
+                      {/* <NbPanelActionButton /> */}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Collapse>
         </TableCell>
       </TableRow>
     )

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
+import RenameNotebookDialog from './RenameNotebookDialog';
+import DeleteNotebookDialog from './DeleteNotebookDialog';
+
 
 const useRowStyles = makeStyles({
 
@@ -59,10 +62,11 @@ const useRowStyles = makeStyles({
 });
 
 
-
-export default function NotebookActionButton() {
-
+export default function NotebookActionButton({ notebookId }) {
+  const [openRename, setOpenRename] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useRowStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,24 +76,46 @@ export default function NotebookActionButton() {
     setAnchorEl(null);
   };
 
-  const classes = useRowStyles();
+  const handleClickOpenRename = () => {
+    setOpenRename(true);
+    setAnchorEl(null);
+  };
+
+  const handleClickOpenDelete = () => {
+    setOpenDelete(true);
+    setAnchorEl(null);
+  };
+
 
   return (
     <>
       <Tooltip className={classes.tooltip} title="More actions" placement="top" arrow>
-        <MoreHorizIcon className={classes.more_horiz} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        </MoreHorizIcon>
+        <MoreHorizIcon 
+          className={classes.more_horiz} 
+          aria-controls="simple-menu" 
+          aria-haspopup="true" 
+          onClick={handleClick}
+        />
       </Tooltip>
       <Menu
-        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Rename Notebook</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Delete Notebook</MenuItem>
+        <MenuItem 
+          className={classes.menu_item} 
+          onClick={handleClickOpenRename}>
+          Rename Notebook
+        </MenuItem>
+        <MenuItem 
+          className={classes.menu_item} 
+          onClick={handleClickOpenDelete}>
+          Delete Notebook
+        </MenuItem>
       </Menu>
+      <RenameNotebookDialog open={openRename} setOpen={setOpenRename} notebookId={notebookId}/>
+      <DeleteNotebookDialog open={openDelete} setOpen={setOpenDelete} notebookId={notebookId}/>
     </>
   )
 }

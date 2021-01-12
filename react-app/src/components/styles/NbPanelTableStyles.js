@@ -8,7 +8,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     "& > *": {
       borderBottom: "unset"
-    }
+    },
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: '4fr 1fr',
+    },
   },
   heading: {
     fontWeight: 'normal',

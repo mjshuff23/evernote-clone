@@ -19,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from './styles/NbPanelTableStyles';
 import Moment from 'react-moment';
 import NotebookActionButton from './NotebookActionButton';
+import { Hidden } from "@material-ui/core";
 
 
 export default function NbPanelTable() {
@@ -66,14 +67,16 @@ export default function NbPanelTable() {
             </Typography>
           </div>
         </TableCell>
-        <TableCell>{user.username}</TableCell>
+        <Hidden smDown>
+          <TableCell>{user.username}</TableCell>
+          <TableCell>
+            <Moment format='ll'>
+              {notebooks.dict[id].updated_at}
+            </Moment>
+          </TableCell>
+        </Hidden>
         <TableCell>
-          <Moment format='ll'>
-            {notebooks.dict[id].updated_at}
-          </Moment>
-        </TableCell>
-        <TableCell>
-          <NotebookActionButton notebookId={id}/>
+          <NotebookActionButton notebookId={id} />
         </TableCell>
       </TableRow>
     )
@@ -100,12 +103,14 @@ export default function NbPanelTable() {
                         </Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.username}</TableCell>
-                    <TableCell>
-                      <Moment format='ll'>
-                        {notes.dict[noteid].updated_at}
-                      </Moment>
-                    </TableCell>
+                    <Hidden smDown>
+                      <TableCell>{user.username}</TableCell>
+                      <TableCell>
+                        <Moment format='ll'>
+                          {notes.dict[noteid].updated_at}
+                        </Moment>
+                      </TableCell>
+                    </Hidden>
                     <TableCell>
                       {/* <NbPanelActionButton /> */}
                     </TableCell>
@@ -134,8 +139,10 @@ export default function NbPanelTable() {
         <TableHead>
           <TableRow className={classes.row}>
             <TableCell className={`${classes.heading} ${classes.padLeft}`}>TITLE</TableCell>
-            <TableCell className={classes.heading} >CREATED BY</TableCell>
-            <TableCell className={classes.heading} >UPDATED AT</TableCell>
+            <Hidden smDown>
+              <TableCell className={classes.heading} >CREATED BY</TableCell>
+              <TableCell className={classes.heading} >UPDATED AT</TableCell>
+            </Hidden>
             <TableCell className={classes.heading} >ACTIONS</TableCell>
           </TableRow>
         </TableHead>

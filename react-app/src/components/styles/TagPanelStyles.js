@@ -52,6 +52,12 @@ const useStyles = makeStyles(theme => ({
   },
   mainIcon: {
     margin: '0.5em'
+  },
+  hide: {
+    display: 'none'
+  },
+  hidden: {
+    visibility: 'hidden'
   }
 }));
 

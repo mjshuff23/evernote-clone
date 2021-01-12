@@ -31,6 +31,9 @@ let theme = createMuiTheme({
         secondary: {
             main: '#008F26',
         },
+        other: {
+            main: '#FFFFFF'
+        }
     },
 });
 

@@ -1,15 +1,17 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide, TextField, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import useStyles from './styles/TagPanelStyles'
 import { toggleTagPanel } from '../store/actions/ui';
-import { createTagThunk } from '../store/actions/tags';
+import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import { deleteTagFromNotes } from '../store/actions/notes';
+import { removeTagFromNoteThunk, deleteTagFromNotes } from '../store/actions/notes';
 import { addTagToNoteThunk } from '../store/actions/notes';
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const TagPanel = () => {
   let { current_notebook, current_note, current_tag } = useParams();
@@ -40,6 +42,8 @@ const TagPanel = () => {
     return sectionMapping;
   };
 
+  useEffect(() => { }, [tags, notes]);
+
   const openDialog = e => {
     e.preventDefault();
     setCreateDialog(true);
@@ -65,12 +69,19 @@ const TagPanel = () => {
   }
 
   const removeTag = tagId => {
+    if (Number(current_tag) === tagId) {
+      history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
+    }
+    dispatch(removeTagFromNoteThunk(current_note, tagId));
+  }
+
+  const deleteTag = tagId => {
     let noteIds = tags.dict[tagId].note_ids;
-    console.log(current_tag)
     if (Number(current_tag) === tagId) {
       history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
     }
     dispatch(deleteTagFromNotes(tagId, noteIds));
+    dispatch(deleteTagThunk(user.id, tagId));
   }
 
   if (Object.keys(ui).length === 0 || tags.ids.length === 0) return null;
@@ -121,12 +132,25 @@ const TagPanel = () => {
                     component={NavLink}
                     to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
+                    <Tooltip className={classes.tooltip} title="Delete Tag" placement="top" arrow>
+                      <IconButton onClick={e => { e.preventDefault(); deleteTag(item); }}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
                     {current_note === 'none' ?
-                      <></> :
+                      <IconButton disabled><AddIcon className={classes.hidden} /></IconButton> :
                       notes.dict[current_note].tag_ids.includes(item) ?
-                        <></> :
-                        <AddIcon onClick={e => { e.preventDefault(); addTagToNote(item); }} />}
-                    <ClearIcon onClick={e => { e.preventDefault(); removeTag(item); }} />
+                        <IconButton disabled><AddIcon className={classes.hidden} /></IconButton> :
+                        <Tooltip className={classes.tooltip} title="Add Tag to Current Note" placement="top" arrow>
+                          <IconButton onClick={e => { e.preventDefault(); addTagToNote(item); }}>
+                            <AddIcon />
+                          </IconButton>
+                        </Tooltip>}
+                    <Tooltip className={classes.tooltip} title="Remove Tag from Current Note" placement="top" arrow>
+                      <IconButton onClick={e => { e.preventDefault(); removeTag(item); }}>
+                        <ClearIcon />
+                      </IconButton>
+                    </Tooltip>
                   </ListItem>
                 ))}
               </ul>

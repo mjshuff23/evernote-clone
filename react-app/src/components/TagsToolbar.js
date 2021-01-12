@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +14,6 @@ import { emphasize } from '@material-ui/core/styles/colorManipulator';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        justifyContent: 'space-evenly',
         backgroundColor: '#1A1A1A',
         marginTop: 42,
         height: 60,
@@ -22,16 +21,15 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         margin: theme.spacing(0.25),
         textAlign: "center",
-        backgroundColor: 'green',
         marginLeft: '0.25em',
+        backgroundColor: '#008000',
         WebkitTapHighlightColor: theme.palette.common.transparent,
         cursor: 'pointer',
-        '&:focus': {
+        '&:focus &:hover': {
             backgroundColor: emphasize('#008000', 0.08),
         },
         '&:active': {
-            boxShadow: theme.shadows[1],
-            backgroundColor: emphasize('#008000', 0.12),
+            backgroundColor: emphasize('#008000', 0.08),
         },
     },
     newTagInput: {
@@ -70,12 +68,19 @@ const useStyles = makeStyles((theme) => ({
     newTagFormBar: {
         display: 'flex',
         alignItems: 'center',
-        margin: 'auto'
+        marginLeft: '1em',
     },
     noteTags: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '0.5em'
+        marginLeft: '1em',
+        padding: '0 0.5em',
+        overflowX: 'scroll',
+        boxShadow: 'inset 0 -5px 5px 1px #1F1F1F',
+        borderBottom: '1px solid green',
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        },
     }
 }));
 
@@ -86,6 +91,8 @@ export default function TagsToolbar() {
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
+
+    useEffect(() => { }, [tags, notes]);
 
     let history = useHistory();
     const [tagName, setTagName] = useState('');
@@ -112,18 +119,6 @@ export default function TagsToolbar() {
     } else {
         return (
             <Grid item xs={12} className={classes.root}>
-                <div className={classes.noteTags}>
-                    {notes.dict[current_note].tag_ids.map(tagId => (
-                        <Chip
-                            key={tagId}
-                            icon={<LocalOfferIcon />}
-                            className={classes.paper}
-                            label={tags.dict[tagId].title.length < 12 ?
-                                tags.dict[tagId].title :
-                                tags.dict[tagId].title.slice(0, 10) + '...'}
-                            onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
-                    ))}
-                </div>
                 <div className={classes.newTagFormBar}>
                     <TextField
                         variant="outlined"
@@ -138,6 +133,18 @@ export default function TagsToolbar() {
                         onClick={addTag}>
                         Add Tag
                     </Button>
+                </div>
+                <div className={notes.dict[current_note].tag_ids.length ? classes.noteTags : classes.hide}>
+                    {notes.dict[current_note].tag_ids.map(tagId => (
+                        <Chip
+                            key={tagId}
+                            icon={<LocalOfferIcon />}
+                            className={classes.paper}
+                            label={tags.dict[tagId].title.length < 12 ?
+                                tags.dict[tagId].title :
+                                tags.dict[tagId].title.slice(0, 10) + '...'}
+                            onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
+                    ))}
                 </div>
             </Grid>
         );

@@ -17,7 +17,6 @@ def get_user_data(user):
     }
 
     notebooks = (Notebook.query
-                 .join(Note)
                  .filter(Notebook.user_id == user['id'])
                  .options(
                      joinedload(Notebook.notes)

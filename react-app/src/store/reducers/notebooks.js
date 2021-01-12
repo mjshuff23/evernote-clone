@@ -27,7 +27,7 @@ export default function reducer(state = initialState, action) {
             return newState;
         case DELETE_NOTEBOOK:
             delete newState.dict[action.notebookid];
-            newState = newState.ids.filter(id => id !== Number(action.notebookid));
+            newState.ids = newState.ids.filter(id => id !== Number(action.notebookid));
             return newState;
         case ADD_NOTE_TO_NOTEBOOK:
             newState.dict[action.notebookid].note_ids.unshift(action.noteid);

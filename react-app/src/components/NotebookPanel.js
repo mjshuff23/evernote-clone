@@ -7,6 +7,7 @@ import NbPanelTable from './NbPanelTable';
 
 export default function NotebookPanel() {
   const classes = useStyles();
+  
   return (
     <Box className={classes.notebookpanel}>
       <NbPanelHeadingBar />

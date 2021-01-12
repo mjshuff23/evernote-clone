@@ -73,9 +73,12 @@ const TagPanel = () => {
   }
 
   const removeTag = tagId => {
-    if (Number(current_tag) === tagId) {
-      history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
-    }
+    // if (Number(current_tag) === tagId) {
+    //   console.log('Pushed to history');
+    //   history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
+    // }
+    // console.log('Current Tag', current_tag);
+    // console.log('Current Tag', tagId);
     dispatch(disassociateTagThunk(current_note, tagId));
   }
 
@@ -93,14 +96,16 @@ const TagPanel = () => {
   return (
     <Slide direction="right" in={ui.display_tag_panel} mountOnEnter unmountOnExit>
       <Box className={classes.tagPanel}>
-        <Typography variant='h4' className={classes.tagPanelHeader}>
+        <div className={classes.tagPanelHeader}>
           <LocalOfferIcon className={classes.mainIcon} />
-          Tags
+          <Typography variant='h4' >
+            Tags
+          </Typography>
           <IconButton className={classes.addTagIconBtn} onClick={openDialog}>
             <AddIcon />
           </IconButton>
-          <Divider variant="fullWidth" />
-        </Typography>
+        </div>
+        <Divider variant="fullWidth" />
         <Dialog open={createDialog} onClose={closeDialog}>
           <DialogTitle id='form-dialog-title'>Add a tag</DialogTitle>
           <DialogContent>
@@ -124,50 +129,55 @@ const TagPanel = () => {
             </Button>
           </DialogActions>
         </Dialog>
-        <List className={classes.listroot} subheader={<li />}>
+        <List className={classes.listroot} disablePadding>
           {Object.keys(sections()).map((sectionId) => (
-            <li key={`section-${sectionId}`} className={classes.listSection}>
-              <ul className={classes.ul}>
-                <ListSubheader>{sectionId}</ListSubheader>
-                {sections()[sectionId].sort(function (tag1, tag2) {
-                  if (tags.dict[tag1].title.toLowerCase() < tags.dict[tag2].title.toLowerCase()) return -1;
-                  if (tags.dict[tag1].title.toLowerCase() > tags.dict[tag2].title.toLowerCase()) return 1;
-                  return 0;
-                }).map((item) => (
-                  <ListItem key={`item-${sectionId}-${item}`}
-                    button
-                    onClick={toggleTagPanel}
-                    component={NavLink}
-                    to={
-                      tags.dict[item].note_ids.length ?
-                        `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` :
-                        `/notebooks/all/notes/none/tags/${item}`
-                    }
-                  >
-                    <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    {current_note === 'none' || !current_note ?
-                      null :
-                      notes.dict[current_note].tag_ids.includes(item) ?
-                        <Tooltip className={classes.tooltip} title="Remove Tag from Current Note" placement="top" arrow>
-                          <IconButton onClick={e => { e.preventDefault(); removeTag(item); }}>
-                            <ClearIcon />
-                          </IconButton>
-                        </Tooltip> :
-                        <Tooltip className={classes.tooltip} title="Add Tag to Current Note" placement="top" arrow>
-                          <IconButton onClick={e => { e.preventDefault(); addTagToNote(item); }}>
-                            <AddIcon />
-                          </IconButton>
-                        </Tooltip>
-                    }
-                    <Tooltip className={classes.tooltip} title="Delete Tag" placement="top" arrow>
-                      <IconButton onClick={e => { e.preventDefault(); deleteTag(item); }}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </ListItem>
-                ))}
-              </ul>
-            </li>
+            <>
+              <ListSubheader
+                key={`section-${sectionId}`}
+                className={classes.listSection}
+              >
+                {sectionId}
+              </ListSubheader>
+              {sections()[sectionId].sort(function (tag1, tag2) {
+                if (tags.dict[tag1].title.toLowerCase() < tags.dict[tag2].title.toLowerCase()) return -1;
+                if (tags.dict[tag1].title.toLowerCase() > tags.dict[tag2].title.toLowerCase()) return 1;
+                return 0;
+              }).map((item) => (
+                <ListItem key={`item-${sectionId}-${item}`}
+                  className={classes.listItem}
+                  disableGutters
+                  button
+                  onClick={toggleTagPanel}
+                  component={NavLink}
+                  to={
+                    tags.dict[item].note_ids.length ?
+                      `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` :
+                      `/notebooks/all/notes/none/tags/${item}`
+                  }
+                >
+                  <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
+                  {current_note === 'none' || !current_note ?
+                    null :
+                    notes.dict[current_note].tag_ids.includes(item) ?
+                      <Tooltip title="Remove Tag from Current Note" placement="top" arrow>
+                        <IconButton onClick={e => { e.preventDefault(); removeTag(item); }}>
+                          <ClearIcon />
+                        </IconButton>
+                      </Tooltip> :
+                      <Tooltip title="Add Tag to Current Note" placement="top" arrow>
+                        <IconButton onClick={e => { e.preventDefault(); addTagToNote(item); }}>
+                          <AddIcon />
+                        </IconButton>
+                      </Tooltip>
+                  }
+                  <Tooltip title="Delete Tag" placement="top" arrow>
+                    <IconButton onClick={e => { e.preventDefault(); deleteTag(item); }}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
+                </ListItem>
+              ))}
+            </>
           ))}
         </List>
       </Box>

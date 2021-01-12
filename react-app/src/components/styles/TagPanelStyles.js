@@ -2,63 +2,46 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   tagPanel: {
-    [theme.breakpoints.up('xs')]: {
-      backgroundColor: theme.palette.background.paper,
-      left: 225,
-      zIndex: 1,
-      position: 'absolute',
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      color: "#F8F8F8",
-      width: 300
-    },
-    [theme.breakpoints.down('xs')]: {
-      backgroundColor: theme.palette.background.paper,
-      left: 60,
-      zIndex: 1,
-      position: 'absolute',
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      color: "#F8F8F8",
-      width: 300
-    }
-  },
-  listroot: {
-    width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-    position: 'relative',
-    overflow: 'auto',
-    maxHeight: '100vh'
-  },
-  listSection: {
-    backgroundColor: "inherit",
-    color: "black !important",
-  },
-  ul: {
-    backgroundColor: "inherit",
-    padding: 0
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100vh',
+    width: 300,
+    left: 225,
+    zIndex: 1,
+    paddingBottom: theme.spacing(1),
+    [theme.breakpoints.down('xs')]: {
+      left: 60,
+    }
   },
   tagPanelHeader: {
     padding: 5,
     display: 'flex',
     alignItems: 'center',
-    color: '#1A1A1A'
-  },
-  addTagIconBtn: {
-    marginLeft: 'auto'
   },
   mainIcon: {
     margin: '0.5em'
   },
-  hide: {
-    display: 'none'
+  addTagIconBtn: {
+    marginLeft: 'auto'
   },
-  hidden: {
-    visibility: 'hidden'
-  }
+  listroot: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    overflow: 'auto',
+    maxHeight: '100vh'
+  },
+  listSection: {
+    // lineHeight: '1.5em',
+    // backgroundColor: theme.palette.background.dark,
+  },
+  listItem: {
+    paddingLeft: theme.spacing(4),
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
 }));
 
 export default useStyles;

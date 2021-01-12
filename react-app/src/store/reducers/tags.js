@@ -7,6 +7,8 @@ import {
     DELETE_NOTE_FROM_TAGS,
 } from '../actions/tags';
 
+import { DELETE_NOTEBOOK } from '../actions/notebooks';
+
 const initialState = {
     dict: {},
     ids: []
@@ -36,6 +38,11 @@ export default function reducer(state = initialState, action) {
         case DELETE_NOTE_FROM_TAGS:
             action.tagids.forEach(tagid => {
                 newState.dict[tagid].note_ids = newState.dict[tagid].note_ids.filter(note => note !== Number(action.noteid));
+            })
+            return newState;
+        case DELETE_NOTEBOOK:
+            newState.ids.forEach(tagid => {
+              newState.dict[tagid].note_ids = newState.dict[tagid].note_ids.filter(note => !action.notebook.note_ids.includes(note));
             })
             return newState;
         default:

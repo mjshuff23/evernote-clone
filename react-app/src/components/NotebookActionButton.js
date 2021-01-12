@@ -1,19 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
+import RenameNotebookDialog from './RenameNotebookDialog';
+import DeleteNotebookDialog from './DeleteNotebookDialog';
+
 
 const useRowStyles = makeStyles({
+
   book_icon: {
     color: '#9e9e9e',
     height: 20
   },
+
   down: {
     width: 20,
     color: 'gray'
   },
+
   heading: {
     fontWeight: 'normal',
     fontSize: 12,
@@ -34,11 +40,9 @@ const useRowStyles = makeStyles({
 
   more_horiz: {
     fontSize: 15,
-    // backgroundColor: 'white'
   },
 
   note_icon: {
-    // transform: "rotate(90deg)",
     paddingRight: 2,
     paddingLeft: 10,
     color: '#9e9e9e',
@@ -50,7 +54,6 @@ const useRowStyles = makeStyles({
       borderBottom: "unset"
     }
   },
-
   up: {
     width: 20,
     color: 'gray'
@@ -59,10 +62,11 @@ const useRowStyles = makeStyles({
 });
 
 
-
-export default function NbPanelActionButton() {
-
+export default function NotebookActionButton({ notebookId }) {
+  const [openRename, setOpenRename] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useRowStyles();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,28 +76,46 @@ export default function NbPanelActionButton() {
     setAnchorEl(null);
   };
 
-  const classes = useRowStyles();
+  const handleClickOpenRename = () => {
+    setOpenRename(true);
+    setAnchorEl(null);
+  };
+
+  const handleClickOpenDelete = () => {
+    setOpenDelete(true);
+    setAnchorEl(null);
+  };
+
 
   return (
     <>
       <Tooltip className={classes.tooltip} title="More actions" placement="top" arrow>
-        <MoreHorizIcon className={classes.more_horiz} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        </MoreHorizIcon>
+        <MoreHorizIcon 
+          className={classes.more_horiz} 
+          aria-controls="simple-menu" 
+          aria-haspopup="true" 
+          onClick={handleClick}
+        />
       </Tooltip>
       <Menu
-        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Copy to...</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Duplicate...</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Edit tags</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Note info</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move to trash</MenuItem>
+        <MenuItem 
+          className={classes.menu_item} 
+          onClick={handleClickOpenRename}>
+          Rename Notebook
+        </MenuItem>
+        <MenuItem 
+          className={classes.menu_item} 
+          onClick={handleClickOpenDelete}>
+          Delete Notebook
+        </MenuItem>
       </Menu>
+      <RenameNotebookDialog open={openRename} setOpen={setOpenRename} notebookId={notebookId}/>
+      <DeleteNotebookDialog open={openDelete} setOpen={setOpenDelete} notebookId={notebookId}/>
     </>
   )
 }

@@ -26,9 +26,9 @@ def create_notebook(userid):
 @notebook_routes.route('/<int:notebookid>', methods=['PUT'], strict_slashes=False)
 @login_required
 def edit_notebook(userid, notebookid):
-    title = json.loads(request.data)
+    data = json.loads(request.data)
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
-    notebook.title = title
+    notebook.title = data['title']
     notebook.updated_at = func.now()
     db.session.commit()
 
@@ -42,4 +42,4 @@ def delete_notebook(userid, notebookid):
     notebook = Notebook.query.filter(Notebook.id == notebookid).first()
     db.session.delete(notebook)
     db.session.commit()
-    return {'id': notebookid}
+    return notebook.to_dict()

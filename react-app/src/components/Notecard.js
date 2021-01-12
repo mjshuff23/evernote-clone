@@ -17,6 +17,7 @@ function tagList(tag_ids, tags, classes) {
 
   const jsx = (tag_ids.map(id => (
     <Chip
+      key={`tag-chip-${id}`}
       size='small'
       icon={<LocalOfferIcon />}
       className={classes.singleTag}
@@ -27,7 +28,7 @@ function tagList(tag_ids, tags, classes) {
 
   if (extra) {
     jsx.push(
-      <Chip size='small' className={classes.singleTag} label={'+' + extra} />
+      <Chip key={`tag-chip-extra`} size='small' className={classes.singleTag} label={'+' + extra} />
     )
   }
   return jsx;
@@ -44,12 +45,12 @@ function displayContent(content) {
 
 
 export default function NoteCard({ noteId }) {
-  const note = useSelector(state => state.notes.dict[noteId]);
+  const notes = useSelector(state => state.notes);
   const tags = useSelector(state => state.tags);
   const classes = useStyles();
   const match = useRouteMatch();
 
-  if (!noteId) return null;
+  if (!notes.dict[noteId]) return null;
 
   return (
     <ListItem
@@ -62,22 +63,22 @@ export default function NoteCard({ noteId }) {
       <div className={classes.notecard}>
         <div>
           <Typography className={classes.title} variant='h6'>
-            {note.title}
+            {notes.dict[noteId].title}
           </Typography>
         </div>
         <div className={classes.content}>
           <Typography variant="body1">
-            {displayContent(note.content)}
+            {displayContent(notes.dict[noteId].content)}
           </Typography>
         </div>
         <div className={classes.infobar}>
           <Typography variant='body2' component='div'>
             <Moment format='ll' className={classes.date}>
-              {note.updated_at}
+              {notes.dict[noteId].updated_at}
             </Moment>
           </Typography>
           <div className={classes.tags}>
-            {tagList(note.tag_ids, tags, classes)}
+            {tagList(notes.dict[noteId].tag_ids, tags, classes)}
           </div>
         </div>
       </div>

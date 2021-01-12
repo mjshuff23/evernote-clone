@@ -59,8 +59,13 @@ const useStyles = makeStyles((theme) => ({
     addTagBtn: {
         backgroundColor: '#008F26',
         color: 'white',
-        '&:hover': {
-            backgroundColor: '#007E22'
+        deletable: {
+            '&:hover, &:focus': {
+                backgroundColor: emphasize('#007E22', 0.08)
+            },
+            '&:active': {
+                backgroundColor: emphasize('#007E22', 0.08)
+            }
         },
         margin: 'auto 0',
         borderRadius: '20px'
@@ -73,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
     noteTags: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '1em',
         padding: '0 0.5em',
         overflowX: 'scroll',
         boxShadow: 'inset 0 -5px 5px 1px #1F1F1F',
@@ -91,13 +95,12 @@ export default function TagsToolbar() {
     const tags = useSelector(state => state.tags);
     const notes = useSelector(state => state.notes);
     const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
-    useEffect(() => { }, [tags, notes]);
+    useEffect(() => { }, [notes.dict[current_note].tag_ids]);
 
     let history = useHistory();
     const [tagName, setTagName] = useState('');
-
-    const dispatch = useDispatch();
 
     const updateTagName = e => {
         setTagName(e.target.value);
@@ -119,6 +122,18 @@ export default function TagsToolbar() {
     } else {
         return (
             <Grid item xs={12} className={classes.root}>
+                <div className={notes.dict[current_note].tag_ids.length ? classes.noteTags : classes.hide}>
+                    {notes.dict[current_note].tag_ids.map(tagId => (
+                        <Chip
+                            key={tagId}
+                            icon={<LocalOfferIcon />}
+                            className={classes.paper}
+                            label={tags.dict[tagId].title.length < 12 ?
+                                tags.dict[tagId].title :
+                                tags.dict[tagId].title.slice(0, 10) + '...'}
+                            onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
+                    ))}
+                </div>
                 <div className={classes.newTagFormBar}>
                     <TextField
                         variant="outlined"
@@ -133,18 +148,6 @@ export default function TagsToolbar() {
                         onClick={addTag}>
                         Add Tag
                     </Button>
-                </div>
-                <div className={notes.dict[current_note].tag_ids.length ? classes.noteTags : classes.hide}>
-                    {notes.dict[current_note].tag_ids.map(tagId => (
-                        <Chip
-                            key={tagId}
-                            icon={<LocalOfferIcon />}
-                            className={classes.paper}
-                            label={tags.dict[tagId].title.length < 12 ?
-                                tags.dict[tagId].title :
-                                tags.dict[tagId].title.slice(0, 10) + '...'}
-                            onDelete={(e) => { e.stopPropagation(); removeTag(tagId) }} />
-                    ))}
                 </div>
             </Grid>
         );

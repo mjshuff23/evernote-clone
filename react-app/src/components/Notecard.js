@@ -17,6 +17,7 @@ function tagList(tag_ids, tags, classes) {
 
   const jsx = (tag_ids.map(id => (
     <Chip
+      key={`tag-chip-${id}`}
       size='small'
       icon={<LocalOfferIcon />}
       className={classes.singleTag}
@@ -27,7 +28,7 @@ function tagList(tag_ids, tags, classes) {
 
   if (extra) {
     jsx.push(
-      <Chip size='small' className={classes.singleTag} label={'+' + extra} />
+      <Chip key={`tag-chip-extra`} size='small' className={classes.singleTag} label={'+' + extra} />
     )
   }
   return jsx;

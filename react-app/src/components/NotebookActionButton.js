@@ -6,14 +6,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const useRowStyles = makeStyles({
+
   book_icon: {
     color: '#9e9e9e',
     height: 20
   },
+
   down: {
     width: 20,
     color: 'gray'
   },
+
   heading: {
     fontWeight: 'normal',
     fontSize: 12,
@@ -34,11 +37,9 @@ const useRowStyles = makeStyles({
 
   more_horiz: {
     fontSize: 15,
-    // backgroundColor: 'white'
   },
 
   note_icon: {
-    // transform: "rotate(90deg)",
     paddingRight: 2,
     paddingLeft: 10,
     color: '#9e9e9e',
@@ -50,7 +51,6 @@ const useRowStyles = makeStyles({
       borderBottom: "unset"
     }
   },
-
   up: {
     width: 20,
     color: 'gray'
@@ -60,7 +60,7 @@ const useRowStyles = makeStyles({
 
 
 
-export default function NbPanelActionButton() {
+export default function NotebookActionButton() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -87,12 +87,8 @@ export default function NbPanelActionButton() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Copy to...</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Duplicate...</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Edit tags</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Note info</MenuItem>
-        <MenuItem className={classes.menu_item} onClick={handleClose}>Move to trash</MenuItem>
+        <MenuItem className={classes.menu_item} onClick={handleClose}>Rename Notebook</MenuItem>
+        <MenuItem className={classes.menu_item} onClick={handleClose}>Delete Notebook</MenuItem>
       </Menu>
     </>
   )

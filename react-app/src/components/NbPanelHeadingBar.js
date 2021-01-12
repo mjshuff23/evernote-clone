@@ -2,9 +2,9 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
+// import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   nb_bar: {
@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     fontSize: 10,
     // textTransform: 'uppercase',
-    color: 'white',
     fontWeight: 'normal',
   },
   input_root: {

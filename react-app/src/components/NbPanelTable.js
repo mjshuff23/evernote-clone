@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Box from "@material-ui/core/Box";
 import Collapse from "@material-ui/core/Collapse";
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
 import IconButton from "@material-ui/core/IconButton";
@@ -19,6 +18,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Typography from '@material-ui/core/Typography';
 import useStyles from './styles/NbPanelTableStyles';
 import Moment from 'react-moment';
+import NotebookActionButton from './NotebookActionButton';
 
 
 export default function NbPanelTable() {
@@ -38,7 +38,7 @@ export default function NbPanelTable() {
 
   const createNotebookRow = (id) => {
     return (
-      <TableRow className={classes.row}>
+      <TableRow className={classes.row} key={`notebook-${id}`}>
         <TableCell >
           <div className={classes.title}>
             <IconButton
@@ -56,7 +56,6 @@ export default function NbPanelTable() {
             <MenuBookIcon className={classes.icon} />
             <Typography
               className={classes.title_text}
-              button
               component={NavLink}
               to={notebooks.dict[id].note_ids.length ?
                 `/notebooks/${id}/notes/${notebooks.dict[id].note_ids[0]}/tags/none` :
@@ -74,15 +73,16 @@ export default function NbPanelTable() {
           </Moment>
         </TableCell>
         <TableCell>
-          <NbPanelActionButton />
+          <NotebookActionButton />
         </TableCell>
       </TableRow>
     )
   }
 
-  const createNoteRow = (id) => {
+  const createNoteTable = (id) => {
     return (
-      <TableRow>
+      <TableRow key={`notebook-${id}-noteTable`}>
+        <TableCell style={{ padding: 0}}>
         <Collapse in={open[id]} timeout="auto" unmountOnExit>
           <Table size="small" aria-label="notes">
             <TableBody>
@@ -93,7 +93,6 @@ export default function NbPanelTable() {
                       <DescriptionOutlinedIcon className={classes.icon} />
                       <Typography
                         className={classes.title_text}
-                        button
                         component={NavLink}
                         to={`/notebooks/${id}/notes/${noteid}/tags/none`}
                       >
@@ -115,16 +114,17 @@ export default function NbPanelTable() {
             </TableBody>
           </Table>
         </Collapse>
+        </TableCell>
       </TableRow>
     )
   }
 
   const createRow = (id) => {
     return (
-      <>
+      <React.Fragment key={`fragment-${id}`}>
         {createNotebookRow(id)}
-        {createNoteRow(id)}
-      </>
+        {createNoteTable(id)}
+      </React.Fragment>
     )
   }
 

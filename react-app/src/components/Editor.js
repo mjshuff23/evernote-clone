@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import TagsToolbar from './TagsToolbar';
 
+
 export default function Editor() {
   const classes = useStyles();
 
@@ -27,8 +28,6 @@ export default function Editor() {
     setText(notes.dict[current_note].content);
     setTitle(notes.dict[current_note].title);
   }, [current_note]);
-
-
 
   function updateBody(content) {
     setText(content);

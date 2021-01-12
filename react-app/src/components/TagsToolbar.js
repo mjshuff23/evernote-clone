@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import { useSelector, useDispatch } from 'react-redux';
-import { createTagThunk } from '../store/actions/tags';
-import { addTagToNoteThunk, removeTagFromNoteThunk } from '../store/actions/notes';
+import { createTagThunk, disassociateTagThunk } from '../store/actions/tags';
+import { addTagToNoteThunk } from '../store/actions/notes';
 import { useParams, useHistory } from 'react-router-dom';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
@@ -114,7 +114,7 @@ export default function TagsToolbar() {
 
     const removeTag = tagId => {
         history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/${current_tag === tagId ? 'none' : current_tag}`);
-        dispatch(removeTagFromNoteThunk(Number(current_note), tagId));
+        dispatch(disassociateTagThunk(Number(current_note), tagId));
     }
 
     if (!Object.keys(notes).length || !Object.keys(tags).length || current_note === 'none') {

@@ -1,17 +1,21 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide, TextField, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import useStyles from './styles/TagPanelStyles'
-import { toggleTagPanel } from '../store/actions/ui';
-import { createTagThunk, deleteTagThunk } from '../store/actions/tags';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import { removeTagFromNoteThunk, deleteTagFromNotes } from '../store/actions/notes';
-import { addTagToNoteThunk } from '../store/actions/notes';
+import {
+  Box, Button, Dialog, DialogActions, DialogContent, DialogTitle,
+  Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide,
+  TextField, Typography
+} from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import Tooltip from '@material-ui/core/Tooltip';
+import useStyles from './styles/TagPanelStyles'
+import { addTagToNoteThunk } from '../store/actions/notes';
+import { toggleTagPanel } from '../store/actions/ui';
+import { createTagThunk, deleteTagThunk, disassociateTagThunk } from '../store/actions/tags';
+import { deleteTagFromNotes } from '../store/actions/notes';
 
 const TagPanel = () => {
   let { current_notebook, current_note, current_tag } = useParams();
@@ -72,7 +76,7 @@ const TagPanel = () => {
     if (Number(current_tag) === tagId) {
       history.push(`/notebooks/${current_notebook}/notes/${current_note}/tags/none`);
     }
-    dispatch(removeTagFromNoteThunk(current_note, tagId));
+    dispatch(disassociateTagThunk(current_note, tagId));
   }
 
   const deleteTag = tagId => {
@@ -90,7 +94,11 @@ const TagPanel = () => {
     <Slide direction="right" in={ui.display_tag_panel} mountOnEnter unmountOnExit>
       <Box className={classes.tagPanel}>
         <Typography variant='h4' className={classes.tagPanelHeader}>
-          <LocalOfferIcon className={classes.mainIcon} />Tags<IconButton className={classes.addTagIconBtn} onClick={openDialog}><AddIcon /></IconButton>
+          <LocalOfferIcon className={classes.mainIcon} />
+          Tags
+          <IconButton className={classes.addTagIconBtn} onClick={openDialog}>
+            <AddIcon />
+          </IconButton>
           <Divider variant="fullWidth" />
         </Typography>
         <Dialog open={createDialog} onClose={closeDialog}>
@@ -110,10 +118,10 @@ const TagPanel = () => {
           <DialogActions>
             <Button onClick={closeDialog} color="primary">
               Cancel
-          </Button>
+            </Button>
             <Button onClick={submitCreatedTag} color="primary">
               Create
-          </Button>
+            </Button>
           </DialogActions>
         </Dialog>
         <List className={classes.listroot} subheader={<li />}>
@@ -130,25 +138,30 @@ const TagPanel = () => {
                     button
                     onClick={toggleTagPanel}
                     component={NavLink}
-                    to={tags.dict[item].note_ids.length ? `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` : `/notebooks/all/notes/none/tags/${item}`}>
+                    to={
+                      tags.dict[item].note_ids.length ?
+                        `/notebooks/all/notes/${tags.dict[item].note_ids[0]}/tags/${item}` :
+                        `/notebooks/all/notes/none/tags/${item}`
+                    }
+                  >
                     <ListItemText primary={`${tags.dict[item].title} (${tags.dict[item].note_ids.length})`} />
-                    <Tooltip className={classes.tooltip} title="Delete Tag" placement="top" arrow>
-                      <IconButton onClick={e => { e.preventDefault(); deleteTag(item); }}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                    {current_note === 'none' ?
-                      <IconButton disabled><AddIcon className={classes.hidden} /></IconButton> :
+                    {current_note === 'none' || !current_note ?
+                      null :
                       notes.dict[current_note].tag_ids.includes(item) ?
-                        <IconButton disabled><AddIcon className={classes.hidden} /></IconButton> :
+                        <Tooltip className={classes.tooltip} title="Remove Tag from Current Note" placement="top" arrow>
+                          <IconButton onClick={e => { e.preventDefault(); removeTag(item); }}>
+                            <ClearIcon />
+                          </IconButton>
+                        </Tooltip> :
                         <Tooltip className={classes.tooltip} title="Add Tag to Current Note" placement="top" arrow>
                           <IconButton onClick={e => { e.preventDefault(); addTagToNote(item); }}>
                             <AddIcon />
                           </IconButton>
-                        </Tooltip>}
-                    <Tooltip className={classes.tooltip} title="Remove Tag from Current Note" placement="top" arrow>
-                      <IconButton onClick={e => { e.preventDefault(); removeTag(item); }}>
-                        <ClearIcon />
+                        </Tooltip>
+                    }
+                    <Tooltip className={classes.tooltip} title="Delete Tag" placement="top" arrow>
+                      <IconButton onClick={e => { e.preventDefault(); deleteTag(item); }}>
+                        <DeleteIcon />
                       </IconButton>
                     </Tooltip>
                   </ListItem>

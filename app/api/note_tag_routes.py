@@ -27,9 +27,7 @@ def addTagToNote(noteid):
 @login_required
 def removeTagFromNote(noteid, tagid):
     notetag = Note_Tag.query.filter(
-        and_(Note_Tag.tag_id == tagid, Note_Tag.note_id == noteid)).first()
-    if notetag is None:
-        return {'id': 0}
+        and_(Note_Tag.tag_id == tagid, Note_Tag.note_id == noteid)).one()
     db.session.delete(notetag)
     db.session.commit()
-    return {'id': notetag.id}
+    return notetag.to_dict()

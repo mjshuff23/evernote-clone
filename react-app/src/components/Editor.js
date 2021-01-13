@@ -29,8 +29,6 @@ export default function Editor() {
     setTitle(notes.dict[current_note].title);
   }, [current_note]);
 
-
-
   function updateBody(content) {
     setText(content);
     let notebook_id = current_notebook;

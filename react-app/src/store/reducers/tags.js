@@ -2,6 +2,7 @@ import {
     SET_TAGS,
     CREATE_TAG,
     DELETE_TAG,
+    DISASSOCIATE_TAG,
     ADD_NOTE_TO_TAG,
     REMOVE_NOTE_FROM_TAG,
     DELETE_NOTE_FROM_TAGS,
@@ -32,8 +33,8 @@ export default function reducer(state = initialState, action) {
             newState.dict[action.tagid].note_ids = newState.dict[action.tagid].note_ids.filter(id => id !== action.noteid);
             newState.dict[action.tagid].note_ids.unshift(action.noteid);
             return newState;
-        case REMOVE_NOTE_FROM_TAG:
-            newState.dict[action.tagid].note_ids = newState.dict[action.tagid].note_ids.filter(id => id !== Number(action.noteid));
+        case DISASSOCIATE_TAG:
+            newState.dict[action.noteTag.tag_id].note_ids = newState.dict[action.noteTag.tag_id].note_ids.filter(id => id !== Number(action.noteTag.note_id));
             return newState;
         case DELETE_NOTE_FROM_TAGS:
             action.tagids.forEach(tagid => {

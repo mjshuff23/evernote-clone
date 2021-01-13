@@ -65,7 +65,6 @@ export const deleteNotebookThunk = (userid, notebookid) => async (dispatch) => {
     });
     if (deleted.ok) {
         deleted = await deleted.json();
-        console.log(deleted);
         dispatch(deleteNotebook(deleted));
     }
 };

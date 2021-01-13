@@ -4,11 +4,12 @@ import {
     UPDATE_NOTE,
     DELETE_NOTE,
     ADD_TAG_TO_NOTE,
-    REMOVE_TAG_FROM_NOTE,
     DELETE_TAG_FROM_NOTES
 } from '../actions/notes';
 
 import { DELETE_NOTEBOOK } from '../actions/notebooks';
+
+import { DISASSOCIATE_TAG } from '../actions/tags';
 
 let initialState = {
     dict: {},
@@ -36,8 +37,8 @@ export default function reducer(state = initialState, action) {
             newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(id => id !== action.notetag);
             newState.dict[action.noteid].tag_ids.push(action.notetag);
             return newState;
-        case REMOVE_TAG_FROM_NOTE:
-            newState.dict[action.noteid].tag_ids = newState.dict[action.noteid].tag_ids.filter(tagid => tagid !== Number(action.noteid));
+        case DISASSOCIATE_TAG:
+            newState.dict[action.noteTag.note_id].tag_ids = newState.dict[action.noteTag.note_id].tag_ids.filter(tagid => tagid !== Number(action.noteTag.tag_id));
             return newState;
         case DELETE_TAG_FROM_NOTES:
             action.noteids.forEach(noteid => {

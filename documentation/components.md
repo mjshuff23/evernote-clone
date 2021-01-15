@@ -1,68 +1,69 @@
+# React Component Tree
 
 App
 - Browser Router
-    - Public Route
-        - Route (/login)
-            LoginForm - Material UI
-            - Route (/sign-up)
-                SignUpForm - Material UI
-    - Private Route
-        - Route (/main-page)
-            - MainPage
-                - SideBar
-                    - User Info Display
-                        - username
-                        - avatar (optional)
-                        - popover button
-                            - sign out
-                    - New Note Button
-                    - NavLinks - Material UI drawer
-                        - All Notes
-                        - All Notebooks
-                            - Individual Notebook
-                        - Tags
-                            - Individual Tag
-                - TagPanel
-                    - TFC Container
-                        - Title
-                        - Filter
-                            - Filter Popover
-                        - CreateNewTag
-                    - Search Bar
-                    - TagList
-                - BrowserRouter
-                    - Route: All Notes, Specific Notebook, Specific Tag
-                        - NoteInfoPanel
-                            - Title
-                            - Container
-                                - Number of Notes
-                                - Filter
-                                    - Filter Popover
-                            - Note List
-                                - Note Excerpt (title, content slice, created_at)
-                        - EditorPanel
-                            - NavLinks
-                                - Go to Notebook
-                                - Move Note
-                            - Title Input
-                            - Editor (Quill)
-                            - TagContainer
-                                - Add Tag Input (Material UI Search Bar)
-                                    - Popover
-                                        - Match Tags
-                                        - CreateTagButton
-                                - AddTagButton
-                                - TagList
-                                    - TagNameButton
-                                        - FilterByTag
-                                        - RemoveTag
-                    - Route: All Notebooks
-                        - Notebook Panel
-                            - Title Container
-                                - Title
-                            - Container
-                                - Add New Notebook Button
-                                    - New Notebook Modal
-                                - Filter
-                                    - Filter Popover
-                                - Notebook Table
+  - Public Route
+    - Route (/login)
+      LoginForm - Material UI
+    - Route (/sign-up)
+      SignUpForm - Material UI
+  - Private Route
+    - Route (/main-page)
+      - MainPage
+        - SideBar
+          - User Info Display
+            - username
+            - avatar (optional)
+            - popover button
+              - sign out
+          - New Note Button
+          - NavLinks - Material UI drawer
+            - All Notes
+            - All Notebooks
+              - Individual Notebook
+            - Tags
+              - Individual Tag
+        - TagPanel
+          - TFC Container
+            - Title
+            - Filter
+              - Filter Popover
+            - CreateNewTag
+          - Search Bar
+          - TagList
+        - BrowserRouter
+          - Route: All Notes, Specific Notebook, Specific Tag
+            - NoteInfoPanel
+              - Title
+              - Container
+                - Number of Notes
+                - Filter
+                  - Filter Popover
+              - Note List
+                - Note Excerpt (title, content slice, created_at)
+            - EditorPanel
+              - NavLinks
+                - Go to Notebook
+                - Move Note
+              - Title Input
+              - Editor (Quill)
+              - TagContainer
+                - Add Tag Input (Material UI Search Bar)
+                  - Popover
+                    - Match Tags
+                    - CreateTagButton
+                - AddTagButton
+                - TagList
+                  - TagNameButton
+                    - FilterByTag
+                    - RemoveTag
+          - Route: All Notebooks
+            - Notebook Panel
+              - Title Container
+                - Title
+              - Container
+                - Add New Notebook Button
+                  - New Notebook Modal
+                - Filter
+                  - Filter Popover
+                - Notebook Table

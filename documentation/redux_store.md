@@ -1,3 +1,6 @@
+# Redux Store
+
+```js
 {
     'authentication': ''
     'notebooks': {
@@ -15,7 +18,7 @@
             '0': {
                 'id': '0',
                 'title': 'My Note',
-                'content': 'This is a note. It's my first note.'
+                'content': 'This is a note. It\'s my first note.'
                 'tag_ids': [],
                 'notebook_id': ''
             }
@@ -46,3 +49,4 @@
         'created_at': '',
     },
 }
+```

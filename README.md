@@ -1,81 +1,84 @@
 
 # KLEVERNOTE
 
-## ABOUT
+## About
 Klevernote is a clone of the popular note-taking app, Evernote.
 
-## LIVE LINK
-https://klevernote.herokuapp.com/
+## [Live Link](https://klevernote.herokuapp.com/)
 
 ## Collaborators
-  Bonnie Hardie\
-  &ensp;&ensp;https://github.com/bonniehardie \
-  Harrison Higgins\
-  &ensp;&ensp; https://github.com/the-harry-higgins \
-  Cynthia Spence\
-  &ensp;&ensp; https://github.com/cynthiaspence7827 \
-  Michael Shuff\
-  &ensp;&ensp; https://github.com/mjshuff23
 
+- [Bonnie Hardie](https://github.com/bonniehardie)
+- [Harrison Higgins](https://github.com/the-harry-higgins)
+- [Cynthia Spence](https://github.com/cynthiaspence7827)
+- [Michael Shuff](https://github.com/mjshuff23)
 
+## Technologies Used
 
-## TECHNOLOGIES USED
+### Frontend
 
-### FRONTEND
-  - material-ui/core
-  - material-ui/icons
-  - testing-library/jest-dom
-  - testing-library/react
-  - testing-library/user-event
-  - firebase
-  - lodash
-  - react
-  - react-dom
-  - react-quill
-  - react-scripts
+- Material-UI
+- React
+- React-DOM
+- Redux
+- React-Quill
 
-### BACKEND
-  - python v3.8
-  - flask
-  - python-dotenv
-  - psycopg2-binary
-  - flask-sqlalchemy
-  - alembic
-  - flask-migrate
-  - flask-login
-  - werkzeug
-  - flask-cors
+### Backend
 
-## FEATURES
-### MVP FEATURES
-    1. NOTES
+- Python
+- Flask
+- SQLAlchemy
+- Alembic
+- PostgreSQL
+- Gunicorn
+- Docker
+- Heroku
+
+## Features
+
+### MVP Features
+
+#### 1. NOTES
+
     Users can create, edit, and delete Notes.
-    2. NOTEBOOKS
+
+#### 2. NOTEBOOKS
+
     Users can save Notes in collections called Notebooks. Users can create, edit, and delete Notebooks.
-    3. TAGS
+
+#### 3. TAGS
+
     Users can create Tags and associate those Tags with their Notes. Users can create, edit, delete, and associate Tags.
-    4. RICH-TEXT EDITING
+
+#### 4. RICH-TEXT EDITING
+
     Rich-text editing allows users to view their Note's styling and formatting as it will appear in its final form.
 ### STRETCH FEATURES
+
     1. Auto save
     2. Search
     3. Reminders
     4. Templates
 
+***
 
----------------------------------------------------------
-Dev Only Notes...
+## Useful Links
 
-# Flask React Project
+- [Database Diagram](./documentation/dbdiagram01.png)
+- [Feature List](./documentation/feature-list.md)
+- [React Component Tree](./documentation/components.md)
+- [Redux Store](./documentation/redux_store.md)
 
-This is the backend for the Flask React project.
+***
 
-## Getting started
+## Dev Instructions
+
+### Getting started
 
 1. Clone this repository (only this branch)
 
    ```bash
-   git clone https://github.com/appacademy-starters/react-project-starter.git
+   git clone https://github.com/mjshuff23/evernote-clone.git
    ```
 
 2. Install dependencies
@@ -84,8 +87,8 @@ This is the backend for the Flask React project.
    pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
    ```
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+3. Create a **.env** file based on the example with proper settings for your development environment
+
 4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
 
 5. Get into your pipenv, migrate your database, seed your database, and run your flask app
@@ -122,7 +125,7 @@ This is the backend for the Flask React project.
    There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
 ***
 
-## Deploy to Heroku
+### Deploy to Heroku
 
 1. Create a new project on Heroku
 2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"

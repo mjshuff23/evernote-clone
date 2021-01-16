@@ -2,10 +2,12 @@
 # KLEVERNOTE
 
 ## About
+
 Klevernote is a clone of the popular note-taking app, Evernote.
 
 ## [Live Link](https://klevernote.herokuapp.com/)
 
+![](./documentation/Klevernote-Overview.gif)
 ## Collaborators
 
 - [Bonnie Hardie](https://github.com/bonniehardie)
@@ -48,17 +50,21 @@ Klevernote is a clone of the popular note-taking app, Evernote.
 
 #### 3. TAGS
 
-    Users can create Tags and associate those Tags with their Notes. Users can create, edit, delete, and associate Tags.
+    Users can create and delete Tags as well as add or remove them from Notes.
 
 #### 4. RICH-TEXT EDITING
 
     Rich-text editing allows users to view their Note's styling and formatting as it will appear in its final form.
-### STRETCH FEATURES
 
-    1. Auto save
-    2. Search
-    3. Reminders
-    4. Templates
+#### 5. AUTO SAVE
+
+    Any editing done to a note is saved automatically.
+
+### Potential Future Features
+
+    1. Search (Notes, Tags, Notebooks)
+    2. Sorting (Alphabetical, Recent)
+    3. Note Templates
 
 ***
 

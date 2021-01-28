@@ -20,8 +20,6 @@ export default function TagsToolbar() {
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => { }, [notes.dict[current_note].tag_ids]);
-
   let history = useHistory();
   const [tagName, setTagName] = useState('');
 

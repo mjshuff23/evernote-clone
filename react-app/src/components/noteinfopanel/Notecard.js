@@ -1,12 +1,15 @@
 import React from "react";
 import { useSelector } from 'react-redux';
-import Typography from "@material-ui/core/Typography";
-import useStyles from './styles/NotecardStyles';
+import { useRouteMatch, NavLink } from 'react-router-dom';
+import Moment from 'react-moment';
+
 import { Chip, ListItem } from "@material-ui/core";
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import { useRouteMatch, NavLink } from 'react-router-dom';
-import { removeHTMLTags } from '../services/utils';
-import Moment from 'react-moment';
+import Typography from "@material-ui/core/Typography";
+
+import { removeHTMLTags } from '../../services/utils';
+import useStyles from '../../styles/noteinfopanel/NotecardStyles';
+
 
 function tagList(tag_ids, tags, classes) {
   if (tag_ids.length === 0) return null;
@@ -33,6 +36,7 @@ function tagList(tag_ids, tags, classes) {
   }
   return jsx;
 }
+
 
 function displayContent(content) {
   content = removeHTMLTags(content);

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
+
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import AuthStyles from '../styles/AuthStyles';
-import { signupThunk } from "../../store/actions/user";
+import Link from '@material-ui/core/Link';
 import { Paper } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import AuthStyles from '../../styles/auth/AuthStyles';
 import Footer from './Footer';
+import { signupThunk } from "../../store/actions/user";
 
 export default function SignupForm() {
   const classes = AuthStyles();

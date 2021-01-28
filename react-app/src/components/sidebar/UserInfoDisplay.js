@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { Menu, MenuItem, Typography, Button, Avatar } from '@material-ui/core';
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import useStyles from './styles/UserInfoDisplayStyles';
-import { logoutThunk } from '../store/actions/user';
+
+import useStyles from '../../styles/UserInfoDisplayStyles';
+import { logoutThunk } from '../../store/actions/user';
 
 
 export default function UserInfoDisplay() {

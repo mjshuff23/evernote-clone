@@ -46,14 +46,6 @@ const useStyles = makeStyles((theme) => ({
   //   position: "absolute",
   //   pointerEvents: "none"
   // },
-  title: {
-    // flexGrow: 1,
-    // display: "none",
-    // fontSize: 12,
-    // [theme.breakpoints.up("sm")]: {
-    //   display: "block"
-    // },
-  },
 }));
 
 export default function NbPanelHeadingBar() {
@@ -63,7 +55,7 @@ export default function NbPanelHeadingBar() {
     <div className={classes.root}>
       <AppBar className={classes.nb_bar} position="static">
         <Toolbar>
-          <Typography className={classes.title} noWrap>
+          <Typography noWrap>
             Notebooks
           </Typography>
           {/* <div className={classes.search_area}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
-import { createNotebookThunk } from '../store/actions/notebooks';
+import { createNotebookThunk } from '../../store/actions/notebooks';
 
 const useStyles = makeStyles((theme) => ({
   dialog_content_text: {
@@ -30,13 +30,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  nb_folder_icon: {
-    
-  }
-
 }));
 
-export default function NbPanelDialogue() {
+export default function NbPanelDialog() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)

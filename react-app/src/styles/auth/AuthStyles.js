@@ -10,7 +10,6 @@ const AuthStyles = makeStyles((theme) => ({
         marginBottom: 75 + theme.spacing(2),
         [theme.breakpoints.down('xs')]: {
           marginTop: theme.spacing(0),
-          // paddingTop: theme.spacing(2),
         }
     },
     container: {
@@ -64,7 +63,6 @@ const AuthStyles = makeStyles((theme) => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        // marginTop: theme.spacing(1),
     },
     icon: {
         color: 'white',

@@ -5,10 +5,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     width: '100%',
   },
-  main: {
-    flexGrow: 1,
-    width: '100%',
-  },
   viewContainer: {
     display: 'flex',
     flexWrap: 'nowrap',

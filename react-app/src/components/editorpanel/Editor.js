@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import ReactQuill from 'react-quill';
-import useStyles from './styles/EditorStyles';
-import { deleteNote, updateNote } from '../store/actions/notes';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+
+import useStyles from '../../styles/editorpanel/EditorStyles';
+import { deleteNote, updateNote } from '../../store/actions/notes';
 
 
 export default function Editor() {

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Switch } from "react-router-dom";
-import MainPage from './components/MainPage';
-import LoginForm from "./components/auth/LoginForm";
-import SignupForm from "./components/auth/SignupForm";
-import PrivateRoute from "./components/auth/PrivateRoute";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
-import SimpleBackdrop from './components/SimpleBackdrop';
+
 import { CssBaseline } from '@material-ui/core';
-import Theme from './Theme';
-import { authenticateThunk } from "./store/actions/user";
-import './App.css';
+
+import MainPage from './MainPage';
+import LoginForm from "./auth/LoginForm";
+import SignupForm from "./auth/SignupForm";
+import PrivateRoute from "./auth/PrivateRoute";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import LoadingSpinner from './LoadingSpinner';
+import '../styles/App.css';
+import Theme from '../styles/Theme';
+import { authenticateThunk } from "../store/actions/user";
+
 
 export default function App() {
   const isNotLoggedIn = useSelector((state) => !state.user);
@@ -25,7 +28,7 @@ export default function App() {
   }, [dispatch]);
 
   if (!loaded) {
-    return <SimpleBackdrop />;
+    return <LoadingSpinner />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
+
 import {
   Box, Button, Dialog, DialogActions, DialogContent, DialogTitle,
   Divider, IconButton, List, ListItem, ListItemText, ListSubheader, Slide,
@@ -11,11 +12,12 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import Tooltip from '@material-ui/core/Tooltip';
-import useStyles from './styles/TagPanelStyles'
-import { addTagToNoteThunk } from '../store/actions/notes';
-import { toggleTagPanel } from '../store/actions/ui';
-import { createTagThunk, deleteTagThunk, disassociateTagThunk } from '../store/actions/tags';
-import { deleteTagFromNotes } from '../store/actions/notes';
+
+import useStyles from '../../styles/tagpanel/TagPanelStyles'
+import { addTagToNoteThunk } from '../../store/actions/notes';
+import { toggleTagPanel } from '../../store/actions/ui';
+import { createTagThunk, deleteTagThunk, disassociateTagThunk } from '../../store/actions/tags';
+import { deleteTagFromNotes } from '../../store/actions/notes';
 
 const TagPanel = () => {
   let { current_notebook, current_note, current_tag } = useParams();

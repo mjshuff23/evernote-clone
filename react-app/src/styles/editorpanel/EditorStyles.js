@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
         border: 'none',
         flexGrow: 1,
         fontFamily: theme.typography.fontFamily,
-        // fontWeight: 'bold'
     },
     tagBar: {
         marginTop: 42,

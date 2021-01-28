@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Box } from '@material-ui/core';
-import useStyles from './styles/EditorPanelStyles';
+
+import useStyles from '../../styles/editorpanel/EditorPanelStyles';
 import Editor from './Editor';
 import TagsToolbar from './TagsToolbar';
 

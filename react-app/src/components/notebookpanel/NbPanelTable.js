@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import Moment from 'react-moment';
+
 import Collapse from "@material-ui/core/Collapse";
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined';
+import { Hidden } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import NbPanelActionButton from './NbPanelActionButton';
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,10 +18,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from '@material-ui/core/Typography';
-import useStyles from './styles/NbPanelTableStyles';
-import Moment from 'react-moment';
+
+import useStyles from '../../styles/notebookpanel/NbPanelTableStyles';
 import NotebookActionButton from './NotebookActionButton';
-import { Hidden } from "@material-ui/core";
 
 
 export default function NbPanelTable() {

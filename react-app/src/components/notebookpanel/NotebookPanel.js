@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Box } from '@material-ui/core';
-import useStyles from './styles/NotebookPanelStyles';
+
+import useStyles from '../../styles/notebookpanel/NotebookPanelStyles';
 import NbPanelHeadingBar from './NbPanelHeadingBar';
 import NbPanelSubHeadingBar from './NbPanelSubHeadingBar';
 import NbPanelTable from './NbPanelTable';

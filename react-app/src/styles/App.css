@@ -13,7 +13,6 @@ html, body {
 }
 
 .ql-container {
-    /* overflow-y: scroll; */
     font-family: inherit;
     font-size: inherit;
 }

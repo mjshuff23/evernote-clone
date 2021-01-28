@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Collapse, Container, List, ListItem, ListItemText, Typography } from '@material-ui/core';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 
-import UserInfoDisplay from './UserInfoDisplay';
-import useStyles from './styles/SidebarStyles';
-import { createNote } from '../store/actions/notes';
-import { useSelector, useDispatch } from 'react-redux';
+import { Button, Collapse, Container, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import NotesIcon from '@material-ui/icons/Notes';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined';
-import { toggleTagPanel } from '../store/actions/ui';
 
+import useStyles from '../../styles/SidebarStyles';
+import UserInfoDisplay from './UserInfoDisplay';
+import { createNote } from '../../store/actions/notes';
+import { toggleTagPanel } from '../../store/actions/ui';
 
 export default function Sidebar() {
   const classes = useStyles();

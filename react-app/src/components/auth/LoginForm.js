@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../../store/actions/user";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import AuthStyles from '../styles/AuthStyles';
-import { Paper } from "@material-ui/core";
 
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import { Paper } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+
+import AuthStyles from '../../styles/auth/AuthStyles';
 import Footer from './Footer';
+import { loginThunk } from "../../store/actions/user";
 
 const LoginForm = () => {
   const classes = AuthStyles();

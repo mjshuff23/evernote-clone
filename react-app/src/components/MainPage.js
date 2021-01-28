@@ -1,12 +1,14 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import { Box } from '@material-ui/core';
-import Sidebar from './Sidebar';
-import TagPanel from './TagPanel';
-import NoteInfoPanel from './NoteInfoPanel';
-import EditorPanel from './EditorPanel';
-import NotebookPanel from './NotebookPanel';
-import useStyles from './styles/MainPageStyles';
+
+import useStyles from '../styles/MainPageStyles';
+import Sidebar from './sidebar/Sidebar';
+import TagPanel from './tagpanel/TagPanel';
+import NoteInfoPanel from './noteinfopanel/NoteInfoPanel';
+import EditorPanel from './editorpanel/EditorPanel';
+import NotebookPanel from './notebookpanel/NotebookPanel';
 
 export default function MainPage() {
   const classes = useStyles();
@@ -14,7 +16,6 @@ export default function MainPage() {
   return (
     <Box className={classes.mainpageContainer}>
       <Sidebar />
-      {/* <main className={classes.main}> */}
       <Switch>
         <Route path="/allnotebooks">
           <TagPanel />
@@ -30,7 +31,6 @@ export default function MainPage() {
           </Box>
         </Route>
       </Switch>
-      {/* </main> */}
     </Box>
   );
 }

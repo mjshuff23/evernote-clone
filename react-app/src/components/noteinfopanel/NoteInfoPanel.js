@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Chip, Typography } from '@material-ui/core';
-import useStyles from './styles/NoteInfoPanelStyles';
 import { useParams } from 'react-router-dom';
-import { setCurrentNote, setCurrentNotebook, setCurrentTag } from '../store/actions/ui';
-import Notecard from './Notecard';
+
+import { Box, Chip, Typography } from '@material-ui/core';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+
+import useStyles from '../../styles/noteinfopanel/NoteInfoPanelStyles';
+import { setCurrentNote, setCurrentNotebook, setCurrentTag } from '../../store/actions/ui';
+import Notecard from './Notecard';
 
 
 export default function NoteInfoPanel() {

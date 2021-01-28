@@ -1,67 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 
-const useRowStyles = makeStyles({
-  book_icon: {
-    color: '#9e9e9e',
-    height: 20
-  },
-  down: {
-    width: 20,
-    color: 'gray'
-  },
-  heading: {
-    fontWeight: 'normal',
-    fontSize: 12,
-    color: 'gray'
-  },
-
-  hidden: {
-    visibility: "hidden"
-  },
-
-  icon_button: {
-    padding: 10
-  },
-
-  menu_item: {
-    fontSize: 12
-  },
-
-  more_horiz: {
-    fontSize: 15,
-    // backgroundColor: 'white'
-  },
-
-  note_icon: {
-    // transform: "rotate(90deg)",
-    paddingRight: 2,
-    paddingLeft: 10,
-    color: '#9e9e9e',
-    height: 20
-  },
-
-  root: {
-    "& > *": {
-      borderBottom: "unset"
-    }
-  },
-
-  up: {
-    width: 20,
-    color: 'gray'
-  },
-
-});
-
+import useStyles from '../../styles/notebookpanel/NbPanelActionButtonStyles';
 
 
 export default function NbPanelActionButton() {
-
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -72,8 +20,7 @@ export default function NbPanelActionButton() {
     setAnchorEl(null);
   };
 
-  const classes = useRowStyles();
-
+  
   return (
     <>
       <Tooltip className={classes.tooltip} title="More actions" placement="top" arrow>

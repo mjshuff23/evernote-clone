@@ -5,7 +5,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import PortraitIcon from '@material-ui/icons/Portrait';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import AuthStyles from '../styles/AuthStyles';
+import AuthStyles from '../../styles/auth/AuthStyles';
 
 const Footer = () => {
   const classes = AuthStyles();

@@ -14,21 +14,23 @@ export default function MainPage() {
   return (
     <Box className={classes.mainpageContainer}>
       <Sidebar />
-      <main className={classes.main}>
-        <Switch>
-          <Route path="/allnotebooks">
-            <TagPanel />
+      {/* <main className={classes.main}> */}
+      <Switch>
+        <Route path="/allnotebooks">
+          <TagPanel />
+          <Box className={classes.viewContainer}>
             <NotebookPanel />
-          </Route>
-          <Route path="/notebooks/:current_notebook/notes/:current_note/tags/:current_tag">
-            <TagPanel />
-            <Box className={classes.noteviewcontainer}>
-              <NoteInfoPanel />
-              <EditorPanel />
-            </Box>
-          </Route>
-        </Switch>
-      </main>
+          </Box>
+        </Route>
+        <Route path="/notebooks/:current_notebook/notes/:current_note/tags/:current_tag">
+          <TagPanel />
+          <Box className={classes.viewContainer}>
+            <NoteInfoPanel />
+            <EditorPanel />
+          </Box>
+        </Route>
+      </Switch>
+      {/* </main> */}
     </Box>
   );
 }

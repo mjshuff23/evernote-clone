@@ -7,6 +7,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     height: '100vh',
     width: 300,
+    flexGrow: '0',
+    flexShrink: '0',
     backgroundColor: "#ebebeb",
     [theme.breakpoints.down('sm')]: {
       width: 250,

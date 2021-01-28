@@ -7,15 +7,15 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         padding: theme.spacing(1),
         height: '100vh',
-        minWidth: '225px',
-        maxWidth: '225px',
+        width: '225px',
+        flexGrow: '0',
+        flexShrink: '0',
         overflowY: 'auto',
         overflowX: 'hidden',
         backgroundColor: '#1A1A1A',
         zIndex: 2,
-        [theme.breakpoints.down('xs')]: {
-            minWidth: '60px',
-            maxWidth: '60px',
+        [theme.breakpoints.down('sm')]: {
+          width: '60px',
         },
     },
     newNoteBtn: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-start',
         textTransform: 'capitalize',
         alignSelf: 'center',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             justifyContent: 'center',
             minWidth: '44px',
             minHeight: '44px',
@@ -43,14 +43,9 @@ const useStyles = makeStyles(theme => ({
     },
     buttonText: {
         paddingLeft: theme.spacing(1),
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             display: 'none'
         }
-    },
-    icon: {
-        // [theme.breakpoints.down('xs')]: {
-        //     display: 'flex',
-        // }
     },
     listItem: {
       display: 'flex',
@@ -59,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     arrow: {
       flex: '0 0 22px',
       marginLeft: theme.spacing(1),
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         display: 'none'
       }
     },
@@ -71,6 +66,9 @@ const useStyles = makeStyles(theme => ({
     subList: {
       padding: 0,
       marginLeft: theme.spacing(2),
+      [theme.breakpoints.down('sm')]: {
+        display: 'none'
+      }
     },
     subListItem: {
       display: 'flex',

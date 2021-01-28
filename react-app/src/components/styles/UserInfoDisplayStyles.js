@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   username: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none'
     }
   },
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'left',
     padding: 0,
     textTransform: 'capitalize',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: '0',
       justifyContent: 'center',
     },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 0,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.secondary.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
   userInfoPanel: {
     width: '100%',
+  },
+  hide: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    }
   }
 }));
 

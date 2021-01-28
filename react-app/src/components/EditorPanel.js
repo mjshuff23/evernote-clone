@@ -5,11 +5,13 @@ import Editor from './Editor';
 import TagsToolbar from './TagsToolbar';
 
 
+
 export default function EditorPanel() {
   const classes = useStyles();
   return (
     <Box className={classes.editorpanel}>
       <Editor />
+      <TagsToolbar />
     </Box>
   );
 }

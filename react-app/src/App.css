@@ -37,21 +37,3 @@ html, body {
 .notebooks-link:visited {
     color: darkgrey;
 } 
-
-@media (max-width: 599.95px) {
-    .MuiListItem-button>.MuiSvgIcon-root:first-child {
-        display: none;
-    }
-    button span>h3+svg {
-        display: none !important;
-    }
-    .userMenu>.MuiPaper-root {
-        left: 60px !important;
-    }
-    .MuiListItem-button>.MuiSvgIcon-root:first-child {
-        display: none;
-    }
-    .MuiList-root>.MuiCollapse-entered {
-        display: none;
-    }
-}

@@ -3,15 +3,19 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   mainpageContainer: {
     display: 'flex',
-    width: '100vw',
-    boxSizing: 'borderBox'
+    width: '100%',
   },
   main: {
     flexGrow: 1,
-    // border: '1px solid black',
+    width: '100%',
   },
-  noteviewcontainer: {
+  viewContainer: {
     display: 'flex',
+    flexWrap: 'nowrap',
+    width: 'calc(100% - 225px)',
+    [theme.breakpoints.down('sm')]: {
+      width: 'calc(100% - 60px)',
+    },
   }
 }));
 

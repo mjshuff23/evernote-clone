@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     left: 225,
     zIndex: 1,
     paddingBottom: theme.spacing(1),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       left: 60,
     }
   },
@@ -32,10 +32,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     overflow: 'auto',
     maxHeight: '100vh'
-  },
-  listSection: {
-    // lineHeight: '1.5em',
-    // backgroundColor: theme.palette.background.dark,
   },
   listItem: {
     paddingLeft: theme.spacing(4),

@@ -4,7 +4,7 @@ WORKDIR /react-app
 COPY react-app/. .
 
 # You have to set this because it should be set during build time.
-ENV REACT_APP_BASE_URL="https://klevernote.herokuapp.com"
+ENV REACT_APP_BASE_URL="https://kleevernote.herokuapp.com"
 
 # Build our React App
 RUN npm install

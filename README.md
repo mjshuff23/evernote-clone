@@ -172,4 +172,4 @@ Klevernote is a clone of the popular note-taking app, Evernote.
 
 10. Under Settings find "Config Vars" and add any additional/secret .env variables.
 
-11. profit
+11. profit hehe

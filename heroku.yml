@@ -1,5 +1,5 @@
 build:
   docker:
-    web: /home/michael/programming/portfolio/project-3-klevernote/Dockerfile
+    web: DockerFile
 run:
   web: bundle exec puma -C config/puma.rb

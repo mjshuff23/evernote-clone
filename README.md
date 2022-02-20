@@ -155,7 +155,7 @@ Klevernote is a clone of the popular note-taking app, Evernote.
 
    ```bash
    heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
+   ``` 
 
 8. Release your docker container to heroku
 

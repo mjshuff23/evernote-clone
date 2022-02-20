@@ -23,13 +23,13 @@ jobs:
     # Runs a single command using the runners shell
     - name: Login to Heroku Container registry
       env:
-        HEROKU_API_KEY: ${{ c0242ba5-0e9d-4714-95e5-52ca80bf9721 }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login
     - name: Build and push
       env:
-        HEROKU_API_KEY: ${{ c0242ba5-0e9d-4714-95e5-52ca80bf9721 }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:push -a animehunt-aa web
     - name: Release
       env:
-        HEROKU_API_KEY: ${{ c0242ba5-0e9d-4714-95e5-52ca80bf9721 }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:release -a animehunt-aa web
